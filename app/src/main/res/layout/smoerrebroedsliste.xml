@@ -29,7 +29,7 @@
                 android:id="@+id/imageButton"
                 android:layout_width="match_parent"
                 android:layout_height="132dp"
-                app:srcCompat="@drawable/dyrlaegensnatmad" />
+                app:srcCompat="@drawable/dyrlaegensnatmad_big" />
 
             <Button
                 android:id="@+id/button"
@@ -41,7 +41,7 @@
                 android:id="@+id/imageButton2"
                 android:layout_width="match_parent"
                 android:layout_height="132dp"
-                app:srcCompat="@drawable/laks" />
+                app:srcCompat="@drawable/laks_big" />
 
             <Button
                 android:id="@+id/button2"
@@ -53,7 +53,7 @@
                 android:id="@+id/imageButton3"
                 android:layout_width="match_parent"
                 android:layout_height="132dp"
-                app:srcCompat="@drawable/rejemad" />
+                app:srcCompat="@drawable/rejemad_big" />
 
             <Button
                 android:id="@+id/button3"
@@ -65,7 +65,7 @@
                 android:id="@+id/imageButton4"
                 android:layout_width="match_parent"
                 android:layout_height="132dp"
-                app:srcCompat="@drawable/roastbeef" />
+                app:srcCompat="@drawable/roastbeef_big" />
 
             <Button
                 android:id="@+id/button4"
@@ -77,7 +77,7 @@
                 android:id="@+id/imageButton5"
                 android:layout_width="match_parent"
                 android:layout_height="132dp"
-                app:srcCompat="@drawable/stjerneskud" />
+                app:srcCompat="@drawable/stjerneskud_big" />
 
             <Button
                 android:id="@+id/button5"
