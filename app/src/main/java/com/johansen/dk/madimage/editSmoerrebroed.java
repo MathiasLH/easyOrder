@@ -28,6 +28,7 @@ public class editSmoerrebroed extends AppCompatActivity implements View.OnClickL
         switch (v.getId()){
             case R.id.edit_addtobasketbutton:
                 order.addItem(foodItem);
+                finish();
         }
     }
 }

@@ -119,7 +119,7 @@ public class basketActivity extends AppCompatActivity implements View.OnClickLis
         switch (v.getId())
         {
             case R.id.orderbtn:
-
+                order.clean();
                 Intent intent = new Intent(this,Chekmark1.class);
                 startActivity(intent);
                 break;

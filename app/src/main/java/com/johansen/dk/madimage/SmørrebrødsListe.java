@@ -31,12 +31,12 @@ public class SmørrebrødsListe extends AppCompatActivity implements View.OnClic
         laks = new foodItem("Laksemad", R.drawable.laks_big);
         rejemad = new foodItem("Rejemad", R.drawable.rejemad_big);
         roastbeef = new foodItem("Roastbeef", R.drawable.roastbeef_big);
-        //foodItem stjerneskud = new foodItem("Stjerneskud", R.drawable.stjerneskud_big);
+        stjerneskud = new foodItem("Stjerneskud", R.drawable.stjerneskud_big);
         createCard(dyrlaege);
         createCard(laks);
         createCard(rejemad);
         createCard(roastbeef);
-        //createCard(stjerneskud);
+        createCard(stjerneskud);
         Button basketBtn = findViewById(R.id.basketbtn);
         basketBtn.setOnClickListener(this);
         selection = new Order();

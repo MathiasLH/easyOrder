@@ -20,6 +20,12 @@ public class Order implements Serializable {
         }
     }
 
+    public static void clean(){
+        for(int i = 0; i < basket.length; i++){
+            basket[i] = null;
+        }
+    }
+
     public static foodItem[] getBasket(){
         return basket;
     }
