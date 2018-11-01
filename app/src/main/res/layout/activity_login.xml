@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backgroundColor"
+    tools:context=".MainActivity"
+    tools:layout_editor_absoluteY="89dp">
+
+    <TextView
+        android:id="@+id/explQR"
+        android:layout_width="469dp"
+        android:layout_height="74dp"
+        android:layout_marginBottom="58dp"
+        android:gravity="center"
+        android:text="Hold din telefon/tablet hen over QR koden for at scanne"
+        android:textColor="@color/textColor"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/qrCode"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <TextView
+        android:id="@+id/help"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="147dp"
+        android:text="Hjælp"
+        android:textColor="@color/textColor"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="@+id/qrCode"
+        app:layout_constraintStart_toStartOf="@+id/qrCode"
+        app:layout_constraintTop_toBottomOf="@+id/qrCode" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="0dp"
+        android:layout_height="158dp"
+        android:layout_marginBottom="78dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/login">
+
+        <ImageButton
+            android:id="@+id/danishFlag"
+            android:layout_width="220dp"
+            android:layout_height="144dp"
+            android:layout_weight="1"
+            android:adjustViewBounds="true"
+            android:background="@drawable/rounded_button"
+            app:srcCompat="@drawable/dansk_flag"
+            tools:layout_editor_absoluteX="62dp"
+            tools:layout_editor_absoluteY="745dp" />
+
+        <ImageButton
+            android:id="@+id/englishFlag"
+            android:layout_width="220dp"
+            android:layout_height="144dp"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_button"
+            app:srcCompat="@drawable/engelsk_flag"
+            tools:layout_editor_absoluteX="285dp"
+            tools:layout_editor_absoluteY="758dp" />
+
+        <ImageButton
+            android:id="@+id/arabFlag"
+            android:layout_width="220dp"
+            android:layout_height="144dp"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_button"
+            app:srcCompat="@drawable/arabisk_flag"
+            tools:layout_editor_absoluteX="508dp"
+            tools:layout_editor_absoluteY="758dp" />
+
+    </LinearLayout>
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="810dp"
+        android:layout_height="123dp"
+        android:layout_marginBottom="69dp"
+        android:background="#fff"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintBottom_toTopOf="@+id/explQR"
+        app:layout_constraintStart_toStartOf="@+id/login"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/login"
+        android:layout_width="0dp"
+        android:layout_height="130dp"
+        android:layout_marginBottom="824dp"
+        android:layout_marginTop="1dp"
+        android:gravity="center"
+        android:text="Log ind"
+        android:textColor="@color/textColor"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/qrCode"
+        android:layout_width="419dp"
+        android:layout_height="398dp"
+        android:layout_marginBottom="51dp"
+        app:layout_constraintBottom_toTopOf="@+id/help"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/explQR"
+        app:srcCompat="@drawable/qrcode" />
+
+</android.support.constraint.ConstraintLayout>
