@@ -25,6 +25,7 @@ public class basketActivity extends AppCompatActivity implements View.OnClickLis
     private int id = 0;
     Order order;
     Button orderBtn;
+    TextView basketText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +33,10 @@ public class basketActivity extends AppCompatActivity implements View.OnClickLis
         setContentView(R.layout.activity_basket);
         orderBtn = findViewById(R.id.orderbtn);
         orderBtn.setOnClickListener(this);
-        Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/fontawesome-webfont.ttf");
+        Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/Orkney Regular.ttf");
         orderBtn.setTypeface(tf);
+        basketText = findViewById(R.id.toptekst);
+        basketText.setTypeface(tf);
         Intent i = getIntent();
         order = (Order) i.getSerializableExtra("order");
         LL = findViewById(R.id.list);

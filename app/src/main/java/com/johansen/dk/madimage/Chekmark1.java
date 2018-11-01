@@ -23,7 +23,7 @@ public class Chekmark1 extends AppCompatActivity {
         (new Handler()).postDelayed(this::switchactivity, 3000);
         sText = findViewById(R.id.sucText);
         orderList = findViewById(R.id.orderListView);
-        Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/fontawesome-webfont.ttf");
+        Typeface tf = Typeface.createFromAsset(getAssets(),"fonts/Orkney Regular.ttf");
         sText.setTypeface(tf);
         orderList.setTypeface(tf);
         //if statment for language
