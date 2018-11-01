@@ -3,11 +3,12 @@ package com.johansen.dk.madimage;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 
 public class editSmoerrebroed extends AppCompatActivity implements View.OnClickListener {
     ImageView foodImage;
-    Order order;
+    static Order order;
     foodItem foodItem;
 
     @Override
@@ -18,6 +19,8 @@ public class editSmoerrebroed extends AppCompatActivity implements View.OnClickL
         foodImage = findViewById(R.id.edit_foodimage);
         foodImage.setImageResource(foodItem.getImageID());
         order = (Order) getIntent().getSerializableExtra("order");
+        Button basketbtn = findViewById(R.id.edit_addtobasketbutton);
+        basketbtn.setOnClickListener(this);
     }
 
     @Override
