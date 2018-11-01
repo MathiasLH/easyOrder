@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -25,17 +26,18 @@ public class SmørrebrødsListe extends AppCompatActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         setContentView(R.layout.smoerrebroedsliste);
         LL = findViewById(R.id.foodList);
-        selection = new Order();
         foodItem dyrlaege = new foodItem("Dyrlægens natmad", R.drawable.dyrlaegensnatmad_big);
         foodItem laks = new foodItem("Laksemad", R.drawable.laks_big);
         foodItem rejemad = new foodItem("Rejemad", R.drawable.rejemad_big);
         foodItem roastbeef = new foodItem("Roastbeef", R.drawable.roastbeef_big);
-        foodItem stjerneskud = new foodItem("Stjerneskud", R.drawable.stjerneskud_big);
+        //foodItem stjerneskud = new foodItem("Stjerneskud", R.drawable.stjerneskud_big);
         createCard(dyrlaege);
         createCard(laks);
         createCard(rejemad);
         createCard(roastbeef);
-        createCard(stjerneskud);
+        //createCard(stjerneskud);
+        Button basketBtn = findViewById(R.id.basketbtn);
+        basketBtn.setOnClickListener(this);
     }
 
     //very ugly function, im sorry.
@@ -121,6 +123,9 @@ public class SmørrebrødsListe extends AppCompatActivity implements View.OnClic
                 editIntent.putExtra("imageID", R.drawable.stjerneskud_big);
                 startActivity(editIntent);
                 break;
+            case R.id.basketbtn:
+                Intent basketIntent = new Intent(this, basketActivity.class);
+                startActivity(basketIntent);
 
         }
     }
