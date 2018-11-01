@@ -6,15 +6,19 @@
         android:allowBackup="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".basketActivity" />
+        <activity android:name=".editSmoerrebroed"></activity>
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".basketActivity" />
-        <activity android:name=".editSmoerrebroed"></activity>
+        <activity android:name=".SmørrebrødsListe"></activity>
+        <activity android:name=".Chekmark1"></activity>
+        <activity android:name=".Error"></activity>
     </application>
 
 </manifest>

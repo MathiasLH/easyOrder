@@ -1,6 +1,7 @@
 package com.johansen.dk.madimage;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.constraint.ConstraintSet;
@@ -16,6 +17,8 @@ import android.widget.TextView;
 public class SmørrebrødsListe extends AppCompatActivity implements View.OnClickListener{
     LinearLayout LL;
     int id = 0;
+    int cardIDs[] = {100, 101, 102, 103, 104};
+    int cardIDspot = 0;
     Order selection;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,8 +42,8 @@ public class SmørrebrødsListe extends AppCompatActivity implements View.OnClic
     private void createCard(foodItem item){
         CardView cv = new CardView(getApplicationContext());
         cv.setTag(item.getName());
-        cv.setId(id);
-        id++;
+        cv.setId(cardIDs[cardIDspot]);
+        cardIDspot++;
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, /*LinearLayout.LayoutParams.WRAP_CONTENT*/380);
         cv.setLayoutParams(params);
         cv.setRadius(50);
@@ -78,6 +81,7 @@ public class SmørrebrødsListe extends AppCompatActivity implements View.OnClic
         ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) cv.getLayoutParams();
         layoutParams.setMargins(0,32,0,0);
         cv.setOnClickListener(this);
+
         LL.addView(cv);
     }
 
@@ -95,6 +99,29 @@ public class SmørrebrødsListe extends AppCompatActivity implements View.OnClic
 
     @Override
     public void onClick(View v) {
+        Intent editIntent = new Intent(this, editSmoerrebroed.class);
+        switch (v.getId()){
+            case 100:
+                editIntent.putExtra("imageID", R.drawable.dyrlaegensnatmad_big);
+                startActivity(editIntent);
+                break;
+            case 101:
+                editIntent.putExtra("imageID", R.drawable.laks_big);
+                startActivity(editIntent);
+                break;
+            case 102:
+                editIntent.putExtra("imageID", R.drawable.rejemad_big);
+                startActivity(editIntent);
+                break;
+            case 103:
+                editIntent.putExtra("imageID", R.drawable.roastbeef_big);
+                startActivity(editIntent);
+                break;
+            case 104:
+                editIntent.putExtra("imageID", R.drawable.stjerneskud_big);
+                startActivity(editIntent);
+                break;
 
+        }
     }
 }
