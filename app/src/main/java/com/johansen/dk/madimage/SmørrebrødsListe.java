@@ -60,7 +60,7 @@ public class SmørrebrødsListe extends AppCompatActivity implements View.OnClic
         TV.setId(id);
         id++;
         CL.addView(TV);
-        ImageButton IB = new ImageButton(this);
+        /*ImageButton IB = new ImageButton(this);
         IB.setImageResource(R.drawable.ic_trash);
         IB.setId(id);
         IB.setOnClickListener(new View.OnClickListener(){
@@ -72,15 +72,15 @@ public class SmørrebrødsListe extends AppCompatActivity implements View.OnClic
         params = new LinearLayout.LayoutParams(55, 60);
         IB.setLayoutParams(params);
         id++;
-        CL.addView(IB);
+        CL.addView(IB);*/
         ConstraintSet CS = new ConstraintSet();
         CS.clone(CL);
         CS.connect(IV.getId(), ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, 0);
         CS.connect(TV.getId(), ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, 16);
         CS.connect(TV.getId(), ConstraintSet.LEFT, ConstraintSet.PARENT_ID, ConstraintSet.LEFT, 8);
         CS.connect(TV.getId(), ConstraintSet.RIGHT, ConstraintSet.PARENT_ID, ConstraintSet.RIGHT, 8);
-        CS.connect(IB.getId(), ConstraintSet.LEFT, TV.getId(), ConstraintSet.RIGHT,300);
-        CS.connect(IB.getId(), ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, 8);
+        //CS.connect(IB.getId(), ConstraintSet.LEFT, TV.getId(), ConstraintSet.RIGHT,300);
+        //CS.connect(IB.getId(), ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, 8);
         CS.applyTo(CL);
         ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) cv.getLayoutParams();
         layoutParams.setMargins(0,32,0,0);
