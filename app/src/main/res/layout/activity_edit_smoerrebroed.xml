@@ -49,11 +49,11 @@
         app:layout_constraintStart_toEndOf="@+id/switch1" />
 
     <Button
-        android:id="@+id/button6"
+        android:id="@+id/edit_addtobasketbutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:text="Button"
+        android:text="føj til kurv"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/switch8" />
 
@@ -142,7 +142,7 @@
         app:layout_constraintVertical_bias="0.529" />
 
     <ImageView
-        android:id="@+id/edit_foodImage"
+        android:id="@+id/edit_foodimage"
         android:layout_width="wrap_content"
         android:layout_height="289dp"
         app:layout_constraintStart_toStartOf="parent"

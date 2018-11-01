@@ -17,7 +17,7 @@ public class Error extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_error);
-        (new Handler()).postDelayed(this::switchactivity, 6000);
+        //(new Handler()).postDelayed(this::switchactivity, 6000);
         sText = findViewById(R.id.sorryText);
         Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/fontawesome-webfont.ttf");
         sText.setTypeface(tf);

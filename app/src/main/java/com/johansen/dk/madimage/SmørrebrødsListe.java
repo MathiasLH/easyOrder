@@ -21,15 +21,16 @@ public class SmørrebrødsListe extends AppCompatActivity implements View.OnClic
     int cardIDs[] = {100, 101, 102, 103, 104};
     int cardIDspot = 0;
     Order selection;
+    foodItem dyrlaege, laks, rejemad, roastbeef, stjerneskud;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.smoerrebroedsliste);
         LL = findViewById(R.id.foodList);
-        foodItem dyrlaege = new foodItem("Dyrlægens natmad", R.drawable.dyrlaegensnatmad_big);
-        foodItem laks = new foodItem("Laksemad", R.drawable.laks_big);
-        foodItem rejemad = new foodItem("Rejemad", R.drawable.rejemad_big);
-        foodItem roastbeef = new foodItem("Roastbeef", R.drawable.roastbeef_big);
+        dyrlaege = new foodItem("Dyrlægens natmad", R.drawable.dyrlaegensnatmad_big);
+        laks = new foodItem("Laksemad", R.drawable.laks_big);
+        rejemad = new foodItem("Rejemad", R.drawable.rejemad_big);
+        roastbeef = new foodItem("Roastbeef", R.drawable.roastbeef_big);
         //foodItem stjerneskud = new foodItem("Stjerneskud", R.drawable.stjerneskud_big);
         createCard(dyrlaege);
         createCard(laks);
@@ -38,6 +39,7 @@ public class SmørrebrødsListe extends AppCompatActivity implements View.OnClic
         //createCard(stjerneskud);
         Button basketBtn = findViewById(R.id.basketbtn);
         basketBtn.setOnClickListener(this);
+        selection = new Order();
     }
 
     //very ugly function, im sorry.
@@ -102,29 +104,32 @@ public class SmørrebrødsListe extends AppCompatActivity implements View.OnClic
     @Override
     public void onClick(View v) {
         Intent editIntent = new Intent(this, editSmoerrebroed.class);
+        editIntent.putExtra("orderObject", selection);
         switch (v.getId()){
             case 100:
-                editIntent.putExtra("imageID", R.drawable.dyrlaegensnatmad_big);
+                editIntent.putExtra("foodItem", dyrlaege);
+
                 startActivity(editIntent);
                 break;
             case 101:
-                editIntent.putExtra("imageID", R.drawable.laks_big);
+                editIntent.putExtra("foodItem", laks);
                 startActivity(editIntent);
                 break;
             case 102:
-                editIntent.putExtra("imageID", R.drawable.rejemad_big);
+                editIntent.putExtra("foodItem", rejemad);
                 startActivity(editIntent);
                 break;
             case 103:
-                editIntent.putExtra("imageID", R.drawable.roastbeef_big);
+                editIntent.putExtra("foodItem", roastbeef);
                 startActivity(editIntent);
                 break;
             case 104:
-                editIntent.putExtra("imageID", R.drawable.stjerneskud_big);
+                editIntent.putExtra("foodItem", stjerneskud);
                 startActivity(editIntent);
                 break;
             case R.id.basketbtn:
                 Intent basketIntent = new Intent(this, basketActivity.class);
+                basketIntent.putExtra("orderObject", selection);
                 startActivity(basketIntent);
 
         }

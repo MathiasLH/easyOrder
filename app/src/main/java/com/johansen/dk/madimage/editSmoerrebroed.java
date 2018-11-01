@@ -7,18 +7,24 @@ import android.widget.ImageView;
 
 public class editSmoerrebroed extends AppCompatActivity implements View.OnClickListener {
     ImageView foodImage;
+    Order order;
+    foodItem foodItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_smoerrebroed);
-        int imageID = getIntent().getIntExtra("imageID", 0);
-        //foodImage = findViewById(edit_foodImage);
-        //foodImage.setImageResource(imageID);
+        foodItem = (foodItem) getIntent().getSerializableExtra("foodItem");
+        foodImage = findViewById(R.id.edit_foodimage);
+        foodImage.setImageResource(foodItem.getImageID());
+        order = (Order) getIntent().getSerializableExtra("order");
     }
 
     @Override
     public void onClick(View v) {
-
+        switch (v.getId()){
+            case R.id.edit_addtobasketbutton:
+                order.addItem(foodItem);
+        }
     }
 }
