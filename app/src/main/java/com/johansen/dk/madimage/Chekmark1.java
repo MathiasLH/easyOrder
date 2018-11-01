@@ -44,6 +44,6 @@ public class Chekmark1 extends AppCompatActivity {
 
     public void switchactivity()
     {
-        startActivity(new Intent(Chekmark1.this, MainActivity.class));
+        startActivity(new Intent(Chekmark1.this, LoginActivity.class));
     }
 }

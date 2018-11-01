@@ -1,5 +1,6 @@
 package com.johansen.dk.madimage;
 
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -11,6 +12,7 @@ import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -18,15 +20,20 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class basketActivity extends AppCompatActivity{
+public class basketActivity extends AppCompatActivity implements View.OnClickListener{
     LinearLayout LL;
     private int id = 0;
     Order order;
+    Button orderBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_basket);
+        orderBtn = findViewById(R.id.orderbtn);
+        orderBtn.setOnClickListener(this);
+        Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/fontawesome-webfont.ttf");
+        orderBtn.setTypeface(tf);
         Intent i = getIntent();
         order = (Order) i.getSerializableExtra("order");
         LL = findViewById(R.id.list);
@@ -105,5 +112,17 @@ public class basketActivity extends AppCompatActivity{
         IV.setId(id);
         id++;
         return IV;
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId())
+        {
+            case R.id.orderbtn:
+
+                Intent intent = new Intent(this,Chekmark1.class);
+                startActivity(intent);
+                break;
+        }
     }
 }
