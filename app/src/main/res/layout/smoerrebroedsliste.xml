@@ -8,8 +8,8 @@
 
     <ScrollView
         android:id="@+id/scrollView2"
-        android:layout_width="412dp"
-        android:layout_height="658dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -18,76 +18,30 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.529"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintTop_toBottomOf="@+id/textView4">
 
 
         <LinearLayout
+            android:id="@+id/foodList"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
-
-            <ImageButton
-                android:id="@+id/imageButton"
-                android:layout_width="match_parent"
-                android:layout_height="132dp"
-                app:srcCompat="@drawable/dyrlaegensnatmad_big" />
-
-            <Button
-                android:id="@+id/button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="🔊 Dyrelægensnatmad" />
-
-            <ImageButton
-                android:id="@+id/imageButton2"
-                android:layout_width="match_parent"
-                android:layout_height="132dp"
-                app:srcCompat="@drawable/laks_big" />
-
-            <Button
-                android:id="@+id/button2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="🔊 Laksemad" />
-
-            <ImageButton
-                android:id="@+id/imageButton3"
-                android:layout_width="match_parent"
-                android:layout_height="132dp"
-                app:srcCompat="@drawable/rejemad_big" />
-
-            <Button
-                android:id="@+id/button3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="🔊 Rejemad" />
-
-            <ImageButton
-                android:id="@+id/imageButton4"
-                android:layout_width="match_parent"
-                android:layout_height="132dp"
-                app:srcCompat="@drawable/roastbeef_big" />
-
-            <Button
-                android:id="@+id/button4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="🔊 Roastbeef" />
-
-            <ImageButton
-                android:id="@+id/imageButton5"
-                android:layout_width="match_parent"
-                android:layout_height="132dp"
-                app:srcCompat="@drawable/stjerneskud_big" />
-
-            <Button
-                android:id="@+id/button5"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="🔊 Stjerneskud" />
 
         </LinearLayout>
     </ScrollView>
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="18dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="Vælg et smørrebrød:"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

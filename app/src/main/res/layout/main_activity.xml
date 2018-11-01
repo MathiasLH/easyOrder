@@ -1,7 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity" />
+    tools:context=".MainActivity" >
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/loginbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="83dp"
+            android:text="login"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/listebtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="35dp"
+            android:text="liste"
+            app:layout_constraintStart_toStartOf="@+id/loginbtn"
+            app:layout_constraintTop_toBottomOf="@+id/loginbtn" />
+
+        <Button
+            android:id="@+id/basketbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="45dp"
+            android:text="basket"
+            app:layout_constraintStart_toStartOf="@+id/listebtn"
+            app:layout_constraintTop_toBottomOf="@+id/listebtn" />
+
+        <Button
+            android:id="@+id/editbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="1dp"
+            android:layout_marginBottom="45dp"
+            android:text="edit"
+            app:layout_constraintBottom_toTopOf="@+id/confirmationtbtn"
+            app:layout_constraintEnd_toEndOf="@+id/confirmationtbtn" />
+
+        <Button
+            android:id="@+id/confirmationtbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="66dp"
+            android:text="confirm"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </android.support.constraint.ConstraintLayout>
+</FrameLayout>
