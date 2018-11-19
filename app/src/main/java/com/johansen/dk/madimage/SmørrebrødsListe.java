@@ -2,6 +2,7 @@ package com.johansen.dk.madimage;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.constraint.ConstraintSet;
@@ -22,6 +23,7 @@ public class SmørrebrødsListe extends AppCompatActivity implements View.OnClic
     int cardIDspot = 0;
     Order selection;
     foodItem dyrlaege, laks, rejemad, roastbeef, stjerneskud;
+    TextView text;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +39,10 @@ public class SmørrebrødsListe extends AppCompatActivity implements View.OnClic
         createCard(rejemad);
         createCard(roastbeef);
         createCard(stjerneskud);
-        Button basketBtn = findViewById(R.id.basketbtn);
+        Typeface tf = Typeface.createFromAsset(getAssets(),"fonts/Orkney Regular.ttf");
+        text = findViewById(R.id.texttop);
+        text.setTypeface(tf);
+        ImageButton basketBtn = findViewById(R.id.basketbtn);
         basketBtn.setOnClickListener(this);
         selection = new Order();
     }

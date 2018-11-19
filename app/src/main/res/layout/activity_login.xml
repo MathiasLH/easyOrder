@@ -23,7 +23,7 @@
         app:layout_constraintTop_toBottomOf="@+id/qrCode" />
 
     <TextView
-        android:id="@+id/explQR"
+        android:id="@+id/explqr"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="434dp"
@@ -46,7 +46,7 @@
         android:background="#fff"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
-        app:layout_constraintBottom_toTopOf="@+id/explQR"
+        app:layout_constraintBottom_toTopOf="@+id/explqr"
         app:layout_constraintStart_toStartOf="@+id/login"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -60,7 +60,7 @@
         android:textColor="@color/textColor"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/explQR"
+        app:layout_constraintBottom_toTopOf="@+id/explqr"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -76,7 +76,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/explQR"
+        app:layout_constraintTop_toBottomOf="@+id/explqr"
         app:srcCompat="@drawable/qrcode" />
 
     <LinearLayout

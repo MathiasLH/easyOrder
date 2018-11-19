@@ -19,4 +19,5 @@ public class Loading extends AppCompatActivity {
     {
         startActivity(new Intent(Loading.this, MainActivity.class));
     }
+
 }
