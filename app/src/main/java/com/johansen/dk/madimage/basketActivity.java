@@ -7,8 +7,6 @@ import android.os.Bundle;
 import android.content.Intent;
 import android.support.constraint.ConstraintLayout;
 import android.support.constraint.ConstraintSet;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +16,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import java.util.ArrayList;
+import com.johansen.dk.madimage.model.Order;
+import com.johansen.dk.madimage.model.foodItem;
 
 public class basketActivity extends AppCompatActivity implements View.OnClickListener{
     LinearLayout LL;

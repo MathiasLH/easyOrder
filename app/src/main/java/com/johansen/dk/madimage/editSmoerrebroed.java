@@ -6,10 +6,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.johansen.dk.madimage.model.Order;
+import com.johansen.dk.madimage.model.foodItem;
+
 public class editSmoerrebroed extends AppCompatActivity implements View.OnClickListener {
     ImageView foodImage;
     static Order order;
-    foodItem foodItem;
+    com.johansen.dk.madimage.model.foodItem foodItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

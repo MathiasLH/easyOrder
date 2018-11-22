@@ -33,10 +33,10 @@ public class Chekmark1 extends AppCompatActivity {
         // {sText.setText("arabic Text");}
         //else{sText.setText("english Text");}
 
-        sText.setText("Thanks For your Order \n");
-        orderList.setText("Your Order: \n" +
+        sText.setText("Tak for din bestilling! \n");
+        /*orderList.setText("Your Order: \n" +
                 "-  OrderItemOne \n" +
-                "-  OrderItemTwo \n");
+                "-  OrderItemTwo \n");*/
 
         mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.done);
         mediaPlayer.start();

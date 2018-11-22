@@ -1,4 +1,4 @@
-package com.johansen.dk.madimage;
+package com.johansen.dk.madimage.model;
 
 import java.io.Serializable;
 
