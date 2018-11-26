@@ -100,7 +100,7 @@
             android:adjustViewBounds="true"
             android:background="@drawable/rounded_button"
             android:scaleType="fitCenter"
-            app:srcCompat="@drawable/dansk_flag"
+            app:srcCompat="@drawable/danish_flag"
             tools:layout_editor_absoluteX="62dp"
             tools:layout_editor_absoluteY="745dp" />
 
@@ -112,7 +112,7 @@
             android:adjustViewBounds="true"
             android:background="@drawable/rounded_button"
             android:scaleType="fitCenter"
-            app:srcCompat="@drawable/engelsk_flag"
+            app:srcCompat="@drawable/british_flag"
             tools:layout_editor_absoluteX="285dp"
             tools:layout_editor_absoluteY="758dp" />
 
@@ -124,7 +124,7 @@
             android:adjustViewBounds="true"
             android:background="@drawable/rounded_button"
             android:scaleType="fitCenter"
-            app:srcCompat="@drawable/arabisk_flag"
+            app:srcCompat="@drawable/arabic_flag"
             tools:layout_editor_absoluteX="508dp"
             tools:layout_editor_absoluteY="758dp" />
 
