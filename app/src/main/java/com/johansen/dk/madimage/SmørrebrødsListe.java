@@ -21,7 +21,7 @@ import com.johansen.dk.madimage.model.foodItem;
 public class SmørrebrødsListe extends AppCompatActivity implements View.OnClickListener{
     LinearLayout LL;
     int id = 0;
-    int cardIDs[] = {100, 101, 102, 103, 104};
+    int cardIDs[] = {100, 101, 102, 103, 104, 105, 106, 107, 108};
     int cardIDspot = 0;
     Order selection;
     foodItem dyrlaege, laks, rejemad, roastbeef, stjerneskud;
@@ -32,10 +32,6 @@ public class SmørrebrødsListe extends AppCompatActivity implements View.OnClic
         setContentView(R.layout.smoerrebroedsliste);
         LL = findViewById(R.id.foodList);
         dyrlaege = new foodItem("Dyrlægens natmad", R.drawable.dyrlaegensnatmad_big);
-        foodItem temp1 = new foodItem( "tempboii", R.drawable.dyrlaegensnatmad_big);
-        foodItem temp2 = new foodItem( "tempboii", R.drawable.dyrlaegensnatmad_big);
-        foodItem temp3 = new foodItem( "tempboii", R.drawable.dyrlaegensnatmad_big);
-        foodItem temp4 = new foodItem( "tempboii", R.drawable.dyrlaegensnatmad_big);
         laks = new foodItem("Laksemad", R.drawable.laks_big);
         rejemad = new foodItem("Rejemad", R.drawable.rejemad_big);
         roastbeef = new foodItem("Roastbeef", R.drawable.roastbeef_big);
@@ -45,10 +41,6 @@ public class SmørrebrødsListe extends AppCompatActivity implements View.OnClic
         createCard(rejemad);
         createCard(roastbeef);
         createCard(stjerneskud);
-        createCard(temp1);
-        createCard(temp2);
-        createCard(temp3);
-        createCard(temp4);
         Typeface tf = Typeface.createFromAsset(getAssets(),"fonts/Orkney Regular.ttf");
         text = findViewById(R.id.texttop);
         text.setTypeface(tf);
