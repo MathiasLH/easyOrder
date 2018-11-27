@@ -7,17 +7,30 @@
     tools:context=".editSmoerrebroed"
     tools:layout_editor_absoluteY="25dp">
 
+    <TextView
+        android:id="@+id/dish_name"
+        android:layout_width="0dp"
+        android:layout_height="32dp"
+        android:background="@color/backgroundColor"
+        android:text="TextView"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="0dp"
-        android:layout_height="582dp"
+        android:layout_height="454dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="2dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/edit_addtobasketbutton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/dish_name">
 
         <ImageView
             android:id="@+id/edit_foodimage"
@@ -35,47 +48,47 @@
             <CheckBox
                 android:id="@+id/checkBox"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
+                android:background="#FFFFFF"
+                android:buttonTint="@color/checkboxColor"
                 android:checked="true"
                 android:clickable="true"
-                android:text="Mørkt brød"
-                android:buttonTint="@color/checkboxColor"
-                android:background="#FFFFFF"/>
+                android:text="Mørkt brød" />
 
             <CheckBox
                 android:id="@+id/checkBox5"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:text="Lyst brød"
+                android:layout_height="40dp"
+                android:background="#FFFFFF"
                 android:buttonTint="@color/checkboxColor"
-                android:background="#FFFFFF"/>
+                android:text="Lyst brød" />
 
             <CheckBox
                 android:id="@+id/checkBox2"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:checked="true"
-                android:text="Med rødløg"
+                android:layout_height="40dp"
+                android:background="#FFFFFF"
                 android:buttonTint="@color/checkboxColor"
-                android:background="#FFFFFF"/>
+                android:checked="true"
+                android:text="Med rødløg" />
 
             <CheckBox
                 android:id="@+id/checkBox3"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:checked="true"
-                android:text="Med karse"
+                android:layout_height="40dp"
+                android:background="#FFFFFF"
                 android:buttonTint="@color/checkboxColor"
-                android:background="#FFFFFF"/>
+                android:checked="true"
+                android:text="Med karse" />
 
             <CheckBox
                 android:id="@+id/checkBox4"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:checked="true"
-                android:text="Med sky"
+                android:layout_height="40dp"
+                android:background="#FFFFFF"
                 android:buttonTint="@color/checkboxColor"
-                android:background="#FFFFFF"/>
+                android:checked="true"
+                android:text="Med sky" />
 
         </LinearLayout>
     </LinearLayout>

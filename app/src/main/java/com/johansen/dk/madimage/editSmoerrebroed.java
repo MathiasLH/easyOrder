@@ -5,12 +5,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.johansen.dk.madimage.model.Order;
 import com.johansen.dk.madimage.model.foodItem;
 
 public class editSmoerrebroed extends AppCompatActivity implements View.OnClickListener {
     ImageView foodImage;
+    TextView foodName;
     static Order order;
     com.johansen.dk.madimage.model.foodItem foodItem;
 
@@ -22,6 +24,8 @@ public class editSmoerrebroed extends AppCompatActivity implements View.OnClickL
         foodImage = findViewById(R.id.edit_foodimage);
         foodImage.setImageResource(foodItem.getImageID());
         order = (Order) getIntent().getSerializableExtra("order");
+        foodName = findViewById(R.id.dish_name);
+        foodName.setText("Rediger " + foodItem.getName());
         Button basketbtn = findViewById(R.id.edit_addtobasketbutton);
         basketbtn.setOnClickListener(this);
     }
