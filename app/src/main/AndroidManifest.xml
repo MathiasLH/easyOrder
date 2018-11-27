@@ -5,6 +5,8 @@
     <uses-permission android:name="android.permission.CAMERA" />
 
     <application
+        android:icon="@mipmap/easyorder_launcher"
+        android:label="easyOrder"
         android:allowBackup="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
