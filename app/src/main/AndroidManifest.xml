@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.johansen.dk.madimage">
 
+    <uses-permission android:name="android.permission.CAMERA" />
+
     <application
         android:icon="@mipmap/easyorder_launcher"
         android:label="easyOrder"
