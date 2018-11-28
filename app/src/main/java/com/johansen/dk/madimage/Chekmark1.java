@@ -44,6 +44,15 @@ public class Chekmark1 extends AppCompatActivity {
 
     public void switchactivity()
     {
-        startActivity(new Intent(Chekmark1.this, LoginActivity.class));
+        //from stackoverflow: https://stackoverflow.com/questions/14001963/finish-all-activities-at-a-time
+        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+        // for info about clear task: https://developer.android.com/reference/android/content/Intent.html#FLAG_ACTIVITY_CLEAR_TASK
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        //for info about new task : https://developer.android.com/reference/android/content/Intent.html#FLAG_ACTIVITY_NEW_TASK
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+
+
+        // startActivity(new Intent(Chekmark1.this, LoginActivity.class));
     }
 }
