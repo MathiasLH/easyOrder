@@ -24,6 +24,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
@@ -33,7 +34,7 @@
         <ImageView
             android:id="@+id/edit_foodimage"
             android:layout_width="match_parent"
-            android:layout_height="240dp"
+            android:layout_height="225dp"
             app:srcCompat="@drawable/dyrlaegensnatmad_big"
             tools:layout_editor_absoluteX="93dp"
             tools:layout_editor_absoluteY="51dp" />
@@ -95,12 +96,16 @@
         android:id="@+id/edit_addtobasketbutton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:layout_marginBottom="16dp"
         android:background="@color/btnColor"
         android:text="føj til kurv"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+        app:layout_constraintVertical_bias="1.0" />
 
 </android.support.constraint.ConstraintLayout>
