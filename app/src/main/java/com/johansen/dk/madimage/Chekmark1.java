@@ -9,7 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 import android.widget.TextView;
 
-
 public class Chekmark1 extends AppCompatActivity {
     TextView sText;
     TextView orderList;
@@ -42,9 +41,9 @@ public class Chekmark1 extends AppCompatActivity {
         mediaPlayer.start();
     }
 
+    //from stackoverflow: https://stackoverflow.com/questions/14001963/finish-all-activities-at-a-time
     public void switchactivity()
     {
-        //from stackoverflow: https://stackoverflow.com/questions/14001963/finish-all-activities-at-a-time
         Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
         // for info about clear task: https://developer.android.com/reference/android/content/Intent.html#FLAG_ACTIVITY_CLEAR_TASK
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -52,7 +51,7 @@ public class Chekmark1 extends AppCompatActivity {
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
 
-
+        // old code
         // startActivity(new Intent(Chekmark1.this, LoginActivity.class));
     }
 }
