@@ -9,10 +9,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 import android.widget.TextView;
 
+import com.johansen.dk.madimage.model.Order;
+
 public class Chekmark1 extends AppCompatActivity {
     TextView sText;
     TextView orderList;
     MediaPlayer mediaPlayer;
+    Order items;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,11 +34,16 @@ public class Chekmark1 extends AppCompatActivity {
         //if(language == arabic)
         // {sText.setText("arabic Text");}
         //else{sText.setText("english Text");}
+        Intent i = getIntent();
+        items = (Order) i.getSerializableExtra("order");
 
         sText.setText("Tak for din bestilling! \n");
-        /*orderList.setText("Your Order: \n" +
-                "-  OrderItemOne \n" +
-                "-  OrderItemTwo \n");*/
+        orderList.setText("Du har bestilt: \n");
+        for(int a = 0; a < items.getBasket().length; a++) {
+            if (items.getBasket()[a] != null) {
+                orderList.append(items.getBasket()[a].getName() + "\n");
+            }
+        }
 
         mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.done);
         mediaPlayer.start();
@@ -53,5 +61,7 @@ public class Chekmark1 extends AppCompatActivity {
 
         // old code
         // startActivity(new Intent(Chekmark1.this, LoginActivity.class));
+
+
     }
 }

@@ -1,5 +1,7 @@
 package com.johansen.dk.madimage;
 
+import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -20,11 +22,13 @@ public class editSmoerrebroed extends AppCompatActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_smoerrebroed);
+        Typeface tf = Typeface.createFromAsset(getAssets(),"fonts/Orkney Regular.ttf");
         foodItem = (foodItem) getIntent().getSerializableExtra("foodItem");
         foodImage = findViewById(R.id.edit_foodimage);
         foodImage.setImageResource(foodItem.getImageID());
-        order = (Order) getIntent().getSerializableExtra("order");
+        order = (Order) getIntent().getSerializableExtra("orderObject");
         foodName = findViewById(R.id.dish_name);
+        foodName.setTypeface(tf);
         foodName.setText("Rediger " + foodItem.getName());
         Button basketbtn = findViewById(R.id.edit_addtobasketbutton);
         basketbtn.setOnClickListener(this);
@@ -35,6 +39,9 @@ public class editSmoerrebroed extends AppCompatActivity implements View.OnClickL
         switch (v.getId()){
             case R.id.edit_addtobasketbutton:
                 order.addItem(foodItem);
+                Intent resultIntent = new Intent();
+                resultIntent.putExtra("orderObject", order);
+                setResult(1, resultIntent);
                 finish();
         }
     }

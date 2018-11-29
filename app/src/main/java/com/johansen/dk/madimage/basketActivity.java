@@ -37,7 +37,7 @@ public class basketActivity extends AppCompatActivity implements View.OnClickLis
         basketText = findViewById(R.id.toptekst);
         basketText.setTypeface(tf);
         Intent i = getIntent();
-        order = (Order) i.getSerializableExtra("order");
+        order = (Order) i.getSerializableExtra("orderObject");
         LL = findViewById(R.id.list);
         processOrder(order);
     }
@@ -121,9 +121,12 @@ public class basketActivity extends AppCompatActivity implements View.OnClickLis
         switch (v.getId())
         {
             case R.id.orderbtn:
-                order.clean();
+
                 Intent intent = new Intent(this,Chekmark1.class);
+                intent.putExtra("order", order);
+
                 startActivity(intent);
+                order.clean();
                 break;
         }
     }

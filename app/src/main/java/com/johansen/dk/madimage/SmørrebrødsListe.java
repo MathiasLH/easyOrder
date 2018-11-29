@@ -3,6 +3,7 @@ package com.johansen.dk.madimage;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.constraint.ConstraintSet;
 import android.support.v7.app.AppCompatActivity;
@@ -47,6 +48,7 @@ public class SmørrebrødsListe extends AppCompatActivity implements View.OnClic
         ImageButton basketBtn = findViewById(R.id.basketbtn);
         basketBtn.setOnClickListener(this);
         selection = new Order();
+        int i = 0;
     }
 
     //very ugly function, im sorry.
@@ -109,30 +111,43 @@ public class SmørrebrødsListe extends AppCompatActivity implements View.OnClic
     }
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 1){
+            selection = (Order) data.getSerializableExtra("orderObject");
+        }
+    }
+
+    @Override
     public void onClick(View v) {
         Intent editIntent = new Intent(this, editSmoerrebroed.class);
         editIntent.putExtra("orderObject", selection);
         switch (v.getId()){
             case 100:
                 editIntent.putExtra("foodItem", dyrlaege);
+                editIntent.putExtra("orderObject", selection);
+                startActivityForResult(editIntent,1);
 
-                startActivity(editIntent);
                 break;
             case 101:
                 editIntent.putExtra("foodItem", laks);
-                startActivity(editIntent);
+                editIntent.putExtra("orderObject", selection);
+                startActivityForResult(editIntent,1);
                 break;
             case 102:
                 editIntent.putExtra("foodItem", rejemad);
-                startActivity(editIntent);
+                editIntent.putExtra("orderObject", selection);
+                startActivityForResult(editIntent,1);
                 break;
             case 103:
                 editIntent.putExtra("foodItem", roastbeef);
-                startActivity(editIntent);
+                editIntent.putExtra("orderObject", selection);
+                startActivityForResult(editIntent,1);
                 break;
             case 104:
                 editIntent.putExtra("foodItem", stjerneskud);
-                startActivity(editIntent);
+                editIntent.putExtra("orderObject", selection);
+                startActivityForResult(editIntent,1);
                 break;
             case R.id.basketbtn:
                 Intent basketIntent = new Intent(this, basketActivity.class);

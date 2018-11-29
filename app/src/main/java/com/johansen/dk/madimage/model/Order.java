@@ -4,14 +4,14 @@ import java.io.Serializable;
 
 public class Order implements Serializable {
     static String roomNo ="";
-    private static foodItem[] basket = new foodItem[5];
+    private foodItem[] basket = new foodItem[5];
 
     public Order(){
-        /*for(int i = 0; i < basket.length; i++){
+        for(int i = 0; i < basket.length; i++){
             basket[i] = null;
-        }*/
+        }
     }
-    public static void addItem(foodItem itemToAdd){
+    public void addItem(foodItem itemToAdd){
         for(int i = 0; i < basket.length; i++){
             if(basket[i] == null){
                 basket[i] = itemToAdd;
@@ -20,13 +20,13 @@ public class Order implements Serializable {
         }
     }
 
-    public static void clean(){
-        for(int i = 0; i < basket.length; i++){
+    public void clean(){
+        /*for(int i = 0; i < basket.length; i++){
             basket[i] = null;
-        }
+        }*/
     }
 
-    public static foodItem[] getBasket(){
+    public foodItem[] getBasket(){
         return basket;
     }
 
