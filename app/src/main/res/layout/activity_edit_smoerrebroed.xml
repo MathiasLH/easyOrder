@@ -44,23 +44,31 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <CheckBox
-                android:id="@+id/checkBox"
+            <RadioGroup
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:background="#FFFFFF"
-                android:buttonTint="@color/checkboxColor"
-                android:checked="true"
-                android:clickable="true"
-                android:text="Mørkt brød" />
+                android:layout_height="wrap_content" >
 
-            <CheckBox
-                android:id="@+id/checkBox5"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:background="#FFFFFF"
-                android:buttonTint="@color/checkboxColor"
-                android:text="Lyst brød" />
+                <RadioButton
+                    android:id="@+id/cbdark"
+                    style="@style/Widget.AppCompat.CompoundButton.CheckBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:background="#FFFFFF"
+                    android:buttonTint="@color/checkboxColor"
+                    android:checked="true"
+                    android:text="Mørkt-Brød" />
+
+                <RadioButton
+                    android:id="@+id/cblight"
+                    style="@style/Widget.AppCompat.CompoundButton.CheckBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:background="#FFFFFF"
+                    android:buttonTint="@color/checkboxColor"
+                    android:text="Lys-Brød" />
+            </RadioGroup>
 
             <CheckBox
                 android:id="@+id/checkBox2"
