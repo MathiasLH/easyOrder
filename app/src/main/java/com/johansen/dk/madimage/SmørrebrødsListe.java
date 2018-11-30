@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.constraint.ConstraintSet;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.view.View;
@@ -21,7 +23,7 @@ import com.johansen.dk.madimage.model.foodItem;
 
 public class SmørrebrødsListe extends AppCompatActivity implements View.OnClickListener{
     LinearLayout LL;
-    int id = 0;
+    int id = 0, tempID;
     int cardIDs[] = {100, 101, 102, 103, 104, 105, 106, 107, 108};
     int cardIDspot = 0;
     Order selection;
@@ -65,6 +67,14 @@ public class SmørrebrødsListe extends AppCompatActivity implements View.OnClic
         ImageView IV = createImageView(item);
         CL.addView(IV);
         TextView TV = new TextView(this);
+        if (tempID==0){
+            IV.setTransitionName("trans_temp");
+            tempID = IV.generateViewId();
+            IV.setId(tempID);
+        }
+        else{
+            IV.setId(IV.generateViewId());
+        }
         TV.setText(item.getName());
         TV.setId(id);
         id++;
@@ -126,7 +136,11 @@ public class SmørrebrødsListe extends AppCompatActivity implements View.OnClic
             case 100:
                 editIntent.putExtra("foodItem", dyrlaege);
                 editIntent.putExtra("orderObject", selection);
-                startActivityForResult(editIntent,1);
+
+                ImageView ImageViewTemp = findViewById(tempID);
+                ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(SmørrebrødsListe.this, ImageViewTemp, ViewCompat.getTransitionName(ImageViewTemp));
+                startActivity(editIntent, options.toBundle());
+                //startActivityForResult(editIntent,1);
 
                 break;
             case 101:
