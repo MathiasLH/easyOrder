@@ -3,22 +3,16 @@ package com.johansen.dk.madimage;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-
 import android.content.Intent;
-import android.support.constraint.ConstraintLayout;
-import android.support.constraint.ConstraintSet;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.johansen.dk.madimage.LayoutLogic.selectionAdapter;
+import com.johansen.dk.madimage.LayoutLogic.basketAdapter;
 import com.johansen.dk.madimage.model.Order;
 import com.johansen.dk.madimage.model.foodItem;
 
@@ -51,12 +45,41 @@ public class basketActivity extends AppCompatActivity implements View.OnClickLis
             if(order.getBasket()[j] != null){
                 fooditems.add(order.getBasket()[j]);
             }
-
         }
-        RecyclerView.Adapter niceAdapter = new selectionAdapter(fooditems);
+        RecyclerView.Adapter niceAdapter = new basketAdapter(fooditems);
+        ((basketAdapter) niceAdapter).setOnItemClickListener(new basketAdapter.ClickListener() {
+            @Override
+            public void onItemClick(int position, View v) {
+               removeItem(position);
+               updateList();
+            }
+        });
         foodList.setAdapter(niceAdapter);
     }
 
+    public void updateList(){
+        fooditems = new ArrayList<>();
+        for(int j = 0; j < order.getBasket().length; j++){
+            if(order.getBasket()[j] != null){
+                fooditems.add(order.getBasket()[j]);
+            }
+        }
+        RecyclerView.Adapter niceAdapter = new basketAdapter(fooditems);
+        foodList.setAdapter(niceAdapter);
+    }
+
+    private void removeItem(int position){
+        CardView cv = (CardView) foodList.findViewHolderForAdapterPosition(position).itemView;
+        TextView tv = cv.getChildAt(0).findViewById(R.id.cardName);
+        String toDelete = tv.getText().toString();
+        for(int i = 0; i < order.getBasket().length; i++){
+            if(order.getBasket()[i] != null){
+                if(order.getBasket()[i].getName() == toDelete){
+                    order.getBasket()[i] = null;
+                }
+            }
+        }
+    }
 
     @Override
     public void onClick(View v) {
