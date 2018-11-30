@@ -6,8 +6,12 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.constraint.ConstraintSet;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -16,32 +20,46 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.johansen.dk.madimage.LayoutLogic.selectionAdapter;
 import com.johansen.dk.madimage.model.Order;
 import com.johansen.dk.madimage.model.foodItem;
 
+import java.util.ArrayList;
+
 public class SmørrebrødsListe extends AppCompatActivity implements View.OnClickListener{
-    LinearLayout LL;
     int id = 0;
-    int cardIDs[] = {100, 101, 102, 103, 104, 105, 106, 107, 108};
-    int cardIDspot = 0;
     Order selection;
     foodItem dyrlaege, laks, rejemad, roastbeef, stjerneskud;
     TextView text;
+    ArrayList<foodItem> foodItems;
+    RecyclerView foodList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.smoerrebroedsliste);
-        LL = findViewById(R.id.foodList);
-        dyrlaege = new foodItem("Dyrlægens natmad", R.drawable.dyrlaegensnatmad_big);
-        laks = new foodItem("Laksemad", R.drawable.laks_big);
-        rejemad = new foodItem("Rejemad", R.drawable.rejemad_big);
-        roastbeef = new foodItem("Roastbeef", R.drawable.roastbeef_big);
-        stjerneskud = new foodItem("Stjerneskud", R.drawable.stjerneskud_big);
-        createCard(dyrlaege);
-        createCard(laks);
-        createCard(rejemad);
-        createCard(roastbeef);
-        createCard(stjerneskud);
+        dyrlaege = new foodItem("Dyrlægens natmad", R.drawable.dyrlaegensnatmad_big, 100);
+        laks = new foodItem("Laksemad", R.drawable.laks_big, 101);
+        rejemad = new foodItem("Rejemad", R.drawable.rejemad_big, 102);
+        roastbeef = new foodItem("Roastbeef", R.drawable.roastbeef_big, 103);
+        stjerneskud = new foodItem("Stjerneskud", R.drawable.stjerneskud_big, 104);
+        foodItems = new ArrayList<>();
+        foodItems.add(dyrlaege);
+        foodItems.add(laks);
+        foodItems.add(rejemad);
+        foodItems.add(roastbeef);
+        foodItems.add(stjerneskud);
+        foodList = findViewById(R.id.foodList);
+        foodList.setHasFixedSize(true);
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
+        foodList.setLayoutManager(mLayoutManager);
+        RecyclerView.Adapter niceAdapter = new selectionAdapter(foodItems);
+        ((selectionAdapter) niceAdapter).setOnItemClickListener(new selectionAdapter.ClickListener() {
+            @Override
+            public void onItemClick(int position, View v) {
+                launchEditActivity(position);
+            }
+        });
+        foodList.setAdapter(niceAdapter);
         Typeface tf = Typeface.createFromAsset(getAssets(),"fonts/Orkney Regular.ttf");
         text = findViewById(R.id.texttop);
         text.setTypeface(tf);
@@ -51,104 +69,30 @@ public class SmørrebrødsListe extends AppCompatActivity implements View.OnClic
         int i = 0;
     }
 
-    //very ugly function, im sorry.
-    private void createCard(foodItem item){
-        CardView cv = new CardView(getApplicationContext());
-        cv.setTag(item.getName());
-        cv.setId(cardIDs[cardIDspot]);
-        cardIDspot++;
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, /*LinearLayout.LayoutParams.WRAP_CONTENT*/380);
-        cv.setLayoutParams(params);
-        cv.setRadius(50);
-        ConstraintLayout CL = new ConstraintLayout(this);
-        cv.addView(CL);
-        ImageView IV = createImageView(item);
-        CL.addView(IV);
-        TextView TV = new TextView(this);
-        TV.setText(item.getName());
-        TV.setId(id);
-        id++;
-        CL.addView(TV);
-        /*ImageButton IB = new ImageButton(this);
-        IB.setImageResource(R.drawable.ic_trash);
-        IB.setId(id);
-        IB.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
-
-            }
-        });
-        IB.setBackgroundResource(0);
-        params = new LinearLayout.LayoutParams(55, 60);
-        IB.setLayoutParams(params);
-        id++;
-        CL.addView(IB);*/
-        ConstraintSet CS = new ConstraintSet();
-        CS.clone(CL);
-        CS.connect(IV.getId(), ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, 0);
-        CS.connect(TV.getId(), ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, 16);
-        CS.connect(TV.getId(), ConstraintSet.LEFT, ConstraintSet.PARENT_ID, ConstraintSet.LEFT, 8);
-        CS.connect(TV.getId(), ConstraintSet.RIGHT, ConstraintSet.PARENT_ID, ConstraintSet.RIGHT, 8);
-        //CS.connect(IB.getId(), ConstraintSet.LEFT, TV.getId(), ConstraintSet.RIGHT,300);
-        //CS.connect(IB.getId(), ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, 8);
-        CS.applyTo(CL);
-        ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) cv.getLayoutParams();
-        layoutParams.setMargins(0,32,0,0);
-        cv.setOnClickListener(this);
-
-        LL.addView(cv);
+    private void launchEditActivity(int position){
+        Intent editIntent = new Intent(this, editSmoerrebroed.class);
+        editIntent.putExtra("orderObject", selection);
+        editIntent.putExtra("foodItem", foodItems.get(position));
+        CardView cv = (CardView) foodList.findViewHolderForAdapterPosition(position).itemView;
+        ImageView iv = cv.getChildAt(0).findViewById(foodItems.get(position).getImageID());
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(SmørrebrødsListe.this, iv, ViewCompat.getTransitionName(iv));
+        startActivityForResult(editIntent,1, options.toBundle());
     }
 
-    private ImageView createImageView(foodItem item){
-        ImageView IV = new ImageView(this);
-        IV.setTag(item.getName() + "Image");
-        IV.setImageResource(item.getImageID());
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, /*LinearLayout.LayoutParams.WRAP_CONTENT*/300);
-        IV.setLayoutParams(params);
-        IV.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        IV.setId(id);
-        id++;
-        return IV;
-    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == 1){
-            selection = (Order) data.getSerializableExtra("orderObject");
+        if(resultCode != RESULT_CANCELED){
+            if(requestCode == 1){
+                selection = (Order) data.getSerializableExtra("orderObject");
+            }
         }
     }
 
     @Override
     public void onClick(View v) {
-        Intent editIntent = new Intent(this, editSmoerrebroed.class);
-        editIntent.putExtra("orderObject", selection);
         switch (v.getId()){
-            case 100:
-                editIntent.putExtra("foodItem", dyrlaege);
-                editIntent.putExtra("orderObject", selection);
-                startActivityForResult(editIntent,1);
-
-                break;
-            case 101:
-                editIntent.putExtra("foodItem", laks);
-                editIntent.putExtra("orderObject", selection);
-                startActivityForResult(editIntent,1);
-                break;
-            case 102:
-                editIntent.putExtra("foodItem", rejemad);
-                editIntent.putExtra("orderObject", selection);
-                startActivityForResult(editIntent,1);
-                break;
-            case 103:
-                editIntent.putExtra("foodItem", roastbeef);
-                editIntent.putExtra("orderObject", selection);
-                startActivityForResult(editIntent,1);
-                break;
-            case 104:
-                editIntent.putExtra("foodItem", stjerneskud);
-                editIntent.putExtra("orderObject", selection);
-                startActivityForResult(editIntent,1);
-                break;
             case R.id.basketbtn:
                 Intent basketIntent = new Intent(this, basketActivity.class);
                 basketIntent.putExtra("orderObject", selection);

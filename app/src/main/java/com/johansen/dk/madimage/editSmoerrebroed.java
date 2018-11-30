@@ -25,7 +25,8 @@ public class editSmoerrebroed extends AppCompatActivity implements View.OnClickL
         Typeface tf = Typeface.createFromAsset(getAssets(),"fonts/Orkney Regular.ttf");
         foodItem = (foodItem) getIntent().getSerializableExtra("foodItem");
         foodImage = findViewById(R.id.edit_foodimage);
-        foodImage.setImageResource(foodItem.getImageID());
+        foodImage.setImageResource(foodItem.getImageResourceID());
+        foodImage.setTransitionName(foodItem.getName()+"Trans");
         order = (Order) getIntent().getSerializableExtra("orderObject");
         foodName = findViewById(R.id.dish_name);
         foodName.setTypeface(tf);
