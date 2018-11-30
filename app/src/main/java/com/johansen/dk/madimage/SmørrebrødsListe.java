@@ -67,14 +67,6 @@ public class SmørrebrødsListe extends AppCompatActivity implements View.OnClic
         ImageView IV = createImageView(item);
         CL.addView(IV);
         TextView TV = new TextView(this);
-        if (tempID==0){
-            IV.setTransitionName("trans_temp");
-            tempID = IV.generateViewId();
-            IV.setId(tempID);
-        }
-        else{
-            IV.setId(IV.generateViewId());
-        }
         TV.setText(item.getName());
         TV.setId(id);
         id++;
@@ -136,12 +128,7 @@ public class SmørrebrødsListe extends AppCompatActivity implements View.OnClic
             case 100:
                 editIntent.putExtra("foodItem", dyrlaege);
                 editIntent.putExtra("orderObject", selection);
-
-                ImageView ImageViewTemp = findViewById(tempID);
-                ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(SmørrebrødsListe.this, ImageViewTemp, ViewCompat.getTransitionName(ImageViewTemp));
-                startActivity(editIntent, options.toBundle());
-                //startActivityForResult(editIntent,1);
-
+                startActivityForResult(editIntent,1);
                 break;
             case 101:
                 editIntent.putExtra("foodItem", laks);

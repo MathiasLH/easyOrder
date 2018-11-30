@@ -26,7 +26,6 @@ public class editSmoerrebroed extends AppCompatActivity implements View.OnClickL
         foodItem = (foodItem) getIntent().getSerializableExtra("foodItem");
         foodImage = findViewById(R.id.edit_foodimage);
         foodImage.setImageResource(foodItem.getImageID());
-        foodImage.setTransitionName("trans_temp");
         order = (Order) getIntent().getSerializableExtra("orderObject");
         foodName = findViewById(R.id.dish_name);
         foodName.setTypeface(tf);

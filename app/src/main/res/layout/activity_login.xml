@@ -41,47 +41,47 @@
             android:layout_marginBottom="8dp"
             android:gravity="center"
             android:text="Hold din telefon/tablet hen over QR koden for at scanne"
+            android:textAlignment="center"
             android:textColor="@color/textColor"
             android:textSize="18sp"
-            app:layout_constraintBottom_toTopOf="@+id/qrCode"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <android.support.constraint.ConstraintLayout
+        <SurfaceView
+            android:id="@+id/cameraPreview"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <ImageButton
-                android:id="@+id/qrCode"
-                android:layout_width="197dp"
-                android:layout_height="197dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
-                android:adjustViewBounds="true"
-                android:scaleType="fitCenter"
-                app:layout_constraintBottom_toTopOf="@+id/help"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.142"
-                app:srcCompat="@drawable/qrcode" />
-
-            <Button
-                android:id="@+id/help"
-                android:layout_width="0dp"
-                android:layout_height="47dp"
-                android:layout_marginBottom="8dp"
-                android:background="@color/backgroundColor"
-                android:text="Hjælp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent" />
-
-        </android.support.constraint.ConstraintLayout>
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/moveAlongBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:background="@color/backgroundColor"
+        android:text="Get me out"
+        app:layout_constraintBottom_toTopOf="@+id/helpBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/helpBtn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:background="@color/backgroundColor"
+        android:text="Hjælp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
