@@ -9,10 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.johansen.dk.madimage.R;
 import com.johansen.dk.madimage.model.foodItem;
-
 import java.util.ArrayList;
 
 public class basketAdapter extends RecyclerView.Adapter<basketAdapter.myViewHolder> {
@@ -29,6 +27,8 @@ public class basketAdapter extends RecyclerView.Adapter<basketAdapter.myViewHold
 
         //@Override
         public void onClick(View v) {clickListener.onItemClick(getAdapterPosition(), v); }
+
+
     }
 
     public basketAdapter(ArrayList<foodItem> myDataset){
@@ -48,7 +48,11 @@ public class basketAdapter extends RecyclerView.Adapter<basketAdapter.myViewHold
         ImageView iv = holder.niceCard.findViewById(R.id.cardImage);
         //iv.setId(dataset.get(position).getImageID());
         iv.setImageResource(dataset.get(position).getImageResourceID());
+    }
 
+    public void removeItemAt(int position){
+        dataset.remove(position);
+        notifyItemRemoved(position);
     }
 
     public int getItemCount(){return dataset.size();}

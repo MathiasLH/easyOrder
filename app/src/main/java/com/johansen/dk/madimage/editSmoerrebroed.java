@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.johansen.dk.madimage.model.Order;
 import com.johansen.dk.madimage.model.foodItem;
 

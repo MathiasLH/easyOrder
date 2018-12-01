@@ -8,15 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.johansen.dk.madimage.R;
 import com.johansen.dk.madimage.model.foodItem;
-
 import java.util.ArrayList;
 
 public class selectionAdapter extends RecyclerView.Adapter<selectionAdapter.myViewHolder>{
     private static ClickListener clickListener;
-    private ArrayList<foodItem> dataset;
+    public ArrayList<foodItem> dataset;
     public static class myViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         public CardView niceCard;
         public myViewHolder(@NonNull CardView cv) {
