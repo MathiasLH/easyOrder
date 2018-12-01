@@ -3,16 +3,21 @@
     package="com.johansen.dk.madimage">
 
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <meta-data
+        android:name="com.google.android.gms.vision.DEPENDENCIES"
+        android:value="barcode" />
 
     <application
+        android:allowBackup="true"
         android:icon="@mipmap/easyorder_launcher"
         android:label="easyOrder"
-        android:allowBackup="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity" />
         <activity android:name=".basketActivity" />
-        <activity android:name=".editSmoerrebroed"></activity>
+        <activity android:name=".editSmoerrebroed" />
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,9 +25,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SmørrebrødsListe"></activity>
-        <activity android:name=".Chekmark1"></activity>
-        <activity android:name=".Error"></activity>
+        <activity android:name=".SmørrebrødsListe" />
+        <activity android:name=".Chekmark1" />
+        <activity android:name=".Error" />
     </application>
 
 </manifest>
