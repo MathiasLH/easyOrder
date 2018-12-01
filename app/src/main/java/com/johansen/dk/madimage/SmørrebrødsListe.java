@@ -60,7 +60,6 @@ public class SmørrebrødsListe extends AppCompatActivity implements View.OnClic
         ImageButton basketBtn = findViewById(R.id.basketbtn);
         basketBtn.setOnClickListener(this);
         selection = new Order();
-        int i = 0;
     }
 
     private void launchEditActivity(int position){
@@ -82,6 +81,9 @@ public class SmørrebrødsListe extends AppCompatActivity implements View.OnClic
                 selection = (Order) data.getSerializableExtra("orderObject");
             }
         }
+        if(resultCode == RESULT_OK){
+            selection = (Order) data.getSerializableExtra("orderObject");
+        }
     }
 
     @Override
@@ -90,7 +92,7 @@ public class SmørrebrødsListe extends AppCompatActivity implements View.OnClic
             case R.id.basketbtn:
                 Intent basketIntent = new Intent(this, basketActivity.class);
                 basketIntent.putExtra("orderObject", selection);
-                startActivity(basketIntent);
+                startActivityForResult(basketIntent, 2);
 
         }
     }

@@ -4,6 +4,7 @@ import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -48,10 +49,27 @@ public class basketActivity extends AppCompatActivity implements View.OnClickLis
         niceAdapter.setOnItemClickListener(new basketAdapter.ClickListener() {
             @Override
             public void onItemClick(int position, View v) {
+                CardView cv = (CardView) foodList.findViewHolderForAdapterPosition(position).itemView;
+                TextView tv = cv.getChildAt(0).findViewById(R.id.cardName);
+                String toDelete = tv.getText().toString();
+                for(int i = 0; i < order.getBasket().length; i++){
+                    if(order.getBasket()[i] != null){
+                        if(order.getBasket()[i].getName().equals(toDelete)){
+                            order.getBasket()[i] = null;
+                        }
+                    }
+                }
                 niceAdapter.removeItemAt(position);
             }
         });
         foodList.setAdapter(niceAdapter);
+    }
+    @Override
+    public void onBackPressed(){
+      Intent intent = new Intent();
+      intent.putExtra("orderObject",order);
+      setResult(RESULT_OK, intent);
+      finish();
     }
 
     @Override

@@ -27,8 +27,6 @@ public class basketAdapter extends RecyclerView.Adapter<basketAdapter.myViewHold
 
         //@Override
         public void onClick(View v) {clickListener.onItemClick(getAdapterPosition(), v); }
-
-
     }
 
     public basketAdapter(ArrayList<foodItem> myDataset){

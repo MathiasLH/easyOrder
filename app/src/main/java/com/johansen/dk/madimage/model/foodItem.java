@@ -6,7 +6,6 @@ public class foodItem implements Serializable {
     private int imageID;
     private int imageResourceID;
     private String name;
-    private boolean isVeg;
     public foodItem(String name, int imageResourceID, int imageID){
         this.name = name;
         this.imageID = imageID;
@@ -24,7 +23,4 @@ public class foodItem implements Serializable {
         return name;
     }
 
-    public boolean isVeg() {
-        return isVeg;
-    }
 }
