@@ -22,6 +22,7 @@ public class basketActivity extends AppCompatActivity implements View.OnClickLis
     TextView basketText;
     RecyclerView foodList;
     ArrayList<foodItem> fooditems;
+    ArrayList<LinearLayoutManager> LLM;
     basketAdapter niceAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,12 +41,15 @@ public class basketActivity extends AppCompatActivity implements View.OnClickLis
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
         foodList.setLayoutManager(mLayoutManager);
         fooditems = new ArrayList<>();
+        LLM = new ArrayList<>();
         for(int j = 0; j < order.getBasket().length; j++){
             if(order.getBasket()[j] != null){
                 fooditems.add(order.getBasket()[j]);
+                LLM.add(new LinearLayoutManager(this));
             }
         }
-        niceAdapter = new basketAdapter(fooditems);
+        //LinearLayoutManager LLM = new LinearLayoutManager(this);
+        niceAdapter = new basketAdapter(fooditems, LLM);
         niceAdapter.setOnItemClickListener(new basketAdapter.ClickListener() {
             @Override
             public void onItemClick(int position, View v) {

@@ -31,17 +31,7 @@ public class SmørrebrødsListe extends AppCompatActivity implements View.OnClic
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.smoerrebroedsliste);
-        dyrlaege = new foodItem("Dyrlægens natmad", R.drawable.dyrlaegensnatmad_big, 100);
-        laks = new foodItem("Laksemad", R.drawable.laks_big, 101);
-        rejemad = new foodItem("Rejemad", R.drawable.rejemad_big, 102);
-        roastbeef = new foodItem("Roastbeef", R.drawable.roastbeef_big, 103);
-        stjerneskud = new foodItem("Stjerneskud", R.drawable.stjerneskud_big, 104);
-        foodItems = new ArrayList<>();
-        foodItems.add(dyrlaege);
-        foodItems.add(laks);
-        foodItems.add(rejemad);
-        foodItems.add(roastbeef);
-        foodItems.add(stjerneskud);
+       createTestData();
         foodList = findViewById(R.id.foodList);
         foodList.setHasFixedSize(true);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
@@ -60,6 +50,40 @@ public class SmørrebrødsListe extends AppCompatActivity implements View.OnClic
         ImageButton basketBtn = findViewById(R.id.basketbtn);
         basketBtn.setOnClickListener(this);
         selection = new Order();
+    }
+
+    private void createTestData(){
+        ArrayList<String> dyrlaegeOptions = new ArrayList<>();
+        dyrlaegeOptions.add("sky");
+        dyrlaegeOptions.add("rødløg");
+        dyrlaegeOptions.add("karse");
+        dyrlaege = new foodItem("Dyrlægens natmad", R.drawable.dyrlaegensnatmad_big, 100, dyrlaegeOptions);
+        ArrayList<String> laksOptions = new ArrayList<>();
+        laksOptions.add("dild");
+        laksOptions.add("citron");
+        laksOptions.add("asperges");
+        laks = new foodItem("Laksemad", R.drawable.laks_big, 101, laksOptions);
+        ArrayList<String> rejeOptions = new ArrayList<>();
+        rejeOptions.add("krydderurt");
+        rejemad = new foodItem("Rejemad", R.drawable.rejemad_big, 102, rejeOptions);
+        ArrayList<String> roastbeefOptions = new ArrayList<>();
+        roastbeefOptions.add("peberrod");
+        roastbeefOptions.add("salat");
+        roastbeefOptions.add("Syltet agurk");
+        roastbeef = new foodItem("Roastbeef", R.drawable.roastbeef_big, 103, roastbeefOptions);
+        ArrayList<String> stjerneskudOptions = new ArrayList<>();
+        stjerneskudOptions.add("fiskeægting");
+        stjerneskudOptions.add("citron");
+        stjerneskudOptions.add("hvid asparges");
+        stjerneskudOptions.add("grøn asparges");
+        stjerneskudOptions.add("rejer");
+        stjerneskud = new foodItem("Stjerneskud", R.drawable.stjerneskud_big, 10, stjerneskudOptions);
+        foodItems = new ArrayList<>();
+        foodItems.add(dyrlaege);
+        foodItems.add(laks);
+        foodItems.add(rejemad);
+        foodItems.add(roastbeef);
+        foodItems.add(stjerneskud);
     }
 
     private void launchEditActivity(int position){
