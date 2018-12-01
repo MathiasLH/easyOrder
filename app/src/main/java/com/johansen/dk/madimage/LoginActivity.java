@@ -57,7 +57,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         //from youtubevideo: https://www.youtube.com/watch?v=ej51mAYXbKs
         cameraPreview = findViewById(R.id.cameraPreview);
         barcodeDetector = new BarcodeDetector.Builder(this).setBarcodeFormats(Barcode.QR_CODE).build();
-        cameraSrc = new CameraSource.Builder(this, barcodeDetector).setRequestedPreviewSize(800, 800).build();
+        cameraSrc = new CameraSource.Builder(this, barcodeDetector).setRequestedPreviewSize(800, 500).build();
         tempHeight = cameraPreview.getHeight();
         tempWidth = cameraPreview.getWidth();
 
@@ -128,13 +128,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         /*Implementing on click listener to QR-code image Button*/
         switch (v.getId()){
             case R.id.moveAlongBtn:
-                Intent listIntent = new Intent(this, SmørrebrødsListe.class);
-                startActivity(listIntent);
+                startActivity(new Intent(LoginActivity.this, SmørrebrødsListe.class));
                 break;
             case R.id.helpBtn:
                 Toast.makeText(this, "NOT IMPLEMENTED", Toast.LENGTH_SHORT).show();
-                //Intent listIntent = new Intent(this, SmørrebrødsListe.class);
-                //startActivity(listIntent);
+                //startActivity(new Intent(LoginActivity.this, LoginHelp.class));
                 break;
             case R.id.danishFlag:
                 Toast.makeText(this, "NOT IMPLEMENTED", Toast.LENGTH_SHORT).show();
@@ -157,4 +155,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             /*setting language to arbaic*/
         }
     }
+
+
 }
