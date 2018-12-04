@@ -7,6 +7,6 @@
     <color name="textColor">#19414B</color>
     <color name="checkboxColor">#89CCD0</color>
     <color name="btnColor">#89CCD0</color>
-    <color name="qr_code_reader_square">#FFFFFF</color>
-    //name="btnColor">#19414B
+    <color name="white">#FFFFFF</color>
+  //name="btnColor">#19414B
 </resources>
