@@ -5,8 +5,8 @@
     <color name="colorAccent">#D81B60</color>
     <color name="backgroundColor">#89CCD0</color>
     <color name="textColor">#19414B</color>
-    <color name="checkboxColor">#7fced2</color>
-    <color name="btnColor">#7fced2</color>
-    <color name="qr_code_reader_square">#000000</color>
+    <color name="checkboxColor">#89CCD0</color>
+    <color name="btnColor">#89CCD0</color>
+    <color name="qr_code_reader_square">#FFFFFF</color>
     //name="btnColor">#19414B
 </resources>

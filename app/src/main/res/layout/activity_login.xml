@@ -47,8 +47,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="8dp"
-        android:background="@drawable/qr_code_reader_square"
-        app:layout_constraintBottom_toTopOf="@+id/moveAlongBtn"
+        app:layout_constraintBottom_toTopOf="@+id/helpBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
@@ -71,17 +70,6 @@
         </android.support.constraint.ConstraintLayout>
 
     </FrameLayout>
-
-    <Button
-        android:id="@+id/moveAlongBtn"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:background="@color/backgroundColor"
-        android:text="Get me out"
-        app:layout_constraintBottom_toTopOf="@+id/helpBtn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/helpBtn"
@@ -107,6 +95,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/moveAlongBtn"
+            android:layout_width="40dp"
+            android:layout_height="25dp"
+            android:background="@color/backgroundColor"
+            android:text="Next"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <ImageButton
             android:id="@+id/danishFlag"
