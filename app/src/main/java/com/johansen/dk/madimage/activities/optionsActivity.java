@@ -52,10 +52,12 @@ public class optionsActivity extends AppCompatActivity implements View.OnClickLi
             cb.setText("Med " + foodItem.getOptions().get(i));
             cb.setTag(foodItem.getOptions().get(i));
             cb.setChecked(true);
-            cb.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#7fced2")));
-            cb.setHeight(100);
+            cb.setBackgroundResource(R.drawable.checkbox_edit);
+            cb.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#FFFFFF")));
+            cb.setHeight(125);
             cbArray.add(cb);
             LL.addView(cb);
+
         }
     }
 
