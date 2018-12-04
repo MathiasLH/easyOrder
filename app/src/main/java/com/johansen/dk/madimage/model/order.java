@@ -3,7 +3,9 @@ package com.johansen.dk.madimage.model;
 import java.io.Serializable;
 
 public class order implements Serializable {
-    static String roomNo ="";
+
+
+    private String roomNo ="";
     private foodItem[] basket = new foodItem[5];
 
     public order(){
@@ -30,7 +32,9 @@ public class order implements Serializable {
         return basket;
     }
 
-    public static void setRoom(String room){
+    public String getRoomNo() { return roomNo; }
+
+    public void setRoom(String room){
         roomNo = room;
     }
 }

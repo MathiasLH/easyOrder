@@ -52,6 +52,8 @@ public class selectionActivity extends AppCompatActivity implements View.OnClick
         ImageButton basketBtn = findViewById(R.id.basketbtn);
         basketBtn.setOnClickListener(this);
         selection = new order();
+        Intent niceIntent = getIntent();
+        selection.setRoom(niceIntent.getStringExtra("roomNo"));
     }
 
     private void createTestData(){

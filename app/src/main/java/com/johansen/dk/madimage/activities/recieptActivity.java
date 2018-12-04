@@ -39,7 +39,7 @@ public class recieptActivity extends AppCompatActivity {
         items = (order) i.getSerializableExtra("order");
 
         sText.setText("Tak for din bestilling! \n");
-        orderList.setText("Du har bestilt: \n");
+        orderList.setText(items.getRoomNo() + " har bestilt: \n");
         for(int a = 0; a < items.getBasket().length; a++) {
             if (items.getBasket()[a] != null) {
                 orderList.append(items.getBasket()[a].getName() + "\n");

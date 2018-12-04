@@ -25,6 +25,7 @@ import com.google.android.gms.vision.barcode.BarcodeDetector;
 import com.johansen.dk.madimage.R;
 
 import java.io.IOException;
+import java.util.regex.Pattern;
 
 public class loginActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -35,6 +36,7 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
     BarcodeDetector barcodeDetector;
     TextView top;
     Button helpBtn, moveAlongBtn;
+    /*me love u*/long time = 0;
 
     int tempHeight,tempWidth;
 
@@ -110,6 +112,27 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
+    private void validateQR(String input){
+        String regex = "([a-zA-Z]+[0-9]+)";
+        if(input.matches(regex)){
+            Vibrator vibrator = (Vibrator)getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
+            vibrator.vibrate(100);
+            Intent niceIntent = new Intent(loginActivity.this, selectionActivity.class);
+            niceIntent.putExtra("roomNo", input);
+            startActivity(niceIntent);
+
+        }
+    }
+
+    private boolean enoughTimePassed(){
+        long currentTime = System.currentTimeMillis();
+        if(currentTime - time > 1000){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     private void createQRscan(){
         cameraPreview.getHolder().addCallback(new SurfaceHolder.Callback() {
             @Override
@@ -149,9 +172,12 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
                     top.post(new Runnable() {
                         @Override
                         public void run() {
-                            Vibrator vibrator = (Vibrator)getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
-                            vibrator.vibrate(1000);
-                            top.setText(qrCodes.valueAt(0).displayValue);
+                            //top.setText(qrCodes.valueAt(0).displayValue);
+
+                            if(enoughTimePassed()){
+                                time = System.currentTimeMillis();
+                                validateQR(qrCodes.valueAt(0).displayValue);
+                            }
                         }
                     });
 
@@ -159,6 +185,4 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
             }
         });
     }
-
-
 }
