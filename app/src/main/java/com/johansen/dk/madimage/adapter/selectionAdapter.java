@@ -1,4 +1,4 @@
-package com.johansen.dk.madimage.LayoutLogic;
+package com.johansen.dk.madimage.adapter;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;

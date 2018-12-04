@@ -1,4 +1,4 @@
-package com.johansen.dk.madimage;
+package com.johansen.dk.madimage.activities;
 
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -14,15 +14,17 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import com.johansen.dk.madimage.LayoutLogic.selectionAdapter;
-import com.johansen.dk.madimage.model.Order;
+
+import com.johansen.dk.madimage.R;
+import com.johansen.dk.madimage.adapter.selectionAdapter;
+import com.johansen.dk.madimage.model.order;
 import com.johansen.dk.madimage.model.foodItem;
 
 import java.util.ArrayList;
 
-public class SmørrebrødsListe extends AppCompatActivity implements View.OnClickListener{
+public class selectionActivity extends AppCompatActivity implements View.OnClickListener{
     int id = 0;
-    Order selection;
+    order selection;
     foodItem dyrlaege, laks, rejemad, roastbeef, stjerneskud;
     TextView text;
     ArrayList<foodItem> foodItems;
@@ -49,7 +51,7 @@ public class SmørrebrødsListe extends AppCompatActivity implements View.OnClic
         text.setTypeface(tf);
         ImageButton basketBtn = findViewById(R.id.basketbtn);
         basketBtn.setOnClickListener(this);
-        selection = new Order();
+        selection = new order();
     }
 
     private void createTestData(){
@@ -87,12 +89,12 @@ public class SmørrebrødsListe extends AppCompatActivity implements View.OnClic
     }
 
     private void launchEditActivity(int position){
-        Intent editIntent = new Intent(this, editSmoerrebroed.class);
+        Intent editIntent = new Intent(this, optionsActivity.class);
         editIntent.putExtra("orderObject", selection);
         editIntent.putExtra("foodItem", foodItems.get(position));
         CardView cv = (CardView) foodList.findViewHolderForAdapterPosition(position).itemView;
         ImageView iv = cv.getChildAt(0).findViewById(foodItems.get(position).getImageID());
-        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(SmørrebrødsListe.this, iv, ViewCompat.getTransitionName(iv));
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(selectionActivity.this, iv, ViewCompat.getTransitionName(iv));
         startActivityForResult(editIntent,1, options.toBundle());
     }
 
@@ -102,11 +104,11 @@ public class SmørrebrødsListe extends AppCompatActivity implements View.OnClic
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode != RESULT_CANCELED){
             if(requestCode == 1){
-                selection = (Order) data.getSerializableExtra("orderObject");
+                selection = (order) data.getSerializableExtra("orderObject");
             }
         }
         if(resultCode == RESULT_OK){
-            selection = (Order) data.getSerializableExtra("orderObject");
+            selection = (order) data.getSerializableExtra("orderObject");
         }
     }
 

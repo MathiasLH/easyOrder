@@ -1,4 +1,4 @@
-package com.johansen.dk.madimage;
+package com.johansen.dk.madimage.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,7 +6,9 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 
-public class Loading extends AppCompatActivity {
+import com.johansen.dk.madimage.R;
+
+public class loadingActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,7 +19,7 @@ public class Loading extends AppCompatActivity {
     }
     public void switchactivity()
     {
-        startActivity(new Intent(Loading.this, MainActivity.class));
+        startActivity(new Intent(loadingActivity.this, loginActivity.class));
     }
 
 }

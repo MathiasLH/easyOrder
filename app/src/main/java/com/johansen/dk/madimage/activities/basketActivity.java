@@ -1,4 +1,4 @@
-package com.johansen.dk.madimage;
+package com.johansen.dk.madimage.activities;
 
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
@@ -10,14 +10,15 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import com.johansen.dk.madimage.LayoutLogic.basketAdapter;
-import com.johansen.dk.madimage.model.Order;
+
+import com.johansen.dk.madimage.R;
+import com.johansen.dk.madimage.adapter.basketAdapter;
 import com.johansen.dk.madimage.model.foodItem;
 
 import java.util.ArrayList;
 
 public class basketActivity extends AppCompatActivity implements View.OnClickListener{
-    Order order;
+    com.johansen.dk.madimage.model.order order;
     Button orderBtn;
     TextView basketText;
     RecyclerView foodList;
@@ -35,7 +36,7 @@ public class basketActivity extends AppCompatActivity implements View.OnClickLis
         basketText = findViewById(R.id.toptekst);
         basketText.setTypeface(tf);
         Intent i = getIntent();
-        order = (Order) i.getSerializableExtra("orderObject");
+        order = (com.johansen.dk.madimage.model.order) i.getSerializableExtra("orderObject");
         foodList = findViewById(R.id.foodList);
         foodList.setHasFixedSize(true);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
@@ -82,7 +83,7 @@ public class basketActivity extends AppCompatActivity implements View.OnClickLis
         {
             case R.id.orderbtn:
 
-                Intent intent = new Intent(this,Chekmark1.class);
+                Intent intent = new Intent(this,recieptActivity.class);
                 intent.putExtra("order", order);
 
                 startActivity(intent);
