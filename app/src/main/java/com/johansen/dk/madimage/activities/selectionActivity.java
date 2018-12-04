@@ -32,7 +32,7 @@ public class selectionActivity extends AppCompatActivity implements View.OnClick
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.smoerrebroedsliste);
+        setContentView(R.layout.activity_selection);
        createTestData();
         foodList = findViewById(R.id.foodList);
         foodList.setHasFixedSize(true);
