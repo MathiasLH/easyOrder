@@ -22,7 +22,7 @@ public class recieptActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.activity_chekmark1);
+        setContentView(R.layout.activity_reciept);
         (new Handler()).postDelayed(this::switchactivity, 3000);
         sText = findViewById(R.id.sucText);
         orderList = findViewById(R.id.orderListView);
