@@ -10,8 +10,8 @@
     <TextView
         android:id="@+id/dish_name"
         android:layout_width="0dp"
-        android:layout_height="32dp"
-        android:background="@color/backgroundColor"
+        android:layout_height="42dp"
+        android:background="@drawable/topbarshape"
         android:text="TextView"
         android:textAlignment="center"
         android:textSize="20sp"
