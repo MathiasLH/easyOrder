@@ -10,8 +10,8 @@
     <TextView
         android:id="@+id/dish_name"
         android:layout_width="0dp"
-        android:layout_height="32dp"
-        android:background="@color/backgroundColor"
+        android:layout_height="42dp"
+        android:background="@drawable/topbarshape"
         android:text="TextView"
         android:textAlignment="center"
         android:textSize="20sp"
@@ -23,9 +23,7 @@
         android:id="@+id/linearLayout2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -39,37 +37,51 @@
             tools:layout_editor_absoluteX="93dp"
             tools:layout_editor_absoluteY="51dp" />
 
-        <LinearLayout
-            android:id="@+id/optionsList"
+        <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
 
             <RadioGroup
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <RadioButton
                     android:id="@+id/cbdark"
                     style="@style/Widget.AppCompat.CompoundButton.CheckBox"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="50dp"
                     android:layout_weight="1"
-                    android:background="#FFFFFF"
-                    android:buttonTint="@color/checkboxColor"
+                    android:background="@drawable/editbuttonshapeleft"
+                    android:buttonTint="#FFFFFF"
                     android:checked="true"
-                    android:text="Mørkt-Brød" />
+                    android:layoutDirection="rtl"
+                    android:text="Mørkt-Brød"
+                    android:textAlignment="center" />
 
                 <RadioButton
                     android:id="@+id/cblight"
                     style="@style/Widget.AppCompat.CompoundButton.CheckBox"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="50dp"
                     android:layout_weight="1"
-                    android:background="#FFFFFF"
-                    android:buttonTint="@color/checkboxColor"
-                    android:text="Lys-Brød" />
+                    android:background="@drawable/editbuttonshaperight"
+                    android:buttonTint="#FFFFFF"
+                    android:text="Lyst-Brød"
+                    android:textAlignment="center" />
+
             </RadioGroup>
+        </android.support.constraint.ConstraintLayout>
+
+        <LinearLayout
+            android:id="@+id/optionsList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
         </LinearLayout>
     </LinearLayout>

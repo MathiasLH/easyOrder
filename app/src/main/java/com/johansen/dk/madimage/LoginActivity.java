@@ -61,6 +61,56 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         tempHeight = cameraPreview.getHeight();
         tempWidth = cameraPreview.getWidth();
 
+        /*defining image Buttons*/
+        danishFlag = findViewById(R.id.danishFlag);
+        englishFlag = findViewById(R.id.englishFlag);
+        arabFlag = findViewById(R.id.arabFlag);
+
+        /*OnClick listener on Buttons*/
+        moveAlongBtn.setOnClickListener(this);
+        helpBtn.setOnClickListener(this);
+        danishFlag.setOnClickListener(this);
+        englishFlag.setOnClickListener(this);
+        arabFlag.setOnClickListener(this);
+
+        createQRscan();
+
+    }
+
+    @Override
+    public void onClick(View v) {
+        /*Implementing on click listener to QR-code image Button*/
+        switch (v.getId()){
+            case R.id.moveAlongBtn:
+                startActivity(new Intent(LoginActivity.this, SmørrebrødsListe.class));
+                break;
+            case R.id.helpBtn:
+                Toast.makeText(this, "NOT IMPLEMENTED", Toast.LENGTH_SHORT).show();
+                //startActivity(new Intent(LoginActivity.this, LoginHelp.class));
+                break;
+            case R.id.danishFlag:
+                Toast.makeText(this, "NOT IMPLEMENTED", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.englishFlag:
+                Toast.makeText(this, "NOT IMPLEMENTED", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.arabFlag:
+                Toast.makeText(this, "NOT IMPLEMENTED", Toast.LENGTH_SHORT).show();
+                break;
+        }
+
+        if (v == danishFlag) {
+            /*setting language to danish maybe default case*/
+        }
+        if (v == englishFlag) {
+            /*setting language to english*/
+        }
+        if (v == arabFlag) {
+            /*setting language to arbaic*/
+        }
+    }
+
+    private void createQRscan(){
         cameraPreview.getHolder().addCallback(new SurfaceHolder.Callback() {
             @Override
             public void surfaceCreated(SurfaceHolder holder) {
@@ -99,61 +149,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     top.post(new Runnable() {
                         @Override
                         public void run() {
-                        Vibrator vibrator = (Vibrator)getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
-                        vibrator.vibrate(1000);
-                        top.setText(qrCodes.valueAt(0).displayValue);
+                            Vibrator vibrator = (Vibrator)getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
+                            vibrator.vibrate(1000);
+                            top.setText(qrCodes.valueAt(0).displayValue);
                         }
                     });
 
                 }
             }
         });
-
-        /*defining image Buttons*/
-        danishFlag = findViewById(R.id.danishFlag);
-        englishFlag = findViewById(R.id.englishFlag);
-        arabFlag = findViewById(R.id.arabFlag);
-
-        /*OnClick listener on Buttons*/
-        moveAlongBtn.setOnClickListener(this);
-        helpBtn.setOnClickListener(this);
-        danishFlag.setOnClickListener(this);
-        englishFlag.setOnClickListener(this);
-        arabFlag.setOnClickListener(this);
-
-    }
-
-    @Override
-    public void onClick(View v) {
-        /*Implementing on click listener to QR-code image Button*/
-        switch (v.getId()){
-            case R.id.moveAlongBtn:
-                startActivity(new Intent(LoginActivity.this, SmørrebrødsListe.class));
-                break;
-            case R.id.helpBtn:
-                Toast.makeText(this, "NOT IMPLEMENTED", Toast.LENGTH_SHORT).show();
-                //startActivity(new Intent(LoginActivity.this, LoginHelp.class));
-                break;
-            case R.id.danishFlag:
-                Toast.makeText(this, "NOT IMPLEMENTED", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.englishFlag:
-                Toast.makeText(this, "NOT IMPLEMENTED", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.arabFlag:
-                Toast.makeText(this, "NOT IMPLEMENTED", Toast.LENGTH_SHORT).show();
-                break;
-        }
-
-        if (v == danishFlag) {
-            /*setting language to danish maybe default case*/
-        }
-        if (v == englishFlag) {
-            /*setting language to english*/
-        }
-        if (v == arabFlag) {
-            /*setting language to arbaic*/
-        }
     }
 
 
