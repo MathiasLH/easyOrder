@@ -1,10 +1,9 @@
-package com.johansen.dk.madimage;
+package com.johansen.dk.madimage.activities;
 
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Camera;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Vibrator;
@@ -23,10 +22,11 @@ import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
+import com.johansen.dk.madimage.R;
 
 import java.io.IOException;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+public class loginActivity extends AppCompatActivity implements View.OnClickListener {
 
     /*initialize ImageButtons */
     ImageButton danishFlag, englishFlag, arabFlag;
@@ -82,11 +82,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         /*Implementing on click listener to QR-code image Button*/
         switch (v.getId()){
             case R.id.moveAlongBtn:
-                startActivity(new Intent(LoginActivity.this, SmørrebrødsListe.class));
+                startActivity(new Intent(loginActivity.this, selectionActivity.class));
                 break;
             case R.id.helpBtn:
                 Toast.makeText(this, "NOT IMPLEMENTED", Toast.LENGTH_SHORT).show();
-                //startActivity(new Intent(LoginActivity.this, LoginHelp.class));
+                //startActivity(new Intent(loginActivity.this, LoginHelp.class));
                 break;
             case R.id.danishFlag:
                 Toast.makeText(this, "NOT IMPLEMENTED", Toast.LENGTH_SHORT).show();

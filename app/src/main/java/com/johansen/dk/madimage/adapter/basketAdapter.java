@@ -1,4 +1,4 @@
-package com.johansen.dk.madimage.LayoutLogic;
+package com.johansen.dk.madimage.adapter;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
@@ -19,7 +19,6 @@ public class basketAdapter extends RecyclerView.Adapter<basketAdapter.myViewHold
     private ArrayList<foodItem> dataset;
     private ArrayList<LinearLayoutManager> LLM;
 
-
     public static class myViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         public CardView niceCard;
         public myViewHolder(@NonNull CardView cv){
@@ -28,7 +27,6 @@ public class basketAdapter extends RecyclerView.Adapter<basketAdapter.myViewHold
             ImageButton ib = niceCard.findViewById(R.id.trashButton);
             //RecyclerView rv = cv.findViewById(R.id.optionsList);
             ib.setOnClickListener(this);
-
         }
 
         //@Override

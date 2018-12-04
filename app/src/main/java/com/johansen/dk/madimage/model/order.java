@@ -2,11 +2,11 @@ package com.johansen.dk.madimage.model;
 
 import java.io.Serializable;
 
-public class Order implements Serializable {
+public class order implements Serializable {
     static String roomNo ="";
     private foodItem[] basket = new foodItem[5];
 
-    public Order(){
+    public order(){
         for(int i = 0; i < basket.length; i++){
             basket[i] = null;
         }

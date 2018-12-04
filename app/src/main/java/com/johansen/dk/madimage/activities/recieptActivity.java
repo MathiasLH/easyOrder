@@ -1,4 +1,4 @@
-package com.johansen.dk.madimage;
+package com.johansen.dk.madimage.activities;
 
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -8,13 +8,15 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 import android.widget.TextView;
-import com.johansen.dk.madimage.model.Order;
 
-public class Chekmark1 extends AppCompatActivity {
+import com.johansen.dk.madimage.R;
+import com.johansen.dk.madimage.model.order;
+
+public class recieptActivity extends AppCompatActivity {
     TextView sText;
     TextView orderList;
     MediaPlayer mediaPlayer;
-    Order items;
+    order items;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +36,7 @@ public class Chekmark1 extends AppCompatActivity {
         // {sText.setText("arabic Text");}
         //else{sText.setText("english Text");}
         Intent i = getIntent();
-        items = (Order) i.getSerializableExtra("order");
+        items = (order) i.getSerializableExtra("order");
 
         sText.setText("Tak for din bestilling! \n");
         orderList.setText("Du har bestilt: \n");
@@ -51,7 +53,7 @@ public class Chekmark1 extends AppCompatActivity {
     //from stackoverflow: https://stackoverflow.com/questions/14001963/finish-all-activities-at-a-time
     public void switchactivity()
     {
-        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+        Intent intent = new Intent(getApplicationContext(), loginActivity.class);
         // for info about clear task: https://developer.android.com/reference/android/content/Intent.html#FLAG_ACTIVITY_CLEAR_TASK
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         //for info about new task : https://developer.android.com/reference/android/content/Intent.html#FLAG_ACTIVITY_NEW_TASK
@@ -59,7 +61,7 @@ public class Chekmark1 extends AppCompatActivity {
         startActivity(intent);
 
         // old code
-        // startActivity(new Intent(Chekmark1.this, LoginActivity.class));
+        // startActivity(new Intent(recieptActivity.this, loginActivity.class));
 
 
     }

@@ -15,19 +15,17 @@
         android:label="easyOrder"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity" />
-        <activity android:name=".basketActivity" />
-        <activity android:name=".editSmoerrebroed" />
-        <activity android:name=".LoginActivity">
+        <activity android:name=".activities.basketActivity" />
+        <activity android:name=".activities.optionsActivity" />
+        <activity android:name=".activities.loginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SmørrebrødsListe" />
-        <activity android:name=".Chekmark1" />
-        <activity android:name=".Error" />
+        <activity android:name=".activities.selectionActivity" />
+        <activity android:name=".activities.recieptActivity" />
     </application>
 
 </manifest>

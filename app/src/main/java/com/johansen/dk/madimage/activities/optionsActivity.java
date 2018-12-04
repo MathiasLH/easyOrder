@@ -1,4 +1,4 @@
-package com.johansen.dk.madimage;
+package com.johansen.dk.madimage.activities;
 
 import android.content.Intent;
 import android.content.res.ColorStateList;
@@ -12,16 +12,16 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import com.johansen.dk.madimage.model.Order;
+
+import com.johansen.dk.madimage.R;
 import com.johansen.dk.madimage.model.foodItem;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-public class editSmoerrebroed extends AppCompatActivity implements View.OnClickListener {
+public class optionsActivity extends AppCompatActivity implements View.OnClickListener {
     ImageView foodImage;
     TextView foodName;
-    static Order order;
+    static com.johansen.dk.madimage.model.order order;
     com.johansen.dk.madimage.model.foodItem foodItem;
     LinearLayout LL;
     ArrayList<CheckBox> cbArray;
@@ -35,7 +35,7 @@ public class editSmoerrebroed extends AppCompatActivity implements View.OnClickL
         foodImage = findViewById(R.id.edit_foodimage);
         foodImage.setImageResource(foodItem.getImageResourceID());
         foodImage.setTransitionName(foodItem.getName()+"Trans");
-        order = (Order) getIntent().getSerializableExtra("orderObject");
+        order = (com.johansen.dk.madimage.model.order) getIntent().getSerializableExtra("orderObject");
         foodName = findViewById(R.id.dish_name);
         foodName.setTypeface(tf);
         foodName.setText("Rediger " + foodItem.getName());
