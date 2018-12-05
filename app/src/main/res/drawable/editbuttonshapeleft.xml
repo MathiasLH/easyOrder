@@ -7,4 +7,7 @@
     android:topRightRadius="15dp"
     android:bottomRightRadius="15dp" />
 
+    <stroke android:width="3dp"
+        android:color="#FFFFFFFF" />
+
 </shape>
