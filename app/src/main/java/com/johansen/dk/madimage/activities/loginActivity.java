@@ -59,7 +59,11 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
         //from youtubevideo: https://www.youtube.com/watch?v=ej51mAYXbKs
         cameraPreview = findViewById(R.id.cameraPreview);
         barcodeDetector = new BarcodeDetector.Builder(this).setBarcodeFormats(Barcode.QR_CODE).build();
-        cameraSrc = new CameraSource.Builder(this, barcodeDetector).setRequestedPreviewSize(800, 500).build();
+        cameraSrc = new CameraSource.Builder(this, barcodeDetector).setRequestedPreviewSize(640, 480)
+                .setFacing(CameraSource.CAMERA_FACING_BACK)
+                .setRequestedFps(30.0f)
+                .setAutoFocusEnabled(true)
+                .build();
         tempHeight = cameraPreview.getHeight();
         tempWidth = cameraPreview.getWidth();
 
