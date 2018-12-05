@@ -25,7 +25,6 @@ import com.google.android.gms.vision.barcode.BarcodeDetector;
 import com.johansen.dk.madimage.R;
 
 import java.io.IOException;
-import java.util.regex.Pattern;
 
 public class loginActivity extends AppCompatActivity implements View.OnClickListener {
 
