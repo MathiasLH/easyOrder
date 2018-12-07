@@ -2,7 +2,9 @@ package com.johansen.dk.madimage.activities;
 
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.view.ViewCompat;
@@ -10,30 +12,37 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.johansen.dk.madimage.R;
 import com.johansen.dk.madimage.adapter.selectionAdapter;
 import com.johansen.dk.madimage.model.order;
 import com.johansen.dk.madimage.model.foodItem;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class selectionActivity extends AppCompatActivity implements View.OnClickListener{
-    int id = 0;
     order selection;
     foodItem dyrlaege, laks, rejemad, roastbeef, stjerneskud;
     TextView text;
     ArrayList<foodItem> foodItems;
     RecyclerView foodList;
+    TextToSpeech myTTS;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selection);
-       createTestData();
+        createTestData();
         foodList = findViewById(R.id.foodList);
         foodList.setHasFixedSize(true);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
@@ -42,9 +51,27 @@ public class selectionActivity extends AppCompatActivity implements View.OnClick
         ((selectionAdapter) niceAdapter).setOnItemClickListener(new selectionAdapter.ClickListener() {
             @Override
             public void onItemClick(int position, View v) {
-                launchEditActivity(position);
+
+                Log.e("TTS", "@@@@@@@@@@@@@@@@@@@"+Integer.toString(v.getId()));
+                readDish(position);
+                //launchEditActivity(position);
             }
         });
+
+        myTTS = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                if (status == TextToSpeech.SUCCESS){
+                    int result = myTTS.setLanguage(Locale.ENGLISH);
+                    if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
+                        Log.e("TTS", "Language not supportd");
+                    }
+                } else {
+                    Log.e("TTS", "Initialization failed");
+                }
+            }
+        });
+
         foodList.setAdapter(niceAdapter);
         Typeface tf = Typeface.createFromAsset(getAssets(),"fonts/Orkney Regular.ttf");
         text = findViewById(R.id.texttop);
@@ -100,6 +127,18 @@ public class selectionActivity extends AppCompatActivity implements View.OnClick
         startActivityForResult(editIntent,1, options.toBundle());
     }
 
+    private void readDish(int position){
+        CardView cv = (CardView) foodList.findViewHolderForAdapterPosition(position).itemView;
+        TextView tv = cv.getChildAt(0).findViewById(R.id.cardName);
+        String text = tv.getText().toString();
+
+        //https://stackoverflow.com/questions/30706780/texttospeech-deprecated-speak-function-in-api-level-21
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            myTTS.speak(text,TextToSpeech.QUEUE_FLUSH,null,null);
+        } else {
+            myTTS.speak(text, TextToSpeech.QUEUE_FLUSH, null);
+        }
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -121,7 +160,20 @@ public class selectionActivity extends AppCompatActivity implements View.OnClick
                 Intent basketIntent = new Intent(this, basketActivity.class);
                 basketIntent.putExtra("orderObject", selection);
                 startActivityForResult(basketIntent, 2);
+                break;
+            default:
+                Toast.makeText(v.getContext(),"DEFAULT HIT",Toast.LENGTH_SHORT).show();
+                break;
 
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (myTTS != null){
+            myTTS.stop();
+            myTTS.shutdown();
+        }
+        super.onDestroy();
     }
 }
