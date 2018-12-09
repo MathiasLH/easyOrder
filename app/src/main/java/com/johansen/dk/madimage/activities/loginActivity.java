@@ -123,13 +123,12 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
             Intent niceIntent = new Intent(loginActivity.this, selectionActivity.class);
             niceIntent.putExtra("roomNo", input);
             startActivity(niceIntent);
-
         }
     }
 
     private boolean enoughTimePassed(){
         long currentTime = System.currentTimeMillis();
-        if(currentTime - time > 1000){
+        if(currentTime - time > 3000){
             return true;
         }else{
             return false;

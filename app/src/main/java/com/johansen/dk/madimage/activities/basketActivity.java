@@ -96,7 +96,7 @@ public class basketActivity extends AppCompatActivity implements View.OnClickLis
                 }
             }
         });
-        
+
     }
 
     private void readDish(int position){
