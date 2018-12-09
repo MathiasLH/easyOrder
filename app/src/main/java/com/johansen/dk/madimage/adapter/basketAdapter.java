@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -21,12 +22,19 @@ public class basketAdapter extends RecyclerView.Adapter<basketAdapter.myViewHold
 
     public static class myViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         public CardView niceCard;
+        public Button TTSBtn;
+        public ImageButton TRASHBtn;
         public myViewHolder(@NonNull CardView cv){
             super(cv);
+            this.TTSBtn = (Button) cv.findViewById(R.id.basket_TTSBtn);
+            TTSBtn.setOnClickListener(this);
+            TTSBtn.setTag("TTS");
+            this.TRASHBtn = (ImageButton) cv.findViewById(R.id.trashButton);
+            TRASHBtn.setOnClickListener(this);
+            TRASHBtn.setTag("TRASH");
             niceCard = cv;
-            ImageButton ib = niceCard.findViewById(R.id.trashButton);
+
             //RecyclerView rv = cv.findViewById(R.id.optionsList);
-            ib.setOnClickListener(this);
         }
 
         //@Override

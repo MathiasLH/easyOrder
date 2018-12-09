@@ -52,9 +52,18 @@ public class selectionActivity extends AppCompatActivity implements View.OnClick
             @Override
             public void onItemClick(int position, View v) {
 
-                Log.e("TTS", "@@@@@@@@@@@@@@@@@@@"+Integer.toString(v.getId()));
-                readDish(position);
-                //launchEditActivity(position);
+                Log.e("TTS", "@@@@@@@@@@@@@@@@@@@" + v.getTag());
+
+                if(v.getTag()=="TTS") {
+                    Log.e("TTS", "@@@@@@@@@@@@@@@@@@@" + Integer.toString(v.getId()));
+                    readDish(position);
+                }
+
+                if(v.getTag()=="OTHER") {
+                    launchEditActivity(position);
+                }
+
+
             }
         });
 

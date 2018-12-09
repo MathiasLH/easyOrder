@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.johansen.dk.madimage.R;
@@ -17,10 +18,21 @@ public class selectionAdapter extends RecyclerView.Adapter<selectionAdapter.myVi
     public ArrayList<foodItem> dataset;
     public static class myViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         public CardView niceCard;
+        public Button TTSBtn;
+        public TextView textV;
+        public ImageView imageV;
         public myViewHolder(@NonNull CardView cv) {
             super(cv);
-            cv.setOnClickListener(this);
-            niceCard = cv;
+            this.TTSBtn = (Button) cv.findViewById(R.id.TTSBtn);
+            TTSBtn.setOnClickListener(this);
+            TTSBtn.setTag("TTS");
+            this.textV = (TextView) cv.findViewById(R.id.cardName);
+            textV.setOnClickListener(this);
+            textV.setTag("OTHER");
+            this.imageV = (ImageView) cv.findViewById(R.id.cardImage);
+            imageV.setOnClickListener(this);
+            imageV.setTag("OTHER");
+            niceCard=cv;
         }
 
         @Override
@@ -50,8 +62,6 @@ public class selectionAdapter extends RecyclerView.Adapter<selectionAdapter.myVi
         iv.setTransitionName(dataset.get(position).getName()+"Trans");
         iv.setImageResource(dataset.get(position).getImageResourceID());
     }
-
-
 
     public int getItemCount() {
         return dataset.size();

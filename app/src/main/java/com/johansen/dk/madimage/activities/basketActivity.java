@@ -1,12 +1,15 @@
 package com.johansen.dk.madimage.activities;
 
 import android.graphics.Typeface;
+import android.os.Build;
+import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -16,6 +19,7 @@ import com.johansen.dk.madimage.adapter.basketAdapter;
 import com.johansen.dk.madimage.model.foodItem;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class basketActivity extends AppCompatActivity implements View.OnClickListener{
     com.johansen.dk.madimage.model.order order;
@@ -25,6 +29,8 @@ public class basketActivity extends AppCompatActivity implements View.OnClickLis
     ArrayList<foodItem> fooditems;
     ArrayList<LinearLayoutManager> LLM;
     basketAdapter niceAdapter;
+    TextToSpeech myTTS;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,21 +60,58 @@ public class basketActivity extends AppCompatActivity implements View.OnClickLis
         niceAdapter.setOnItemClickListener(new basketAdapter.ClickListener() {
             @Override
             public void onItemClick(int position, View v) {
+
+                if(v.getTag()=="TRASH"){
                 CardView cv = (CardView) foodList.findViewHolderForAdapterPosition(position).itemView;
                 TextView tv = cv.getChildAt(0).findViewById(R.id.cardName);
                 String toDelete = tv.getText().toString();
-                for(int i = 0; i < order.getBasket().length; i++){
-                    if(order.getBasket()[i] != null){
-                        if(order.getBasket()[i].getName().equals(toDelete)){
+                for (int i = 0; i < order.getBasket().length; i++) {
+                    if (order.getBasket()[i] != null) {
+                        if (order.getBasket()[i].getName().equals(toDelete)) {
                             order.getBasket()[i] = null;
                         }
                     }
                 }
                 niceAdapter.removeItemAt(position);
             }
+
+            if(v.getTag()=="TTS"){
+                Log.e("TTS", "@@@@@@@@@@@@@@@@@@@" + Integer.toString(v.getId()));
+                readDish(position);
+            }
+        }
         });
         foodList.setAdapter(niceAdapter);
+
+        myTTS = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                if (status == TextToSpeech.SUCCESS){
+                    int result = myTTS.setLanguage(Locale.ENGLISH);
+                    if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
+                        Log.e("TTS", "Language not supportd");
+                    }
+                } else {
+                    Log.e("TTS", "Initialization failed");
+                }
+            }
+        });
+        
     }
+
+    private void readDish(int position){
+        CardView cv = (CardView) foodList.findViewHolderForAdapterPosition(position).itemView;
+        TextView tv = cv.getChildAt(0).findViewById(R.id.cardName);
+        String text = tv.getText().toString();
+
+        //https://stackoverflow.com/questions/30706780/texttospeech-deprecated-speak-function-in-api-level-21
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            myTTS.speak(text,TextToSpeech.QUEUE_FLUSH,null,null);
+        } else {
+            myTTS.speak(text, TextToSpeech.QUEUE_FLUSH, null);
+        }
+    }
+
     @Override
     public void onBackPressed(){
       Intent intent = new Intent();
