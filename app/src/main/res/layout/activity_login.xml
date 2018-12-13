@@ -129,14 +129,14 @@
             tools:layout_editor_absoluteY="758dp" />
 
         <ImageButton
-            android:id="@+id/arabFlag"
+            android:id="@+id/turkishFlag"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:adjustViewBounds="true"
             android:background="@drawable/rounded_button"
             android:scaleType="fitCenter"
-            app:srcCompat="@drawable/arabic_flag"
+            app:srcCompat="@drawable/turkish_flag"
             tools:layout_editor_absoluteX="508dp"
             tools:layout_editor_absoluteY="758dp" />
 

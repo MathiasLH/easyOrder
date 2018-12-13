@@ -29,7 +29,7 @@ import java.io.IOException;
 public class loginActivity extends AppCompatActivity implements View.OnClickListener {
 
     /*initialize ImageButtons */
-    ImageButton danishFlag, englishFlag, arabFlag;
+    ImageButton danishFlag, englishFlag, turkishFlag;
     SurfaceView cameraPreview;
     CameraSource cameraSrc;
     BarcodeDetector barcodeDetector;
@@ -69,14 +69,14 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
         /*defining image Buttons*/
         danishFlag = findViewById(R.id.danishFlag);
         englishFlag = findViewById(R.id.englishFlag);
-        arabFlag = findViewById(R.id.arabFlag);
+        turkishFlag = findViewById(R.id.turkishFlag);
 
         /*OnClick listener on Buttons*/
         moveAlongBtn.setOnClickListener(this);
         helpBtn.setOnClickListener(this);
         danishFlag.setOnClickListener(this);
         englishFlag.setOnClickListener(this);
-        arabFlag.setOnClickListener(this);
+        turkishFlag.setOnClickListener(this);
 
         createQRscan();
 
@@ -99,7 +99,7 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
             case R.id.englishFlag:
                 Toast.makeText(this, "NOT IMPLEMENTED", Toast.LENGTH_SHORT).show();
                 break;
-            case R.id.arabFlag:
+            case R.id.turkishFlag:
                 Toast.makeText(this, "NOT IMPLEMENTED", Toast.LENGTH_SHORT).show();
                 break;
         }
@@ -110,7 +110,7 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
         if (v == englishFlag) {
             /*setting language to english*/
         }
-        if (v == arabFlag) {
+        if (v == turkishFlag) {
             /*setting language to arbaic*/
         }
     }

@@ -57,7 +57,6 @@ public class optionsActivity extends AppCompatActivity implements View.OnClickLi
             cb.setHeight(125);
             cbArray.add(cb);
             LL.addView(cb);
-
         }
     }
 
