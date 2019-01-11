@@ -23,7 +23,7 @@
         android:background="@drawable/topbarshape"
         android:text="Vælg et smørrebrød:"
         android:textAlignment="center"
-        android:textSize="20sp"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
