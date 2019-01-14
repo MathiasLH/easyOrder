@@ -101,7 +101,7 @@ public class basketActivity extends AppCompatActivity implements View.OnClickLis
         Toast.makeText(this,Integer.toString(fooditems.size()),Toast.LENGTH_SHORT).show();
 
         if (fooditems.size() < 1){
-
+            orderBtn.setBackgroundColor(getResources().getColor(R.color.grey));
         }
 
     }

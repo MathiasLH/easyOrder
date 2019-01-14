@@ -8,5 +8,6 @@
     <color name="checkboxColor">#89CCD0</color>
     <color name="btnColor">#89CCD0</color>
     <color name="white">#FFFFFF</color>
-  //name="btnColor">#19414B
+    <color name="grey">#C0C0C0</color>
+    //name="btnColor">#19414B
 </resources>
