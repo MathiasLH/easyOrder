@@ -40,6 +40,8 @@ public class selectionActivity extends AppCompatActivity implements View.OnClick
     ArrayList<foodItem> foodItems;
     RecyclerView foodList;
     TextToSpeech myTTS;
+    ImageButton basketBtn;
+    Animation basketAnimation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,9 +89,9 @@ public class selectionActivity extends AppCompatActivity implements View.OnClick
 
         foodList.setAdapter(niceAdapter);
         Typeface tf = Typeface.createFromAsset(getAssets(),"fonts/Orkney Regular.ttf");
-        text = findViewById(R.id.texttop);
+        text = (TextView) findViewById(R.id.texttop);
         text.setTypeface(tf);
-        ImageButton basketBtn = findViewById(R.id.basketbtn);
+        basketBtn = (ImageButton) findViewById(R.id.basketbtn);
         basketBtn.setOnClickListener(this);
         selection = new order();
         Intent niceIntent = getIntent();
@@ -163,20 +165,12 @@ public class selectionActivity extends AppCompatActivity implements View.OnClick
             if(requestCode == 1){
                 selection = (order) data.getSerializableExtra("orderObject");
                 animationConfirmation = (boolean) data.getSerializableExtra("boolean");
-
-
             }
         }
-        if(resultCode == RESULT_OK){
-            selection = (order) data.getSerializableExtra("orderObject");
-            animationConfirmation = (boolean) data.getSerializableExtra("boolean");
-        }
-
-        if(animationConfirmation = true){
-
-            Animation animation1 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.blinkanim);
-            basketBtn.findViewById(R.id.basketbtn).startAnimation(animation1);
-
+        if(animationConfirmation == true){
+            basketAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.blinkanim);
+            basketBtn.startAnimation(basketAnimation);
+            animationConfirmation = false;
         }
     }
 

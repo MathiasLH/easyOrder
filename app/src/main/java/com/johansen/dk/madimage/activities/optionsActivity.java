@@ -87,12 +87,10 @@ public class optionsActivity extends AppCompatActivity implements View.OnClickLi
                 resultIntent.putExtra("orderObject", order);
                 resultIntent.putExtra("boolean", animationConfirmation);
 
-
                 // try animation
                 //Pair test = Pair.create(foodImage, foodImage.getTransitionName());
                 //Pair test2 = Pair.create()
                 //ActivityOptions.makeSceneTransitionAnimation(this, foodImage, "indkoebTrans");
-
 
                 // delete stack
                 //finish();
