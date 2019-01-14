@@ -2,18 +2,22 @@ package com.johansen.dk.madimage.activities;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.SparseArray;
+import android.view.LayoutInflater;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,6 +39,7 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
     BarcodeDetector barcodeDetector;
     TextView top;
     Button helpBtn, moveAlongBtn;
+    final Context context = this;
     /*me love u*/long time = 0;
 
     int tempHeight,tempWidth;
@@ -89,9 +94,27 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
             case R.id.moveAlongBtn:
                 startActivity(new Intent(loginActivity.this, selectionActivity.class));
                 break;
+
             case R.id.helpBtn:
-                Toast.makeText(this, "NOT IMPLEMENTED", Toast.LENGTH_SHORT).show();
-                //startActivity(new Intent(loginActivity.this, LoginHelp.class));
+                // get prompts.xml view
+                LayoutInflater li = LayoutInflater.from(context);
+                View promptsView = li.inflate(R.layout.help, null);
+
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                        context);
+
+                // set prompts.xml to alertdialog builder
+                alertDialogBuilder.setView(promptsView);
+
+                // set dialog message
+                alertDialogBuilder
+                        .setCancelable(true);
+
+                // create alert dialog
+                AlertDialog alertDialog = alertDialogBuilder.create();
+
+                // show it
+                alertDialog.show();
                 break;
             case R.id.danishFlag:
                 Toast.makeText(this, "NOT IMPLEMENTED", Toast.LENGTH_SHORT).show();
@@ -103,6 +126,7 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
                 Toast.makeText(this, "NOT IMPLEMENTED", Toast.LENGTH_SHORT).show();
                 break;
         }
+
 
         if (v == danishFlag) {
             /*setting language to danish maybe default case*/
