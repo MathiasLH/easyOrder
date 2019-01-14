@@ -54,6 +54,7 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
         top = findViewById(R.id.explqr);
         /*defining buttons*/
         helpBtn = findViewById(R.id.helpBtn);
+        helpBtn.setTypeface(tf);
         moveAlongBtn = findViewById(R.id.moveAlongBtn);
         /*using fonts on text fields*/
         top.setTypeface(tf);
@@ -63,7 +64,7 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
         //from youtubevideo: https://www.youtube.com/watch?v=ej51mAYXbKs
         cameraPreview = findViewById(R.id.cameraPreview);
         barcodeDetector = new BarcodeDetector.Builder(this).setBarcodeFormats(Barcode.QR_CODE).build();
-        cameraSrc = new CameraSource.Builder(this, barcodeDetector).setRequestedPreviewSize(640, 480)
+        cameraSrc = new CameraSource.Builder(this, barcodeDetector).setRequestedPreviewSize(1024,768)
                 .setFacing(CameraSource.CAMERA_FACING_BACK)
                 .setRequestedFps(30.0f)
                 .setAutoFocusEnabled(true)
@@ -108,7 +109,14 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
 
                 // set dialog message
                 alertDialogBuilder
-                        .setCancelable(true);
+                        .setCancelable(true)
+
+                .setPositiveButton("OK",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog,int id) {
+                            dialog.cancel();
+                        }
+                    });
 
                 // create alert dialog
                 AlertDialog alertDialog = alertDialogBuilder.create();
@@ -125,6 +133,7 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
             case R.id.turkishFlag:
                 Toast.makeText(this, "NOT IMPLEMENTED", Toast.LENGTH_SHORT).show();
                 break;
+
         }
 
 
