@@ -14,6 +14,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -32,11 +34,14 @@ import java.util.Locale;
 
 public class selectionActivity extends AppCompatActivity implements View.OnClickListener{
     order selection;
+    boolean animationConfirmation;
     foodItem dyrlaege, laks, rejemad, roastbeef, stjerneskud;
     TextView text;
     ArrayList<foodItem> foodItems;
     RecyclerView foodList;
     TextToSpeech myTTS;
+    ImageButton basketBtn;
+    Animation basketAnimation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,9 +89,9 @@ public class selectionActivity extends AppCompatActivity implements View.OnClick
 
         foodList.setAdapter(niceAdapter);
         Typeface tf = Typeface.createFromAsset(getAssets(),"fonts/Orkney Regular.ttf");
-        text = findViewById(R.id.texttop);
+        text = (TextView) findViewById(R.id.texttop);
         text.setTypeface(tf);
-        ImageButton basketBtn = findViewById(R.id.basketbtn);
+        basketBtn = (ImageButton) findViewById(R.id.basketbtn);
         basketBtn.setOnClickListener(this);
         selection = new order();
         Intent niceIntent = getIntent();
@@ -159,13 +164,18 @@ public class selectionActivity extends AppCompatActivity implements View.OnClick
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
+        ImageButton basketBtn = findViewById(R.id.basketbtn);
         if(resultCode != RESULT_CANCELED){
             if(requestCode == 1){
                 selection = (order) data.getSerializableExtra("orderObject");
+                animationConfirmation = (boolean) data.getSerializableExtra("boolean");
             }
         }
-        if(resultCode == RESULT_OK){
-            selection = (order) data.getSerializableExtra("orderObject");
+        if(animationConfirmation == true){
+            basketAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.blinkanim);
+            basketBtn.startAnimation(basketAnimation);
+            animationConfirmation = false;
         }
     }
 

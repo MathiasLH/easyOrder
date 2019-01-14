@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.johansen.dk.madimage.R;
 import com.johansen.dk.madimage.adapter.basketAdapter;
@@ -96,6 +97,12 @@ public class basketActivity extends AppCompatActivity implements View.OnClickLis
                 }
             }
         });
+
+        Toast.makeText(this,Integer.toString(fooditems.size()),Toast.LENGTH_SHORT).show();
+
+        if (fooditems.size() < 1){
+
+        }
 
     }
 
