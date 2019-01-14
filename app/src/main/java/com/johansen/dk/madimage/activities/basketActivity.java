@@ -21,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.johansen.dk.madimage.R;
 import com.johansen.dk.madimage.adapter.basketAdapter;
 import com.johansen.dk.madimage.model.foodItem;
@@ -33,9 +34,13 @@ public class basketActivity extends AppCompatActivity implements View.OnClickLis
     Button orderBtn;
     TextView basketText;
     RecyclerView foodList;
+    ArrayList<foodItem> fooditems;
+    ArrayList<LinearLayoutManager> LLM;
     basketAdapter niceAdapter;
     TextToSpeech myTTS;
     int lastItemClicked;
+    LottieAnimationView emptyBasketGif;
+    boolean isOrderAvailable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,24 +63,27 @@ public class basketActivity extends AppCompatActivity implements View.OnClickLis
             @Override
             public void onItemClick(int position, View v) {
 
-                if(v.getTag()=="TRASH"){
+                if (v.getTag() == "TRASH") {
                     niceAdapter.removeItemAt(position);
+                    isOrderAvailable();
                 }
-                if(v.getTag()=="TTS"){
+                if (v.getTag() == "TTS") {
                     Log.e("TTS", "@@@@@@@@@@@@@@@@@@@" + Integer.toString(v.getId()));
                     readDish(position);
                 }
-                if(v.getTag()=="OTHER"){
+                if (v.getTag() == "OTHER") {
                     launchEditActivity(position);
                 }
             }
         });
         foodList.setAdapter(niceAdapter);
 
+        emptyBasketGif = (LottieAnimationView) findViewById(R.id.empty_basket_gif);
+
         myTTS = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
-                if (status == TextToSpeech.SUCCESS){
+                if (status == TextToSpeech.SUCCESS) {
                     int result = myTTS.setLanguage(Locale.ENGLISH);
                     if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
                         Log.e("TTS", "Language not supportd");
@@ -86,19 +94,10 @@ public class basketActivity extends AppCompatActivity implements View.OnClickLis
             }
         });
 
-        Toast.makeText(this,Integer.toString(order.getBasket().size()),Toast.LENGTH_SHORT).show();
-
-        if (order.getBasket().size() < 1){
-            orderBtn.setBackgroundColor(getResources().getColor(R.color.grey));
-        }
-
+        isOrderAvailable();
     }
 
-    private void drawList(){
-
-    }
-
-    private void launchEditActivity(int position){
+    private void launchEditActivity(int position) {
         Intent editIntent = new Intent(this, optionsActivity.class);
         editIntent.putExtra("foodItem", order.getBasket().get(position));
         lastItemClicked = position;
@@ -111,47 +110,62 @@ public class basketActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode != RESULT_CANCELED){
-
+        if (resultCode != RESULT_CANCELED) {
             order.removeItem(lastItemClicked);
             order.addItem((foodItem) data.getSerializableExtra("foodItem"));
             niceAdapter.notifyDataSetChanged();
         }
+        isOrderAvailable();
     }
 
-    private void readDish(int position){
+    private void readDish(int position) {
         CardView cv = (CardView) foodList.findViewHolderForAdapterPosition(position).itemView;
         TextView tv = cv.getChildAt(0).findViewById(R.id.cardName);
         String text = tv.getText().toString();
 
         //https://stackoverflow.com/questions/30706780/texttospeech-deprecated-speak-function-in-api-level-21
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            myTTS.speak(text,TextToSpeech.QUEUE_FLUSH,null,null);
+            myTTS.speak(text, TextToSpeech.QUEUE_FLUSH, null, null);
         } else {
             myTTS.speak(text, TextToSpeech.QUEUE_FLUSH, null);
         }
     }
 
     @Override
-    public void onBackPressed(){
-      Intent intent = new Intent();
-      intent.putExtra("orderObject",order);
-      setResult(2, intent);
-      finish();
+    public void onBackPressed() {
+        Intent intent = new Intent();
+        intent.putExtra("orderObject", order);
+        setResult(2, intent);
+        finish();
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId())
-        {
+        switch (v.getId()) {
             case R.id.orderbtn:
-
-                Intent intent = new Intent(this,recieptActivity.class);
-                intent.putExtra("order", order);
-
-                startActivity(intent);
-                order.clean();
+                if (isOrderAvailable) {
+                    Intent intent = new Intent(this, recieptActivity.class);
+                    intent.putExtra("order", order);
+                    startActivity(intent);
+                    order.clean();
+                } else Toast.makeText(this,"Vælg venligst et smørrebrød",Toast.LENGTH_LONG).show();
                 break;
+        }
+    }
+
+    public void isOrderAvailable() {
+
+        Toast.makeText(this, Integer.toString(order.getBasket().size()), Toast.LENGTH_SHORT).show();
+
+        if (order.getBasket().size() < 1) {
+            emptyBasketGif.setVisibility(View.VISIBLE);
+            orderBtn.setBackgroundColor(getResources().getColor(R.color.grey));
+            isOrderAvailable = false;
+        }
+        else {
+            emptyBasketGif.setVisibility(View.GONE);
+            orderBtn.setBackgroundColor(getResources().getColor(R.color.btnColor));
+            isOrderAvailable = true;
         }
     }
 }
