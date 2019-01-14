@@ -4,28 +4,28 @@ import android.support.v7.widget.LinearLayoutManager;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class foodItem implements Serializable {
     private int imageID;
     private int imageResourceID;
     private String name;
-    private ArrayList<String> options;
+    private String optionNames[];
+    private boolean optionValues[];
+    //private ArrayList<option> options;
+    private boolean darkBread = true;
 
-
-
-
-    public foodItem(String name, int imageResourceID, int imageID, ArrayList<String> opttions){
-        this.options = opttions;
+    public foodItem(String name, int imageResourceID, int imageID, String[] options){
+        this.optionNames = options;
+        this.optionValues = new boolean[optionNames.length];
+        for(int i = 0; i < optionValues.length; i++){
+            optionValues[i] = true;
+        }
         this.name = name;
         this.imageID = imageID;
         this.imageResourceID = imageResourceID;
     }
 
-    public ArrayList<String> getOptions() { return options; }
-
-    public void setOptions(ArrayList<String> options){
-        this.options = options;
-    }
     public int getImageID() {
         return imageID;
     }
@@ -38,4 +38,29 @@ public class foodItem implements Serializable {
         return name;
     }
 
+    public String[] getOptionNames() {
+        return optionNames;
+    }
+
+    public void setOptionNames(String[] optionNames) {
+        this.optionNames = optionNames;
+    }
+
+    public boolean[] getOptionValues() {
+        return optionValues;
+    }
+
+    public void setOptionValues(boolean[] optionValues) {
+        this.optionValues = optionValues;
+    }
+
+    public boolean isDarkBread() { return darkBread;  }
+
+    public void setDarkBread(boolean darkBread) { this.darkBread = darkBread;  }
+
+
 }
+
+
+
+

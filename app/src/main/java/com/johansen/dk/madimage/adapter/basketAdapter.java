@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.johansen.dk.madimage.R;
 import com.johansen.dk.madimage.model.foodItem;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class basketAdapter extends RecyclerView.Adapter<basketAdapter.myViewHolder> {
     private static ClickListener clickListener;
@@ -61,12 +62,22 @@ public class basketAdapter extends RecyclerView.Adapter<basketAdapter.myViewHold
         tv.setText(dataset.get(position).getName());
         ImageView iv = holder.niceCard.findViewById(R.id.cardImage);
         iv.setImageResource(dataset.get(position).getImageResourceID());
-        optionsAdapter niceAdapter = new optionsAdapter(dataset.get(position).getOptions());
+        optionsAdapter niceAdapter = new optionsAdapter(getOptionsToDraw(position));
         RecyclerView rv = holder.niceCard.findViewById(R.id.optionsList);
         rv.setAdapter(niceAdapter);
         rv.setHasFixedSize(true);
         LinearLayoutManager mLayoutManager = LLM.get(position);
         rv.setLayoutManager(mLayoutManager);
+    }
+
+    private ArrayList<String> getOptionsToDraw(int position){
+        ArrayList<String> nameArray = new ArrayList<>();
+        for(int i = 0 ; i < dataset.get(position).getOptionValues().length; i++){
+            if(!dataset.get(position).getOptionValues()[i]){
+                nameArray.add(dataset.get(position).getOptionNames()[i]);
+            }
+        }
+        return nameArray;
     }
 
     public void removeItemAt(int position){

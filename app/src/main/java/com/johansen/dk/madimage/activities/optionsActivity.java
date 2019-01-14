@@ -50,11 +50,11 @@ public class optionsActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     private void createCheckboxes(){
-        for(int i = 0; i < foodItem.getOptions().size(); i++){
+        for(int i = 0; i < foodItem.getOptionNames().length; i++){
             CheckBox cb = new CheckBox(getApplicationContext());
-            cb.setText("Med " + foodItem.getOptions().get(i));
-            cb.setTag(foodItem.getOptions().get(i));
-            cb.setChecked(true);
+            cb.setText("Med " + foodItem.getOptionNames()[i]);
+            cb.setTag(foodItem.getOptionNames()[i]);
+            cb.setChecked(foodItem.getOptionValues()[i]);
             cb.setBackgroundResource(R.drawable.checkbox_edit);
             cb.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#FFFFFF")));
             cb.setHeight(125);
@@ -63,7 +63,7 @@ public class optionsActivity extends AppCompatActivity implements View.OnClickLi
         }
     }
 
-    public ArrayList<String> getOptions(){
+    /*public ArrayList<String> getOptions(){
         ArrayList<String> options = new ArrayList<>();
         for(int i = 0; i < cbArray.size(); i++){
             if(!cbArray.get(i).isChecked()){
@@ -71,13 +71,21 @@ public class optionsActivity extends AppCompatActivity implements View.OnClickLi
             }
         }
         return options;
+    }*/
+
+    public boolean[] getOptions(){
+        boolean optionValues[] = new boolean[foodItem.getOptionNames().length];
+        for(int i = 0; i < cbArray.size(); i++){
+            optionValues[i] = cbArray.get(i).isChecked();
+        }
+        return optionValues;
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.edit_addtobasketbutton:
-                foodItem.setOptions(getOptions());
+                foodItem.setOptionValues(getOptions());
                 foodImage.setTransitionName("indkoebTrans");
                 order.addItem(foodItem);
                 Intent resultIntent = new Intent();

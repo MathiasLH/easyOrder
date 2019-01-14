@@ -95,30 +95,35 @@ public class selectionActivity extends AppCompatActivity implements View.OnClick
     }
 
     private void createTestData(){
-        ArrayList<String> dyrlaegeOptions = new ArrayList<>();
+        /*ArrayList<String> dyrlaegeOptions = new ArrayList<>();
         dyrlaegeOptions.add("sky");
         dyrlaegeOptions.add("rødløg");
-        dyrlaegeOptions.add("karse");
+        dyrlaegeOptions.add("karse");*/
+        String dyrlaegeOptions[] = {"sky", "rødløg", "karse"};
         dyrlaege = new foodItem("Dyrlægens natmad", R.drawable.dyrlaegensnatmad_big, 100, dyrlaegeOptions);
-        ArrayList<String> laksOptions = new ArrayList<>();
+        /*ArrayList<String> laksOptions = new ArrayList<>();
         laksOptions.add("dild");
         laksOptions.add("citron");
-        laksOptions.add("asperges");
+        laksOptions.add("asperges");*/
+        String laksOptions[] = {"dild", "citron", "asparges"};
         laks = new foodItem("Lakse mad", R.drawable.laks_big, 101, laksOptions);
-        ArrayList<String> rejeOptions = new ArrayList<>();
-        rejeOptions.add("krydderurt");
+        /*ArrayList<String> rejeOptions = new ArrayList<>();
+        rejeOptions.add("krydderurt");*/
+        String rejeOptions[] = {"krydderUrt"};
         rejemad = new foodItem("Rejemad", R.drawable.rejemad_big, 102, rejeOptions);
-        ArrayList<String> roastbeefOptions = new ArrayList<>();
+        /*ArrayList<String> roastbeefOptions = new ArrayList<>();
         roastbeefOptions.add("peberrod");
         roastbeefOptions.add("salat");
-        roastbeefOptions.add("Syltet agurk");
+        roastbeefOptions.add("Syltet agurk");*/
+        String roastbeefOptions[] = {"peberrod", "salat", "syltet agurk"};
         roastbeef = new foodItem("Roastbeef", R.drawable.roastbeef_big, 103, roastbeefOptions);
-        ArrayList<String> stjerneskudOptions = new ArrayList<>();
+        /*ArrayList<String> stjerneskudOptions = new ArrayList<>();
         stjerneskudOptions.add("fiskeægting");
         stjerneskudOptions.add("citron");
         stjerneskudOptions.add("hvid asparges");
         stjerneskudOptions.add("grøn asparges");
-        stjerneskudOptions.add("rejer");
+        stjerneskudOptions.add("rejer");*/
+        String stjerneskudOptions[] = {"rogn", "citron", "hvid asparges", "grøn asparges", "rejer"};
         stjerneskud = new foodItem("Stjerneskud", R.drawable.stjerneskud_big, 10, stjerneskudOptions);
         foodItems = new ArrayList<>();
         foodItems.add(dyrlaege);
