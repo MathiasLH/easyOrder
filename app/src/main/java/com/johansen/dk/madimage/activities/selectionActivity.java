@@ -71,7 +71,8 @@ public class selectionActivity extends AppCompatActivity implements View.OnClick
             @Override
             public void onInit(int status) {
                 if (status == TextToSpeech.SUCCESS){
-                    int result = myTTS.setLanguage(Locale.ENGLISH);
+                    // language da = danish ; en = english ; turkish = tr ; russisk = ru
+                    int result = myTTS.setLanguage(new Locale("da", ""));
                     if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
                         Log.e("TTS", "Language not supportd");
                     }
@@ -90,6 +91,7 @@ public class selectionActivity extends AppCompatActivity implements View.OnClick
         selection = new order();
         Intent niceIntent = getIntent();
         selection.setRoom(niceIntent.getStringExtra("roomNo"));
+        findViewById(R.id.basketbtn).setTransitionName("indkoebTrans");
     }
 
     private void createTestData(){
@@ -102,7 +104,7 @@ public class selectionActivity extends AppCompatActivity implements View.OnClick
         laksOptions.add("dild");
         laksOptions.add("citron");
         laksOptions.add("asperges");
-        laks = new foodItem("Laksemad", R.drawable.laks_big, 101, laksOptions);
+        laks = new foodItem("Lakse mad", R.drawable.laks_big, 101, laksOptions);
         ArrayList<String> rejeOptions = new ArrayList<>();
         rejeOptions.add("krydderurt");
         rejemad = new foodItem("Rejemad", R.drawable.rejemad_big, 102, rejeOptions);

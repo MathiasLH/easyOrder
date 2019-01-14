@@ -1,11 +1,14 @@
 package com.johansen.dk.madimage.activities;
 
+import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Pair;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -75,11 +78,20 @@ public class optionsActivity extends AppCompatActivity implements View.OnClickLi
         switch (v.getId()){
             case R.id.edit_addtobasketbutton:
                 foodItem.setOptions(getOptions());
+                foodImage.setTransitionName("indkoebTrans");
                 order.addItem(foodItem);
                 Intent resultIntent = new Intent();
                 resultIntent.putExtra("orderObject", order);
                 setResult(1, resultIntent);
-                finish();
+                // try animation
+                //Pair test = Pair.create(foodImage, foodImage.getTransitionName());
+                //Pair test2 = Pair.create()
+                //ActivityOptions.makeSceneTransitionAnimation(this, foodImage, "indkoebTrans");
+
+
+                // delete stack
+                //finish();
+                supportFinishAfterTransition();
         }
     }
 }
