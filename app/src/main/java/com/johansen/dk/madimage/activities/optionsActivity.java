@@ -35,10 +35,11 @@ public class optionsActivity extends AppCompatActivity implements View.OnClickLi
         setContentView(R.layout.activity_options);
         Typeface tf = Typeface.createFromAsset(getAssets(),"fonts/Orkney Regular.ttf");
         foodItem = (foodItem) getIntent().getSerializableExtra("foodItem");
+
         foodImage = findViewById(R.id.edit_foodimage);
         foodImage.setImageResource(foodItem.getImageResourceID());
         foodImage.setTransitionName(foodItem.getName()+"Trans");
-        order = (com.johansen.dk.madimage.model.order) getIntent().getSerializableExtra("orderObject");
+        //order = (com.johansen.dk.madimage.model.order) getIntent().getSerializableExtra("orderObject");
         foodName = findViewById(R.id.dish_name);
         foodName.setTypeface(tf);
         foodName.setText("Rediger " + foodItem.getName());
@@ -87,12 +88,13 @@ public class optionsActivity extends AppCompatActivity implements View.OnClickLi
             case R.id.edit_addtobasketbutton:
                 foodItem.setOptionValues(getOptions());
                 foodImage.setTransitionName("indkoebTrans");
-                order.addItem(foodItem);
+                //order.addItem(foodItem);
                 Intent resultIntent = new Intent();
-                resultIntent.putExtra("orderObject", order);
+                //resultIntent.putExtra("orderObject", order);
                 setResult(1, resultIntent);
                 boolean animationConfirmation = true;
-                resultIntent.putExtra("orderObject", order);
+                //resultIntent.putExtra("orderObject", order);
+                resultIntent.putExtra("foodItem", foodItem);
                 resultIntent.putExtra("boolean", animationConfirmation);
 
                 // try animation

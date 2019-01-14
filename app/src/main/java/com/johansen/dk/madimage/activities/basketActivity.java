@@ -3,6 +3,9 @@ package com.johansen.dk.madimage.activities;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.speech.tts.TextToSpeech;
+import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
@@ -11,7 +14,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +37,7 @@ public class basketActivity extends AppCompatActivity implements View.OnClickLis
     ArrayList<LinearLayoutManager> LLM;
     basketAdapter niceAdapter;
     TextToSpeech myTTS;
+    int lastItemClicked;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,39 +55,26 @@ public class basketActivity extends AppCompatActivity implements View.OnClickLis
         foodList.setHasFixedSize(true);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
         foodList.setLayoutManager(mLayoutManager);
-        fooditems = new ArrayList<>();
         LLM = new ArrayList<>();
-        for(int j = 0; j < order.getBasket().length; j++){
-            if(order.getBasket()[j] != null){
-                fooditems.add(order.getBasket()[j]);
+        for(int j = 0; j < order.getBasket().size(); j++){
                 LLM.add(new LinearLayoutManager(this));
-            }
         }
-        //LinearLayoutManager LLM = new LinearLayoutManager(this);
-        niceAdapter = new basketAdapter(fooditems, LLM);
+        niceAdapter = new basketAdapter(order.getBasket(), LLM);
         niceAdapter.setOnItemClickListener(new basketAdapter.ClickListener() {
             @Override
             public void onItemClick(int position, View v) {
 
                 if(v.getTag()=="TRASH"){
-                CardView cv = (CardView) foodList.findViewHolderForAdapterPosition(position).itemView;
-                TextView tv = cv.getChildAt(0).findViewById(R.id.cardName);
-                String toDelete = tv.getText().toString();
-                for (int i = 0; i < order.getBasket().length; i++) {
-                    if (order.getBasket()[i] != null) {
-                        if (order.getBasket()[i].getName().equals(toDelete)) {
-                            order.getBasket()[i] = null;
-                        }
-                    }
+                    niceAdapter.removeItemAt(position);
                 }
-                niceAdapter.removeItemAt(position);
+                if(v.getTag()=="TTS"){
+                    Log.e("TTS", "@@@@@@@@@@@@@@@@@@@" + Integer.toString(v.getId()));
+                    readDish(position);
+                }
+                if(v.getTag()=="OTHER"){
+                    launchEditActivity(position);
+                }
             }
-
-            if(v.getTag()=="TTS"){
-                Log.e("TTS", "@@@@@@@@@@@@@@@@@@@" + Integer.toString(v.getId()));
-                readDish(position);
-            }
-        }
         });
         foodList.setAdapter(niceAdapter);
 
@@ -98,12 +92,37 @@ public class basketActivity extends AppCompatActivity implements View.OnClickLis
             }
         });
 
-        Toast.makeText(this,Integer.toString(fooditems.size()),Toast.LENGTH_SHORT).show();
+        Toast.makeText(this,Integer.toString(order.getBasket().size()),Toast.LENGTH_SHORT).show();
 
-        if (fooditems.size() < 1){
+        if (order.getBasket().size() < 1){
             orderBtn.setBackgroundColor(getResources().getColor(R.color.grey));
         }
 
+    }
+
+    private void drawList(){
+
+    }
+
+    private void launchEditActivity(int position){
+        Intent editIntent = new Intent(this, optionsActivity.class);
+        editIntent.putExtra("foodItem", order.getBasket().get(position));
+        lastItemClicked = position;
+        //CardView cv = (CardView) foodList.findViewHolderForAdapterPosition(position).itemView;
+        //ImageView iv = cv.getChildAt(0).findViewById(foodItems.get(position).getImageID());
+        //ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(selectionActivity.this, iv, ViewCompat.getTransitionName(iv));
+        startActivityForResult(editIntent, 2);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode != RESULT_CANCELED){
+
+            order.removeItem(lastItemClicked);
+            order.addItem((foodItem) data.getSerializableExtra("foodItem"));
+            niceAdapter.notifyDataSetChanged();
+        }
     }
 
     private void readDish(int position){
@@ -123,7 +142,7 @@ public class basketActivity extends AppCompatActivity implements View.OnClickLis
     public void onBackPressed(){
       Intent intent = new Intent();
       intent.putExtra("orderObject",order);
-      setResult(RESULT_OK, intent);
+      setResult(2, intent);
       finish();
     }
 

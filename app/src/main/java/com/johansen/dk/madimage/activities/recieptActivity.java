@@ -40,10 +40,10 @@ public class recieptActivity extends AppCompatActivity {
 
         sText.setText("Tak for din bestilling! \n");
         orderList.setText(items.getRoomNo() + " har bestilt: \n");
-        for(int a = 0; a < items.getBasket().length; a++) {
-            if (items.getBasket()[a] != null) {
-                orderList.append(items.getBasket()[a].getName() + "\n");
-            }
+        for(int a = 0; a < items.getBasket().size(); a++) {
+
+                orderList.append(items.getBasket().get(a).getName() + "\n");
+
         }
 
         mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.done);

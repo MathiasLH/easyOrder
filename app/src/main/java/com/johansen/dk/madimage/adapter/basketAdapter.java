@@ -21,10 +21,13 @@ public class basketAdapter extends RecyclerView.Adapter<basketAdapter.myViewHold
     private ArrayList<foodItem> dataset;
     private ArrayList<LinearLayoutManager> LLM;
 
+
     public static class myViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         public CardView niceCard;
         public Button TTSBtn;
         public ImageButton TRASHBtn;
+        private TextView foodName;
+        private ImageView foodImage;
         public myViewHolder(@NonNull CardView cv){
             super(cv);
             this.TTSBtn = (Button) cv.findViewById(R.id.basket_TTSBtn);
@@ -33,6 +36,13 @@ public class basketAdapter extends RecyclerView.Adapter<basketAdapter.myViewHold
             this.TRASHBtn = (ImageButton) cv.findViewById(R.id.trashButton);
             TRASHBtn.setOnClickListener(this);
             TRASHBtn.setTag("TRASH");
+            foodName = cv.findViewById(R.id.cardName);
+            foodName.setOnClickListener(this);
+            foodName.setTag("OTHER");
+            foodImage = cv.findViewById(R.id.cardImage);
+            foodImage.setOnClickListener(this);
+            foodImage.setTag("OTHER");
+
             niceCard = cv;
 
             //RecyclerView rv = cv.findViewById(R.id.optionsList);

@@ -168,9 +168,13 @@ public class selectionActivity extends AppCompatActivity implements View.OnClick
         ImageButton basketBtn = findViewById(R.id.basketbtn);
         if(resultCode != RESULT_CANCELED){
             if(requestCode == 1){
-                selection = (order) data.getSerializableExtra("orderObject");
+                selection.addItem((foodItem) data.getSerializableExtra("foodItem"));
+                //selection = (order) data.getSerializableExtra("orderObject");
                 animationConfirmation = (boolean) data.getSerializableExtra("boolean");
             }
+        }
+        if(resultCode == 2){
+            selection = (order) data.getSerializableExtra("orderObject");
         }
         if(animationConfirmation == true){
             basketAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.blinkanim);
