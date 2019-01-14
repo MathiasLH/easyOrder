@@ -33,8 +33,6 @@ public class basketActivity extends AppCompatActivity implements View.OnClickLis
     Button orderBtn;
     TextView basketText;
     RecyclerView foodList;
-    ArrayList<foodItem> fooditems;
-    ArrayList<LinearLayoutManager> LLM;
     basketAdapter niceAdapter;
     TextToSpeech myTTS;
     int lastItemClicked;
@@ -55,11 +53,7 @@ public class basketActivity extends AppCompatActivity implements View.OnClickLis
         foodList.setHasFixedSize(true);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
         foodList.setLayoutManager(mLayoutManager);
-        LLM = new ArrayList<>();
-        for(int j = 0; j < order.getBasket().size(); j++){
-                LLM.add(new LinearLayoutManager(this));
-        }
-        niceAdapter = new basketAdapter(order.getBasket(), LLM);
+        niceAdapter = new basketAdapter(order.getBasket(), this);
         niceAdapter.setOnItemClickListener(new basketAdapter.ClickListener() {
             @Override
             public void onItemClick(int position, View v) {
