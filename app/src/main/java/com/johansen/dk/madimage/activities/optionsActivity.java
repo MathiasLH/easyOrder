@@ -95,8 +95,8 @@ public class optionsActivity extends AppCompatActivity implements View.OnClickLi
 
 
                 // delete stack
-                finish();
-                //supportFinishAfterTransition();
+                //finish();
+                supportFinishAfterTransition();
         }
     }
 }
