@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "464593685648-bg903ckneh8k9lsvd71416piu5bm2cc1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.johansen.dk.madimage",
+            "certificate_hash": "a2f6f1103c1e32311a612dc3c148e9fc35e7332c"
+          }
+        },
+        {
           "client_id": "464593685648-f8ujgokbo992bfc6n72nhqo9sa5si4q8.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,8 +37,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "464593685648-f8ujgokbo992bfc6n72nhqo9sa5si4q8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2
