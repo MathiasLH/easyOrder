@@ -1,6 +1,8 @@
 package com.johansen.dk.madimage.activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -21,6 +23,16 @@ public class recieptActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        SharedPreferences sharedprefs = getSharedPreferences("screen_version", MODE_PRIVATE);
+        if(sharedprefs.getBoolean("tablet",false)){
+            setContentView(R.layout.activity_reciept_tablet);
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        } else {
+            setContentView(R.layout.activity_reciept);
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }
+
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_reciept);
         (new Handler()).postDelayed(this::switchactivity, 3000);

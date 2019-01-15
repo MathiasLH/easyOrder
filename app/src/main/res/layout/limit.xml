@@ -1,0 +1,20 @@
+<?xml version ="1.0" encoding ="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layout_root"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/backgroundColor"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Det maximale antal smørrebrød er valgt. Slet venligst et af de forrige valgte smørrebrød for at tilføje et nyt, eller færdiggøre din ordre."
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#19414B" />
+
+
+</LinearLayout>

@@ -3,6 +3,8 @@ package com.johansen.dk.madimage.activities;
 import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -32,7 +34,16 @@ public class optionsActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_options);
+
+        SharedPreferences sharedprefs = getSharedPreferences("screen_version", MODE_PRIVATE);
+        if(sharedprefs.getBoolean("tablet",false)){
+            setContentView(R.layout.activity_options_tablet);
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        } else {
+            setContentView(R.layout.activity_options);
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }
+
         Typeface tf = Typeface.createFromAsset(getAssets(),"fonts/Orkney Regular.ttf");
         foodItem = (foodItem) getIntent().getSerializableExtra("foodItem");
 

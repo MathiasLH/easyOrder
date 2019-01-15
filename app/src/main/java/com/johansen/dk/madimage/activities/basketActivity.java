@@ -1,5 +1,7 @@
 package com.johansen.dk.madimage.activities;
 
+import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.speech.tts.TextToSpeech;
@@ -20,7 +22,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.airbnb.lottie.LottieAnimationView;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -51,7 +52,16 @@ public class basketActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_basket);
+
+        SharedPreferences sharedprefs = getSharedPreferences("screen_version", MODE_PRIVATE);
+        if(sharedprefs.getBoolean("tablet",false)){
+            setContentView(R.layout.activity_basket_tablet);
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        } else {
+            setContentView(R.layout.activity_basket);
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }
+
         orderBtn = findViewById(R.id.orderbtn);
         orderBtn.setOnClickListener(this);
         Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/Orkney Regular.ttf");
