@@ -47,7 +47,6 @@ public class basketActivity extends AppCompatActivity implements View.OnClickLis
 
     /*instans of database*/
     DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference("Beboere");
-    DatabaseReference mBeboerRef = mRootRef.child("Beboer");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +61,8 @@ public class basketActivity extends AppCompatActivity implements View.OnClickLis
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         }
 
-        orderBtn = findViewById(R.id.orderbtn);
+        emptyBasketGif = (LottieAnimationView) findViewById(R.id.empty_basket_gif);
+        orderBtn = (Button) findViewById(R.id.orderbtn);
         orderBtn.setOnClickListener(this);
         Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/Orkney Regular.ttf");
         orderBtn.setTypeface(tf);
@@ -96,8 +96,6 @@ public class basketActivity extends AppCompatActivity implements View.OnClickLis
 
         foodList.setAdapter(niceAdapter);
 
-        emptyBasketGif = (LottieAnimationView) findViewById(R.id.empty_basket_gif);
-
         myTTS = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
@@ -111,7 +109,6 @@ public class basketActivity extends AppCompatActivity implements View.OnClickLis
                 }
             }
         });
-
         isOrderAvailable();
     }
 
@@ -175,8 +172,6 @@ public class basketActivity extends AppCompatActivity implements View.OnClickLis
 
     public void isOrderAvailable() {
 
-        Toast.makeText(this, Integer.toString(order.getBasket().size()), Toast.LENGTH_SHORT).show();
-
         if (order.getBasket().size() < 1) {
             emptyBasketGif.setVisibility(View.VISIBLE);
             orderBtn.setBackgroundColor(getResources().getColor(R.color.grey));
@@ -192,6 +187,6 @@ public class basketActivity extends AppCompatActivity implements View.OnClickLis
     public void addOrderToDatabase() {
         String id = mRootRef.push().getKey();
 
-        mBeboerRef.child(id).setValue(order.getBasket().toString());
+        mRootRef.child(id).setValue(order.getBasket().toString());
     }
 }
