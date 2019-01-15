@@ -181,6 +181,26 @@ public class selectionActivity extends AppCompatActivity implements View.OnClick
             basketBtn.startAnimation(basketAnimation);
             animationConfirmation = false;
         }
+        switch (selection.getBasket().size()){
+            case 0:
+                basketBtn.setImageResource(R.drawable.serveringsbakke);
+                break;
+            case 1:
+                basketBtn.setImageResource(R.drawable.serveringsbakke_1);
+                break;
+            case 2:
+                basketBtn.setImageResource(R.drawable.serveringsbakke_2);
+                break;
+            case 3:
+                basketBtn.setImageResource(R.drawable.serveringsbakke_3);
+                break;
+            case 4:
+                basketBtn.setImageResource(R.drawable.serveringsbakke_4);
+                break;
+            case 5:
+                basketBtn.setImageResource(R.drawable.serveringsbakke_5);
+                break;
+        }
     }
 
     @Override

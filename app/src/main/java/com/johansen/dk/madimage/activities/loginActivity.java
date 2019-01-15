@@ -18,6 +18,7 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,6 +40,7 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
     BarcodeDetector barcodeDetector;
     TextView top;
     Button helpBtn, moveAlongBtn;
+    FrameLayout frame;
     final Context context = this;
     /*me love u*/long time = 0;
 
@@ -112,6 +114,7 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
                         .setCancelable(true)
 
                 .setPositiveButton("OK",
+
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog,int id) {
                             dialog.cancel();
