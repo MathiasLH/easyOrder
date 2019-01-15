@@ -16,6 +16,8 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.johansen.dk.madimage.R;
@@ -30,6 +32,8 @@ public class optionsActivity extends AppCompatActivity implements View.OnClickLi
     com.johansen.dk.madimage.model.foodItem foodItem;
     LinearLayout LL;
     ArrayList<CheckBox> cbArray;
+    RadioGroup breadbuttons;
+    RadioButton cbdark, cblight;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +63,12 @@ public class optionsActivity extends AppCompatActivity implements View.OnClickLi
         LL = findViewById(R.id.optionsList);
         cbArray = new ArrayList<>();
         createCheckboxes();
+        breadbuttons = findViewById(R.id.radioGroup2);
+        cbdark = breadbuttons.findViewById(R.id.cbdark);
+        cbdark.setChecked(foodItem.isDarkBread());
+        cblight = breadbuttons.findViewById(R.id.cblight);
+        cblight.setChecked(!foodItem.isDarkBread());
+
     }
 
     private void createCheckboxes(){
@@ -100,6 +110,8 @@ public class optionsActivity extends AppCompatActivity implements View.OnClickLi
             case R.id.edit_addtobasketbutton:
                 foodItem.setOptionValues(getOptions());
                 foodImage.setTransitionName("indkoebTrans");
+                foodItem.setDarkBread(cbdark.isChecked());
+
                 //order.addItem(foodItem);
                 Intent resultIntent = new Intent();
                 //resultIntent.putExtra("orderObject", order);

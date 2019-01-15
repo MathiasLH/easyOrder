@@ -17,6 +17,7 @@ import java.util.ArrayList;
 public class optionsAdapter extends RecyclerView.Adapter<optionsAdapter.myViewHolder> {
     private ArrayList<String> dataset;
     Typeface myTypeFace;
+    boolean isDarkBread;
     public static class myViewHolder extends RecyclerView.ViewHolder{
         public CardView niceCard;
         public myViewHolder(CardView cv){
@@ -24,7 +25,7 @@ public class optionsAdapter extends RecyclerView.Adapter<optionsAdapter.myViewHo
             niceCard = cv;
         }
     }
-    public optionsAdapter(ArrayList<String> myDataSet, Typeface tf){dataset =myDataSet; myTypeFace = tf;}
+    public optionsAdapter(ArrayList<String> myDataSet, Typeface tf, boolean isDarkBread){dataset =myDataSet; myTypeFace = tf; this.isDarkBread=isDarkBread;}
 
     public myViewHolder onCreateViewHolder(ViewGroup parent, int ViewType){
         CardView cv =(CardView) LayoutInflater.from(parent.getContext()).inflate(R.layout.basketoption, parent, false);

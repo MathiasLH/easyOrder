@@ -22,6 +22,8 @@
             android:layout_marginTop="4dp"
             android:layout_marginEnd="8dp"
             android:text="TextView"
+            android:textSize="24sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cardImage" />
@@ -30,9 +32,8 @@
             android:id="@+id/basket_TTSBtn"
             android:layout_width="70dp"
             android:layout_height="0dp"
-            android:layout_marginBottom="4dp"
             android:background="@drawable/basket_speakerrightside"
-            app:layout_constraintBottom_toTopOf="@+id/trashButton"
+            app:layout_constraintBottom_toBottomOf="@+id/cardImage"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0" />
@@ -54,12 +55,12 @@
             android:id="@+id/trashButton"
             android:layout_width="51dp"
             android:layout_height="51dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
             android:background="@android:drawable/screen_background_light_transparent"
             android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardImage"
             app:srcCompat="@drawable/ic_trash" />
 
         <android.support.v7.widget.RecyclerView
@@ -68,15 +69,31 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="4dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/cardName"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/cardImage"
-            app:layout_constraintTop_toBottomOf="@+id/cardName">
+            app:layout_constraintTop_toBottomOf="@+id/breadType">
 
         </android.support.v7.widget.RecyclerView>
+
+        <TextView
+            android:id="@+id/breadType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="TextView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/divider" />
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="8dp"
+            android:background="?android:attr/listDivider"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardName" />
 
     </android.support.constraint.ConstraintLayout>
 </android.support.v7.widget.CardView>
