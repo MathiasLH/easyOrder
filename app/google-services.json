@@ -1,27 +1,27 @@
 {
   "project_info": {
-    "project_number": "106690658525",
-    "firebase_url": "https://galgelegapp-85177.firebaseio.com",
-    "project_id": "galgelegapp-85177",
-    "storage_bucket": "galgelegapp-85177.appspot.com"
+    "project_number": "464593685648",
+    "firebase_url": "https://easy-order-f50b3.firebaseio.com",
+    "project_id": "easy-order-f50b3",
+    "storage_bucket": "easy-order-f50b3.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:106690658525:android:0bd92a078aba8533",
+        "mobilesdk_app_id": "1:464593685648:android:9d88de07af816148",
         "android_client_info": {
-          "package_name": "com.andersen.caroline.galgeapp"
+          "package_name": "com.johansen.dk.madimage"
         }
       },
       "oauth_client": [
         {
-          "client_id": "106690658525-ufh7u55anm4896p8ln9p65anr2i3ae90.apps.googleusercontent.com",
+          "client_id": "464593685648-f8ujgokbo992bfc6n72nhqo9sa5si4q8.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyApjNo10BSdIrSbl5VSlI4TDS9JXcyf6Yg"
+          "current_key": "AIzaSyBp6-fLLmezIKnuf0vzKepw_P0uCj29XeM"
         }
       ],
       "services": {
