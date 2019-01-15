@@ -1,5 +1,6 @@
 package com.johansen.dk.madimage.adapter;
 
+import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 public class selectionAdapter extends RecyclerView.Adapter<selectionAdapter.myViewHolder>{
     private static ClickListener clickListener;
     public ArrayList<foodItem> dataset;
+    public Typeface tf2;
     public static class myViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         public CardView niceCard;
         public Button TTSBtn;
@@ -41,8 +43,8 @@ public class selectionAdapter extends RecyclerView.Adapter<selectionAdapter.myVi
         }
     }
 
-    public selectionAdapter(ArrayList<foodItem> myDataset) {
-        dataset = myDataset;
+    public selectionAdapter(ArrayList<foodItem> myDataset, Typeface tf) {
+        dataset = myDataset; tf2 = tf;
     }
 
     @NonNull
@@ -56,6 +58,7 @@ public class selectionAdapter extends RecyclerView.Adapter<selectionAdapter.myVi
 
     public void onBindViewHolder(@NonNull myViewHolder holder, int position) {
         TextView tv = holder.niceCard.findViewById(R.id.cardName);
+        tv.setTypeface(tf2);
         tv.setText(dataset.get(position).getName());
         ImageView iv = holder.niceCard.findViewById(R.id.cardImage);
         iv.setId(dataset.get(position).getImageID());

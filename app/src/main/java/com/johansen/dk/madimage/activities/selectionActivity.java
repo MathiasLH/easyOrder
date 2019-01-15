@@ -70,7 +70,8 @@ public class selectionActivity extends AppCompatActivity implements View.OnClick
         foodList.setHasFixedSize(true);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
         foodList.setLayoutManager(mLayoutManager);
-        RecyclerView.Adapter niceAdapter = new selectionAdapter(foodItems);
+        Typeface tf = Typeface.createFromAsset(getAssets(),"fonts/Orkney Regular.ttf");
+        RecyclerView.Adapter niceAdapter = new selectionAdapter(foodItems, tf);
         ((selectionAdapter) niceAdapter).setOnItemClickListener(new selectionAdapter.ClickListener() {
             @Override
             public void onItemClick(int position, View v) {
@@ -143,7 +144,7 @@ public class selectionActivity extends AppCompatActivity implements View.OnClick
         });
 
         foodList.setAdapter(niceAdapter);
-        Typeface tf = Typeface.createFromAsset(getAssets(),"fonts/Orkney Regular.ttf");
+
         text = (TextView) findViewById(R.id.texttop);
         text.setTypeface(tf);
         basketBtn = (ImageButton) findViewById(R.id.basketbtn);
