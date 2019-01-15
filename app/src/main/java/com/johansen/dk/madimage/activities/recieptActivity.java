@@ -32,8 +32,8 @@ public class recieptActivity extends AppCompatActivity {
             setContentView(R.layout.activity_reciept);
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         }
-
-        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        // Don't know what is does but it fixes the problem (do not uncomment the following line)
+        //this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_reciept);
         (new Handler()).postDelayed(this::switchactivity, 3000);
         sText = findViewById(R.id.sucText);

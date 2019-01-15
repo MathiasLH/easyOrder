@@ -64,12 +64,13 @@ public class optionsActivity extends AppCompatActivity implements View.OnClickLi
     private void createCheckboxes(){
         for(int i = 0; i < foodItem.getOptionNames().length; i++){
             CheckBox cb = new CheckBox(getApplicationContext());
+            cb.setTextSize(24);
             cb.setText("Med " + foodItem.getOptionNames()[i]);
             cb.setTag(foodItem.getOptionNames()[i]);
             cb.setChecked(foodItem.getOptionValues()[i]);
             cb.setBackgroundResource(R.drawable.checkbox_edit);
             cb.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#FFFFFF")));
-            cb.setHeight(125);
+            cb.setHeight(170);
             cbArray.add(cb);
             LL.addView(cb);
         }

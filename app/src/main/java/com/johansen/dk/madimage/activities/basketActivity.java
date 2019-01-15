@@ -62,7 +62,8 @@ public class basketActivity extends AppCompatActivity implements View.OnClickLis
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         }
 
-        orderBtn = findViewById(R.id.orderbtn);
+        emptyBasketGif = (LottieAnimationView) findViewById(R.id.empty_basket_gif);
+        orderBtn = (Button) findViewById(R.id.orderbtn);
         orderBtn.setOnClickListener(this);
         Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/Orkney Regular.ttf");
         orderBtn.setTypeface(tf);
@@ -74,7 +75,8 @@ public class basketActivity extends AppCompatActivity implements View.OnClickLis
         foodList.setHasFixedSize(true);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
         foodList.setLayoutManager(mLayoutManager);
-        niceAdapter = new basketAdapter(order.getBasket(), this);
+
+        niceAdapter = new basketAdapter(order.getBasket(), this, tf);
         niceAdapter.setOnItemClickListener(new basketAdapter.ClickListener() {
             @Override
             public void onItemClick(int position, View v) {
@@ -92,15 +94,14 @@ public class basketActivity extends AppCompatActivity implements View.OnClickLis
                 }
             }
         });
-        foodList.setAdapter(niceAdapter);
 
-        emptyBasketGif = (LottieAnimationView) findViewById(R.id.empty_basket_gif);
+        foodList.setAdapter(niceAdapter);
 
         myTTS = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
                 if (status == TextToSpeech.SUCCESS) {
-                    int result = myTTS.setLanguage(Locale.ENGLISH);
+                    int result = myTTS.setLanguage(new Locale("da", ""));
                     if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
                         Log.e("TTS", "Language not supportd");
                     }
@@ -109,7 +110,6 @@ public class basketActivity extends AppCompatActivity implements View.OnClickLis
                 }
             }
         });
-
         isOrderAvailable();
     }
 
@@ -172,8 +172,6 @@ public class basketActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     public void isOrderAvailable() {
-
-        Toast.makeText(this, Integer.toString(order.getBasket().size()), Toast.LENGTH_SHORT).show();
 
         if (order.getBasket().size() < 1) {
             emptyBasketGif.setVisibility(View.VISIBLE);

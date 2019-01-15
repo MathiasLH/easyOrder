@@ -58,25 +58,27 @@
                     android:id="@+id/cbdark"
                     style="@style/Widget.AppCompat.CompoundButton.CheckBox"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="70dp"
                     android:layout_weight="1"
                     android:background="@drawable/editbuttonshapeleft"
                     android:buttonTint="#FFFFFF"
                     android:checked="true"
                     android:layoutDirection="rtl"
                     android:text="Mørkt-Brød"
-                    android:textAlignment="center" />
+                    android:textAlignment="center"
+                    android:textSize="24sp" />
 
                 <RadioButton
                     android:id="@+id/cblight"
                     style="@style/Widget.AppCompat.CompoundButton.CheckBox"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="70dp"
                     android:layout_weight="1"
                     android:background="@drawable/editbuttonshaperight"
                     android:buttonTint="#FFFFFF"
                     android:text="Lyst-Brød"
-                    android:textAlignment="center" />
+                    android:textAlignment="center"
+                    android:textSize="24sp" />
 
             </RadioGroup>
 
@@ -101,10 +103,10 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="12dp"
         android:background="@color/btnColor"
         android:text="føj til kurv"
-        android:textSize="14sp"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
