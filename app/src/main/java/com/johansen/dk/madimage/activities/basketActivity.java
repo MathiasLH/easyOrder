@@ -69,7 +69,8 @@ public class basketActivity extends AppCompatActivity implements View.OnClickLis
         foodList.setHasFixedSize(true);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
         foodList.setLayoutManager(mLayoutManager);
-        niceAdapter = new basketAdapter(order.getBasket(), this);
+
+        niceAdapter = new basketAdapter(order.getBasket(), this, tf);
         niceAdapter.setOnItemClickListener(new basketAdapter.ClickListener() {
             @Override
             public void onItemClick(int position, View v) {
@@ -87,6 +88,7 @@ public class basketActivity extends AppCompatActivity implements View.OnClickLis
                 }
             }
         });
+
         foodList.setAdapter(niceAdapter);
 
         emptyBasketGif = (LottieAnimationView) findViewById(R.id.empty_basket_gif);
@@ -95,7 +97,7 @@ public class basketActivity extends AppCompatActivity implements View.OnClickLis
             @Override
             public void onInit(int status) {
                 if (status == TextToSpeech.SUCCESS) {
-                    int result = myTTS.setLanguage(Locale.ENGLISH);
+                    int result = myTTS.setLanguage(new Locale("da", ""));
                     if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
                         Log.e("TTS", "Language not supportd");
                     }

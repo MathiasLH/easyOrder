@@ -1,6 +1,8 @@
 package com.johansen.dk.madimage.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
@@ -22,6 +24,8 @@ public class basketAdapter extends RecyclerView.Adapter<basketAdapter.myViewHold
     private ArrayList<foodItem> dataset;
     //private ArrayList<LinearLayoutManager> LLM;
     private Context context;
+    Typeface tf2;
+
 
 
     public static class myViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
@@ -54,10 +58,11 @@ public class basketAdapter extends RecyclerView.Adapter<basketAdapter.myViewHold
         public void onClick(View v) {clickListener.onItemClick(getAdapterPosition(), v); }
     }
 
-    public basketAdapter(ArrayList<foodItem> myDataset, Context context /*ArrayList<LinearLayoutManager> LLM*/){
+    public basketAdapter(ArrayList<foodItem> myDataset, Context context , Typeface tf){
         //this.LLM = LLM;
         this.context = context;
         dataset = myDataset;
+        tf2=tf;
     }
 
     public myViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
@@ -72,9 +77,11 @@ public class basketAdapter extends RecyclerView.Adapter<basketAdapter.myViewHold
     public void onBindViewHolder(myViewHolder holder, int position){
         TextView tv = holder.niceCard.findViewById(R.id.cardName);
         tv.setText(dataset.get(position).getName());
+        tv.setTypeface(tf2);
+        tv.setTextSize(18);
         ImageView iv = holder.niceCard.findViewById(R.id.cardImage);
         iv.setImageResource(dataset.get(position).getImageResourceID());
-        optionsAdapter niceAdapter = new optionsAdapter(getOptionsToDraw(position));
+        optionsAdapter niceAdapter = new optionsAdapter(getOptionsToDraw(position),tf2);
         RecyclerView rv = holder.niceCard.findViewById(R.id.optionsList);
         rv.setAdapter(niceAdapter);
         rv.setHasFixedSize(true);

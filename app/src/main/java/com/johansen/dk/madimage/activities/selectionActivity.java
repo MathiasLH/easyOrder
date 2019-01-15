@@ -1,5 +1,7 @@
 package com.johansen.dk.madimage.activities;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
@@ -10,11 +12,13 @@ import android.speech.tts.TextToSpeech;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.view.ViewCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -44,6 +48,7 @@ public class selectionActivity extends AppCompatActivity implements View.OnClick
     TextToSpeech myTTS;
     ImageButton basketBtn;
     Animation basketAnimation;
+    final Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,7 +82,44 @@ public class selectionActivity extends AppCompatActivity implements View.OnClick
                 }
 
                 if(v.getTag()=="OTHER") {
-                    launchEditActivity(position);
+                    if(selection.getBasket().size() < 5) {
+                        launchEditActivity(position);
+                    } else {
+                        LayoutInflater li = LayoutInflater.from(context);
+                        View promptsView = li.inflate(R.layout.limit, null);
+
+                        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                                context);
+
+                        // set prompts.xml to alertdialog builder
+                        alertDialogBuilder.setView(promptsView);
+
+                        alertDialogBuilder.setTitle("For mange smørrebrød");
+
+                        // set dialog message
+                        alertDialogBuilder
+                                .setCancelable(true)
+
+                        .setPositiveButton("OK",
+
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog,int id) {
+                                        dialog.cancel();
+                                    }
+                                });
+
+
+                        // create alert dialog
+                        AlertDialog alertDialog = alertDialogBuilder.create();
+
+                        // show it
+                        alertDialog.show();
+                        /*Toast.makeText(v.getContext(),
+                                "Du har allerede valgt det maximale antal smørrebrød, " +
+                                        "venligst slet en af det forrige valgte smørrebrød for at " +
+                                        "tilføje et nyt smørrebrød, eller bestil din ordre."
+                                ,Toast.LENGTH_LONG).show();*/
+                    }
                 }
 
 
