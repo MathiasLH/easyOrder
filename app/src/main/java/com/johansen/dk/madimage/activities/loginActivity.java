@@ -247,9 +247,11 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
         double diagonalInches = Math.sqrt(xInches*xInches + yInches*yInches);
         if (diagonalInches>=6.5){
             editor.putBoolean("tablet", true);
+            editor.apply();
             return true;
         }else{
             editor.putBoolean("tablet", false);
+            editor.apply();
             return false;
         }
     }
