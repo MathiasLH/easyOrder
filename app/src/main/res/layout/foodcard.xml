@@ -36,12 +36,12 @@
 
         <TextView
             android:id="@+id/cardName"
-            android:layout_width="299dp"
+            android:layout_width="0dp"
             android:layout_height="39dp"
             android:text="TextView"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Widget.PopupMenu.Large"
-            android:textSize="28sp"
+            android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"

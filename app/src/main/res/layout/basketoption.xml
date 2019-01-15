@@ -15,6 +15,7 @@
             android:layout_marginBottom="4dp"
             android:text="test"
             android:textAlignment="center"
+            android:textColor="#19414B"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toLeftOf="parent"
