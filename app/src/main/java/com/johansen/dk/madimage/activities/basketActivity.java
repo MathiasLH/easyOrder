@@ -24,6 +24,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.johansen.dk.madimage.R;
 import com.johansen.dk.madimage.adapter.basketAdapter;
 import com.johansen.dk.madimage.model.foodItem;
@@ -43,6 +45,10 @@ public class basketActivity extends AppCompatActivity implements View.OnClickLis
     int lastItemClicked;
     LottieAnimationView emptyBasketGif;
     boolean isOrderAvailable;
+
+    /*instans of database*/
+    DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference("Beboere");
+    DatabaseReference mBeboerRef = mRootRef.child("Beboer");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -157,6 +163,8 @@ public class basketActivity extends AppCompatActivity implements View.OnClickLis
         switch (v.getId()) {
             case R.id.orderbtn:
                 if (isOrderAvailable) {
+                    addOrderToDatabase();
+
                     Intent intent = new Intent(this, recieptActivity.class);
                     intent.putExtra("order", order);
                     startActivity(intent);
@@ -180,5 +188,11 @@ public class basketActivity extends AppCompatActivity implements View.OnClickLis
             orderBtn.setBackgroundColor(getResources().getColor(R.color.btnColor));
             isOrderAvailable = true;
         }
+    }
+
+    public void addOrderToDatabase() {
+        String id = mRootRef.push().getKey();
+
+        mBeboerRef.child(id).setValue(order.getBasket().toString());
     }
 }
