@@ -1,6 +1,8 @@
 package com.johansen.dk.madimage.activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
@@ -46,6 +48,16 @@ public class selectionActivity extends AppCompatActivity implements View.OnClick
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        SharedPreferences sharedprefs = getSharedPreferences("screen_version", MODE_PRIVATE);
+        if(sharedprefs.getBoolean("tablet",false)){
+            setContentView(R.layout.activity_selection_tablet);
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        } else {
+            setContentView(R.layout.activity_selection);
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }
+
         setContentView(R.layout.activity_selection);
         createTestData();
         foodList = findViewById(R.id.foodList);

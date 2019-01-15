@@ -4,6 +4,8 @@ import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -11,6 +13,7 @@ import android.os.Vibrator;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.DisplayMetrics;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.SurfaceHolder;
@@ -47,7 +50,15 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+
+        if(isTablet()){
+            setContentView(R.layout.activity_login_tablet);
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        } else {
+            setContentView(R.layout.activity_login);
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }
+
         /*define font*/
         Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/Orkney Regular.ttf");
         /*defining textViews*/
@@ -219,5 +230,24 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
                 }
             }
         });
+    }
+
+    //this method of checking screensize is from stackoverflow: https://stackoverflow.com/questions/9279111/determine-if-the-device-is-a-smartphone-or-tablet
+    private boolean isTablet(){
+        DisplayMetrics metrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        float yInches= metrics.heightPixels/metrics.ydpi;
+        float xInches= metrics.widthPixels/metrics.xdpi;
+
+        SharedPreferences sharedpref = getSharedPreferences("screen_version", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedpref.edit();
+        double diagonalInches = Math.sqrt(xInches*xInches + yInches*yInches);
+        if (diagonalInches>=6.5){
+            editor.putBoolean("tablet", true);
+            return true;
+        }else{
+            editor.putBoolean("tablet", false);
+            return false;
+        }
     }
 }
