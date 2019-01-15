@@ -140,9 +140,9 @@ public class basketActivity extends AppCompatActivity implements View.OnClickLis
 
         //https://stackoverflow.com/questions/30706780/texttospeech-deprecated-speak-function-in-api-level-21
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            myTTS.speak(text, TextToSpeech.QUEUE_FLUSH, null, null);
+            myTTS.speak(order.getBasket().get(position).toString(), TextToSpeech.QUEUE_FLUSH, null, null);
         } else {
-            myTTS.speak(text, TextToSpeech.QUEUE_FLUSH, null);
+            myTTS.speak(order.getBasket().get(position).toString(), TextToSpeech.QUEUE_FLUSH, null);
         }
     }
 

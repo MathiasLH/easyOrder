@@ -58,6 +58,20 @@ public class foodItem implements Serializable {
 
     public void setDarkBread(boolean darkBread) { this.darkBread = darkBread;  }
 
+    public String toString() {
+        String out = name + ",";
+        if(darkBread){
+            out += "Med mørkt brød" + ",";
+        } else {
+            out += "Med lyst brød" + ",";
+        }
+        for(int i = 0; i<getOptionNames().length; i++){
+            if (!getOptionValues()[i]) {
+                out+= "Uden " + getOptionNames()[i] + ",\n";
+            }
+        }
+        return out;
+    }
 
 }
 
