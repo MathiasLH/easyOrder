@@ -28,11 +28,12 @@ public class basketAdapter extends RecyclerView.Adapter<basketAdapter.myViewHold
 
 
 
+
     public static class myViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         public CardView niceCard;
         public Button TTSBtn;
         public ImageButton TRASHBtn;
-        private TextView foodName;
+        private TextView foodName, breadType;
         private ImageView foodImage;
         public myViewHolder(@NonNull CardView cv){
             super(cv);
@@ -48,6 +49,7 @@ public class basketAdapter extends RecyclerView.Adapter<basketAdapter.myViewHold
             foodImage = cv.findViewById(R.id.cardImage);
             foodImage.setOnClickListener(this);
             foodImage.setTag("OTHER");
+            breadType = cv.findViewById(R.id.breadType);
 
             niceCard = cv;
 
@@ -76,12 +78,20 @@ public class basketAdapter extends RecyclerView.Adapter<basketAdapter.myViewHold
 
     public void onBindViewHolder(myViewHolder holder, int position){
         TextView tv = holder.niceCard.findViewById(R.id.cardName);
+        TextView tv2 = holder.niceCard.findViewById(R.id.breadType);
         tv.setText(dataset.get(position).getName());
         tv.setTypeface(tf2);
-        tv.setTextSize(18);
+        if(dataset.get(position).isDarkBread()){
+            tv2.setText("Med mørkt brød");
+        } else {
+            tv2.setText("Med lyst brød");
+        }
+        tv2.setTypeface(tf2);
+        tv2.setTextSize(18);
+
         ImageView iv = holder.niceCard.findViewById(R.id.cardImage);
         iv.setImageResource(dataset.get(position).getImageResourceID());
-        optionsAdapter niceAdapter = new optionsAdapter(getOptionsToDraw(position),tf2);
+        optionsAdapter niceAdapter = new optionsAdapter(getOptionsToDraw(position),tf2, dataset.get(position).isDarkBread());
         RecyclerView rv = holder.niceCard.findViewById(R.id.optionsList);
         rv.setAdapter(niceAdapter);
         rv.setHasFixedSize(true);

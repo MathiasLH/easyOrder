@@ -22,7 +22,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.airbnb.lottie.LottieAnimationView;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -48,7 +47,6 @@ public class basketActivity extends AppCompatActivity implements View.OnClickLis
 
     /*instans of database*/
     DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference("Beboere");
-    DatabaseReference mBeboerRef = mRootRef.child("Beboer");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -189,6 +187,6 @@ public class basketActivity extends AppCompatActivity implements View.OnClickLis
     public void addOrderToDatabase() {
         String id = mRootRef.push().getKey();
 
-        mBeboerRef.child(id).setValue(order.getBasket().toString());
+        mRootRef.child(id).setValue(order.getBasket().toString());
     }
 }
