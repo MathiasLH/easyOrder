@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "106690658525",
+    "firebase_url": "https://galgelegapp-85177.firebaseio.com",
+    "project_id": "galgelegapp-85177",
+    "storage_bucket": "galgelegapp-85177.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:106690658525:android:0bd92a078aba8533",
+        "android_client_info": {
+          "package_name": "com.andersen.caroline.galgeapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "106690658525-ufh7u55anm4896p8ln9p65anr2i3ae90.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyApjNo10BSdIrSbl5VSlI4TDS9JXcyf6Yg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
