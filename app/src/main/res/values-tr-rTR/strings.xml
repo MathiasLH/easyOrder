@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">easyOrder</string>
+    <string name="help_button_text">YARDIM</string>
 </resources>
