@@ -11,5 +11,7 @@
     <string name="selection_toast">Vælg venligst et smørrebrød</string>
     <string name="options_toptext">Rediger</string>
     <string name="options_button_text">FØJ TIL KURV</string>
+    <string name="reciept_toptext">Tak for din bestilling!</string>
+    <string name="reciept_order_text">har bestilt:</string>
 
 </resources>
