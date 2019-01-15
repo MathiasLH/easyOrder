@@ -47,7 +47,6 @@ public class basketActivity extends AppCompatActivity implements View.OnClickLis
 
     /*instans of database*/
     DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference("Beboere");
-    DatabaseReference mBeboerRef = mRootRef.child("Beboer");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -188,6 +187,6 @@ public class basketActivity extends AppCompatActivity implements View.OnClickLis
     public void addOrderToDatabase() {
         String id = mRootRef.push().getKey();
 
-        mBeboerRef.child(id).setValue(order.getBasket().toString());
+        mRootRef.child(id).setValue(order.getBasket().toString());
     }
 }
