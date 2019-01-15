@@ -68,18 +68,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <FrameLayout
-                android:id="@+id/somethingFrame"
-                android:layout_width="300dp"
-                android:layout_height="300dp"
-                android:background="@drawable/qr_code_reader_square"
-                app:layout_constraintBottom_toBottomOf="@+id/cameraPreview"
-                app:layout_constraintEnd_toEndOf="@+id/cameraPreview"
-                app:layout_constraintStart_toStartOf="@+id/cameraPreview"
-                app:layout_constraintTop_toTopOf="@+id/cameraPreview">
-
-            </FrameLayout>
-
         </android.support.constraint.ConstraintLayout>
 
     </FrameLayout>
