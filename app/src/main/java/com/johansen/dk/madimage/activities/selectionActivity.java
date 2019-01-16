@@ -50,6 +50,7 @@ public class selectionActivity extends AppCompatActivity implements View.OnClick
     ImageButton basketBtn;
     Animation basketAnimation;
     final Context context = this;
+    boolean clickAllowed = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,12 +79,13 @@ public class selectionActivity extends AppCompatActivity implements View.OnClick
 
                 Log.e("TTS", "@@@@@@@@@@@@@@@@@@@" + v.getTag());
 
-                if(v.getTag()=="TTS") {
+                if(v.getTag()=="TTS" && clickAllowed) {
                     Log.e("TTS", "@@@@@@@@@@@@@@@@@@@" + Integer.toString(v.getId()));
                     readDish(position);
                 }
 
-                if(v.getTag()=="OTHER") {
+                if(v.getTag()=="OTHER" && clickAllowed) {
+                    clickAllowed = false;
                     if(selection.getBasket().size() < 5) {
                         launchEditActivity(position);
                     } else {
@@ -220,7 +222,7 @@ public class selectionActivity extends AppCompatActivity implements View.OnClick
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
+        clickAllowed = true;
         ImageButton basketBtn = findViewById(R.id.basketbtn);
         if(resultCode != RESULT_CANCELED){
             if(requestCode == 1){
