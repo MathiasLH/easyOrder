@@ -7,20 +7,11 @@
     android:background="@color/white"
     tools:context=".activities.selectionActivity">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/foodList"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/texttop" />
-
     <TextView
         android:id="@+id/texttop"
         android:layout_width="0dp"
         android:layout_height="42dp"
-        android:background="@drawable/topbarshape"
+        android:background="@drawable/topbarshape_tablet"
         android:text="Vælg et smørrebrød:"
         android:textAlignment="center"
         android:textSize="24sp"
@@ -32,14 +23,34 @@
         android:id="@+id/basketbtn"
         android:layout_width="42dp"
         android:layout_height="0dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="12dp"
         android:layout_marginBottom="1dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginTop="1dp"
         android:background="@drawable/rounded_button"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="@+id/texttop"
         app:layout_constraintEnd_toEndOf="@+id/texttop"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/serveringsbakke" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/texttop">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/foodList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/texttop" />
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="help_button_text">HJÆLP</string>
-    <string name="selection_button_text">YEET</string>
+    <string name="selection_button_text">BESTIL</string>
     <string name="options_toptext">Rediger</string>
     <string name="selection_toptext">Vælg et smørrebrød:</string>
     <string name="help_gif_text">Sådan gør du:</string>

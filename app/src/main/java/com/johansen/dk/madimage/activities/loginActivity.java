@@ -141,20 +141,20 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
                 break;
             case R.id.danishFlag:
                 prefs = getSharedPreferences("setLanguage", MODE_PRIVATE);
-                prefs.edit().putString("language", "DK").commit();
-                setLanguage();
+                prefs.edit().putString("language", "da").commit();
+                setLocale();
                 Toast.makeText(this, "LANGUAGE SET: DK", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.englishFlag:
                 prefs = getSharedPreferences("setLanguage", MODE_PRIVATE);
-                prefs.edit().putString("language", "GB").commit();
-                setLanguage();
+                prefs.edit().putString("language", "en").commit();
+                setLocale();
                 Toast.makeText(this, "LANGUAGE SET: ENG", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.turkishFlag:
                 prefs = getSharedPreferences("setLanguage", MODE_PRIVATE);
-                prefs.edit().putString("language", "TR").commit();
-                setLanguage();
+                prefs.edit().putString("language", "tr").commit();
+                setLocale();
                 Toast.makeText(this, "LANGUAGE SET: TR", Toast.LENGTH_SHORT).show();
                 break;
                 default: Toast.makeText(this, "DEFAULT HIT", Toast.LENGTH_SHORT).show();
@@ -260,34 +260,28 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
             // Do first run stuff here then set 'firstrun' as false
             // using the following line to edit/commit prefs
             prefs.edit().putBoolean("firstrun", false).commit();
+            prefs = getSharedPreferences("setLanguage", MODE_PRIVATE);
+            prefs.getString("da","");
+            setLocale();
         }
     }
 
-    private void setLanguage() {
+    private void setLocale() {
         prefs = getSharedPreferences("setLanguage", MODE_PRIVATE);
         String lang = prefs.getString("language", "");
-        switch (lang) {
-            case "DK":
-                setLocale("da_DL");
-                break;
-            case "GB":
-                setLocale("en_GB");
-                break;
-            case "TR":
-                setLocale("tr");
-                break;
-            default:
-                Toast.makeText(this, "SETLANG: DEFAULT HIT", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    public void setLocale(String lang) {
         Locale myLocale = new Locale(lang);
         Resources res = getResources();
         DisplayMetrics dm = res.getDisplayMetrics();
         Configuration conf = res.getConfiguration();
         conf.locale = myLocale;
         res.updateConfiguration(conf, dm);
-        recreate();
+        setText();
+    }
+
+    private void setText(){
+        prefs = getSharedPreferences("setLanguage", MODE_PRIVATE);
+        String lang = prefs.getString("language", "");
+        helpBtn.setText(getString(R.string.help_button_text));
+        loginInfo.setText(getString(R.string.login_info));
     }
 }

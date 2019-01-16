@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="quick_string">Lyst eller Mørkt brød</string>
+    <string name="login_info">Hold your phone/tablet over the QR code to scan it</string>
+    <string name="help_button_text">HELP</string>
+    <string name="help_gif_text">You do like this:</string>
+    <string name="selection_toptext">Choose a dish</string>
+    <string name="basket_toptext">The contents of your serving tray</string>
+    <string name="selection_button_text">ORDER</string>
+    <string name="selection_toast">Please choose a dish</string>
+    <string name="options_toptext">Edit</string>
+    <string name="options_button_text">ADD TO SERVING TRAY</string>
+    <string name="reciept_toptext">Thank you for your order!</string>
+    <string name="reciept_order_text">has ordered:</string>
+</resources>

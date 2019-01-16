@@ -2,7 +2,7 @@
     <string name="app_name" translatable="false">easyOrder</string>
 
     <string name="quick_string" translatable="true">Lyst eller Mørkt brød</string>
-    <string name="login_info">hold din telefon/tablet hen over QR koden for at scanne</string>
+    <string name="login_info">Hold din telefon/tablet hen over QR koden for at scanne</string>
     <string name="help_button_text">HJÆLP</string>
     <string name="help_gif_text">Sådan gør du:</string>
     <string name="selection_toptext">Vælg et smørrebrød:</string>
