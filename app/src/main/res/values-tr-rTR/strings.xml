@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">easyOrder</string>
     <string name="help_button_text">YARDIM</string>
     <string name="quick_string">Beyaz veya buğdaylı ekmek</string>
     <string name="login_info">Taramak için telefonunuzu / tabletinizi QR kodunun üzerinde tutunuz</string>

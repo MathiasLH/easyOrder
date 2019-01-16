@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Vibrator;
@@ -36,27 +38,26 @@ import com.johansen.dk.madimage.R;
 import com.johansen.dk.madimage.model.order;
 
 import java.io.IOException;
+import java.util.Locale;
 
 public class loginActivity extends AppCompatActivity implements View.OnClickListener {
 
-    /*initialize ImageButtons */
     ImageButton danishFlag, englishFlag, turkishFlag;
     SurfaceView cameraPreview;
     CameraSource cameraSrc;
     BarcodeDetector barcodeDetector;
-    TextView top;
+    TextView loginInfo;
     Button helpBtn, moveAlongBtn;
-    FrameLayout frame;
     final Context context = this;
-    /*me love u*/long time = 0;
-
-    int tempHeight,tempWidth;
+    /*me love u*/ long time = 0;
+    int tempHeight, tempWidth;
+    SharedPreferences prefs = null;
+    Typeface tf;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        if(isTablet()){
+        if (isTablet()) {
             setContentView(R.layout.activity_login_tablet);
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         } else {
@@ -64,23 +65,21 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         }
 
-        /*define font*/
-        Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/Orkney Regular.ttf");
-        /*defining textViews*/
-        top = findViewById(R.id.explqr);
-        /*defining buttons*/
-        helpBtn = findViewById(R.id.helpBtn);
-        helpBtn.setTypeface(tf);
-        moveAlongBtn = findViewById(R.id.moveAlongBtn);
+        loginInfo = (TextView) findViewById(R.id.explqr);
+        helpBtn = (Button) findViewById(R.id.helpBtn);
+        moveAlongBtn = (Button) findViewById(R.id.moveAlongBtn);
+
+        tf = Typeface.createFromAsset(getAssets(), "fonts/Orkney Regular.ttf");
         /*using fonts on text fields*/
-        top.setTypeface(tf);
+        loginInfo.setTypeface(tf);
+        helpBtn.setTypeface(tf);
         helpBtn.setTypeface(tf);
 
         /*defining elements for QR-scanner*/
         //from youtubevideo: https://www.youtube.com/watch?v=ej51mAYXbKs
-        cameraPreview = findViewById(R.id.cameraPreview);
+        cameraPreview = (SurfaceView) findViewById(R.id.cameraPreview);
         barcodeDetector = new BarcodeDetector.Builder(this).setBarcodeFormats(Barcode.QR_CODE).build();
-        cameraSrc = new CameraSource.Builder(this, barcodeDetector).setRequestedPreviewSize(1024,768)
+        cameraSrc = new CameraSource.Builder(this, barcodeDetector).setRequestedPreviewSize(1024, 768)
                 .setFacing(CameraSource.CAMERA_FACING_BACK)
                 .setRequestedFps(30.0f)
                 .setAutoFocusEnabled(true)
@@ -101,13 +100,12 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
         turkishFlag.setOnClickListener(this);
 
         createQRscan();
-
     }
 
     @Override
     public void onClick(View v) {
         /*Implementing on click listener to QR-code image Button*/
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.moveAlongBtn:
                 startActivity(new Intent(loginActivity.this, selectionActivity.class));
                 break;
@@ -127,13 +125,13 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
                 alertDialogBuilder
                         .setCancelable(true)
 
-                .setPositiveButton("OK",
+                        .setPositiveButton("OK",
 
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog,int id) {
-                            dialog.cancel();
-                        }
-                    });
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        dialog.cancel();
+                                    }
+                                });
 
                 // create alert dialog
                 AlertDialog alertDialog = alertDialogBuilder.create();
@@ -142,33 +140,31 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
                 alertDialog.show();
                 break;
             case R.id.danishFlag:
-                Toast.makeText(this, "NOT IMPLEMENTED", Toast.LENGTH_SHORT).show();
+                prefs = getSharedPreferences("setLanguage", MODE_PRIVATE);
+                prefs.edit().putString("language", "DK").commit();
+                setLanguage();
+                Toast.makeText(this, "LANGUAGE SET: DK", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.englishFlag:
-                Toast.makeText(this, "NOT IMPLEMENTED", Toast.LENGTH_SHORT).show();
+                prefs = getSharedPreferences("setLanguage", MODE_PRIVATE);
+                prefs.edit().putString("language", "GB").commit();
+                setLanguage();
+                Toast.makeText(this, "LANGUAGE SET: ENG", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.turkishFlag:
-                Toast.makeText(this, "NOT IMPLEMENTED", Toast.LENGTH_SHORT).show();
+                prefs = getSharedPreferences("setLanguage", MODE_PRIVATE);
+                prefs.edit().putString("language", "TR").commit();
+                setLanguage();
+                Toast.makeText(this, "LANGUAGE SET: TR", Toast.LENGTH_SHORT).show();
                 break;
-
-        }
-
-
-        if (v == danishFlag) {
-            /*setting language to danish maybe default case*/
-        }
-        if (v == englishFlag) {
-            /*setting language to english*/
-        }
-        if (v == turkishFlag) {
-            /*setting language to arbaic*/
+                default: Toast.makeText(this, "DEFAULT HIT", Toast.LENGTH_SHORT).show();
         }
     }
 
-    private void validateQR(String input){
+    private void validateQR(String input) {
         String regex = "([a-zA-Z]+[0-9]+)";
-        if(input.matches(regex)){
-            Vibrator vibrator = (Vibrator)getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
+        if (input.matches(regex)) {
+            Vibrator vibrator = (Vibrator) getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
             vibrator.vibrate(100);
             Intent niceIntent = new Intent(loginActivity.this, selectionActivity.class);
             niceIntent.putExtra("roomNo", input);
@@ -176,16 +172,16 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
-    private boolean enoughTimePassed(){
+    private boolean enoughTimePassed() {
         long currentTime = System.currentTimeMillis();
-        if(currentTime - time > 3000){
+        if (currentTime - time > 3000) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
 
-    private void createQRscan(){
+    private void createQRscan() {
         cameraPreview.getHolder().addCallback(new SurfaceHolder.Callback() {
             @Override
             public void surfaceCreated(SurfaceHolder holder) {
@@ -194,15 +190,13 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
                 }
                 try {
                     cameraSrc.start(holder);
-                }
-                catch (IOException e){
+                } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
 
             @Override
             public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-
             }
 
             @Override
@@ -220,13 +214,13 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
             public void receiveDetections(Detector.Detections<Barcode> detections) {
                 SparseArray<Barcode> qrCodes = detections.getDetectedItems();
 
-                if(qrCodes.size() != 0 ){
-                    top.post(new Runnable() {
+                if (qrCodes.size() != 0) {
+                    loginInfo.post(new Runnable() {
                         @Override
                         public void run() {
                             //top.setText(qrCodes.valueAt(0).displayValue);
 
-                            if(enoughTimePassed()){
+                            if (enoughTimePassed()) {
                                 time = System.currentTimeMillis();
                                 validateQR(qrCodes.valueAt(0).displayValue);
                             }
@@ -239,23 +233,61 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     //this method of checking screensize is from stackoverflow: https://stackoverflow.com/questions/9279111/determine-if-the-device-is-a-smartphone-or-tablet
-    private boolean isTablet(){
+    private boolean isTablet() {
         DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
-        float yInches= metrics.heightPixels/metrics.ydpi;
-        float xInches= metrics.widthPixels/metrics.xdpi;
+        float yInches = metrics.heightPixels / metrics.ydpi;
+        float xInches = metrics.widthPixels / metrics.xdpi;
 
-        SharedPreferences sharedpref = getSharedPreferences("screen_version", MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedpref.edit();
-        double diagonalInches = Math.sqrt(xInches*xInches + yInches*yInches);
-        if (diagonalInches>=6.5){
+        prefs = getSharedPreferences("screen_version", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        double diagonalInches = Math.sqrt(xInches * xInches + yInches * yInches);
+        if (diagonalInches >= 6.5) {
             editor.putBoolean("tablet", true);
-            editor.apply();
+            editor.commit();
             return true;
-        }else{
+        } else {
             editor.putBoolean("tablet", false);
-            editor.apply();
+            editor.commit();
             return false;
         }
+    }
+
+    protected void onResume() {
+        super.onResume();
+        prefs = getSharedPreferences("com.johansen.easyOrder", MODE_PRIVATE);
+        if (prefs.getBoolean("firstrun", true)) {
+            // Do first run stuff here then set 'firstrun' as false
+            // using the following line to edit/commit prefs
+            prefs.edit().putBoolean("firstrun", false).commit();
+        }
+    }
+
+    private void setLanguage() {
+        prefs = getSharedPreferences("setLanguage", MODE_PRIVATE);
+        String lang = prefs.getString("language", "");
+        switch (lang) {
+            case "DK":
+                setLocale("da_DL");
+                break;
+            case "GB":
+                setLocale("en_GB");
+                break;
+            case "TR":
+                setLocale("tr");
+                break;
+            default:
+                Toast.makeText(this, "SETLANG: DEFAULT HIT", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void setLocale(String lang) {
+        Locale myLocale = new Locale(lang);
+        Resources res = getResources();
+        DisplayMetrics dm = res.getDisplayMetrics();
+        Configuration conf = res.getConfiguration();
+        conf.locale = myLocale;
+        res.updateConfiguration(conf, dm);
+        recreate();
     }
 }

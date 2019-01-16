@@ -1,17 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name" translatable="false">easyOrder</string>
-
-    <string name="quick_string" translatable="true">Lyst eller Mørkt brød</string>
-    <string name="login_info">hold din telefon/tablet hen over QR koden for at scanne</string>
     <string name="help_button_text">HJÆLP</string>
-    <string name="help_gif_text">Sådan gør du:</string>
-    <string name="selection_toptext">Vælg et smørrebrød:</string>
-    <string name="basket_toptext">Indholdet af din serveringsbakke</string>
-    <string name="selection_button_text">BESTIL</string>
-    <string name="selection_toast">Vælg venligst et smørrebrød</string>
+    <string name="selection_button_text">YEET</string>
     <string name="options_toptext">Rediger</string>
+    <string name="selection_toptext">Vælg et smørrebrød:</string>
+    <string name="help_gif_text">Sådan gør du:</string>
+    <string name="login_info">hold din telefon/tablet hen over QR koden for at scanne</string>
+    <string name="basket_toptext">Indholdet af din serveringsbakke</string>
+    <string name="selection_toast">Vælg venligst et smørrebrød</string>
     <string name="options_button_text">FØJ TIL SERVERINGSBAKKE</string>
     <string name="reciept_toptext">Tak for din bestilling!</string>
     <string name="reciept_order_text">har bestilt:</string>
-
+    <string name="quick_string">Lyst eller Mørkt brød</string>
 </resources>
