@@ -36,6 +36,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.johansen.dk.madimage.R;
 import com.johansen.dk.madimage.model.order;
+import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import java.io.IOException;
 import java.util.Locale;
@@ -47,12 +48,13 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
     CameraSource cameraSrc;
     BarcodeDetector barcodeDetector;
     TextView loginInfo;
-    Button helpBtn, moveAlongBtn;
+    Button helpBtn, moveAlongBtn, clearPerm;
     final Context context = this;
     /*me love u*/ long time = 0;
     int tempHeight, tempWidth;
     SharedPreferences prefs = null;
     Typeface tf;
+    final RxPermissions rxPermissions = new RxPermissions(this); // where this is an Activity or Fragment instance
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +70,7 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
         loginInfo = (TextView) findViewById(R.id.explqr);
         helpBtn = (Button) findViewById(R.id.helpBtn);
         moveAlongBtn = (Button) findViewById(R.id.moveAlongBtn);
+        clearPerm = (Button) findViewById(R.id.clearPermission);
 
         tf = Typeface.createFromAsset(getAssets(), "fonts/Orkney Regular.ttf");
         /*using fonts on text fields*/
@@ -98,7 +101,9 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
         danishFlag.setOnClickListener(this);
         englishFlag.setOnClickListener(this);
         turkishFlag.setOnClickListener(this);
+        clearPerm.setOnClickListener(this);
 
+        hasCameraPermission();
         createQRscan();
     }
 
@@ -156,6 +161,11 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
                 prefs.edit().putString("language", "tr").commit();
                 setLocale();
                 Toast.makeText(this, "LANGUAGE SET: TR", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.clearPermission:
+                prefs = getSharedPreferences("permission", MODE_PRIVATE);
+                prefs.edit().clear().commit();
+                Toast.makeText(this, "RESTART APP", Toast.LENGTH_SHORT).show();
                 break;
                 default: Toast.makeText(this, "DEFAULT HIT", Toast.LENGTH_SHORT).show();
         }
@@ -283,5 +293,27 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
         String lang = prefs.getString("language", "");
         helpBtn.setText(getString(R.string.help_button_text));
         loginInfo.setText(getString(R.string.login_info));
+    }
+
+    //permission library: https://github.com/tbruyelle/RxPermissions
+    private void askPermission(){
+        // Must be done during an initialization phase like onCreate
+        rxPermissions
+                .request(Manifest.permission.CAMERA)
+                .subscribe(granted -> {
+                    if (granted) {
+                        prefs.edit().putBoolean("cameraPermission", true).commit();
+                        recreate();
+                    } else {
+                        // Oups permission denied
+                    }
+                });
+    }
+
+    private void hasCameraPermission(){
+        prefs = getSharedPreferences("permission",MODE_PRIVATE);
+        if(prefs.getBoolean("cameraPermission",false)==false){
+            askPermission();
+        }
     }
 }
