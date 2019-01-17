@@ -22,8 +22,6 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,10 +30,7 @@ import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.johansen.dk.madimage.R;
-import com.johansen.dk.madimage.model.order;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import java.io.IOException;
@@ -67,18 +62,15 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
             setContentView(R.layout.activity_login);
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         }
-
-        loginInfo = (TextView) findViewById(R.id.explqr);
-        helpBtn = (Button) findViewById(R.id.helpBtn);
-        moveAlongBtn = (Button) findViewById(R.id.moveAlongBtn);
-        clearPerm = (Button) findViewById(R.id.clearPermission);
-
+        loginInfo = findViewById(R.id.explqr);
+        helpBtn = findViewById(R.id.helpBtn);
+        moveAlongBtn = findViewById(R.id.moveAlongBtn);
+        clearPerm = findViewById(R.id.clearPermission);
         tf = Typeface.createFromAsset(getAssets(), "fonts/Orkney Regular.ttf");
         /*using fonts on text fields*/
         loginInfo.setTypeface(tf);
         helpBtn.setTypeface(tf);
         helpBtn.setTypeface(tf);
-
         /*defining elements for QR-scanner*/
         //from youtubevideo: https://www.youtube.com/watch?v=ej51mAYXbKs
         cameraPreview = (SurfaceView) findViewById(R.id.cameraPreview);
@@ -90,12 +82,10 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
                 .build();
         tempHeight = cameraPreview.getHeight();
         tempWidth = cameraPreview.getWidth();
-
         /*defining image Buttons*/
         danishFlag = findViewById(R.id.danishFlag);
         englishFlag = findViewById(R.id.englishFlag);
         turkishFlag = findViewById(R.id.turkishFlag);
-
         /*OnClick listener on Buttons*/
         moveAlongBtn.setOnClickListener(this);
         helpBtn.setOnClickListener(this);
@@ -103,9 +93,7 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
         englishFlag.setOnClickListener(this);
         turkishFlag.setOnClickListener(this);
         clearPerm.setOnClickListener(this);
-
-        vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE) ;
-
+        vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         hasCameraPermission();
         createQRscan();
     }
@@ -171,14 +159,15 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
                 prefs.edit().clear().commit();
                 Toast.makeText(this, "RESTART APP", Toast.LENGTH_SHORT).show();
                 break;
-                default: Toast.makeText(this, "DEFAULT HIT", Toast.LENGTH_SHORT).show();
+            default:
+                Toast.makeText(this, "DEFAULT HIT", Toast.LENGTH_SHORT).show();
         }
     }
 
     private void validateQR(String input) {
         String regex = "([a-zA-Z]+[0-9]+)";
         if (input.matches(regex)) {
-            for(int i=0;i<2;i++) {
+            for (int i = 0; i < 2; i++) {
                 vibe.vibrate(200);
             }
             Intent niceIntent = new Intent(loginActivity.this, selectionActivity.class);
@@ -233,15 +222,12 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
                     loginInfo.post(new Runnable() {
                         @Override
                         public void run() {
-                            //top.setText(qrCodes.valueAt(0).displayValue);
-
                             if (enoughTimePassed()) {
                                 time = System.currentTimeMillis();
                                 validateQR(qrCodes.valueAt(0).displayValue);
                             }
                         }
                     });
-
                 }
             }
         });
@@ -276,7 +262,7 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
             // using the following line to edit/commit prefs
             prefs.edit().putBoolean("firstrun", false).commit();
             prefs = getSharedPreferences("setLanguage", MODE_PRIVATE);
-            prefs.getString("da","");
+            prefs.getString("da", "");
             setLocale();
         }
     }
@@ -293,7 +279,7 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
         setText();
     }
 
-    private void setText(){
+    private void setText() {
         prefs = getSharedPreferences("setLanguage", MODE_PRIVATE);
         String lang = prefs.getString("language", "");
         helpBtn.setText(getString(R.string.help_button_text));
@@ -301,7 +287,7 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     //permission library: https://github.com/tbruyelle/RxPermissions
-    private void askPermission(){
+    private void askPermission() {
         // Must be done during an initialization phase like onCreate
         rxPermissions
                 .request(Manifest.permission.CAMERA)
@@ -315,9 +301,9 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
                 });
     }
 
-    private void hasCameraPermission(){
-        prefs = getSharedPreferences("permission",MODE_PRIVATE);
-        if(prefs.getBoolean("cameraPermission",false)==false){
+    private void hasCameraPermission() {
+        prefs = getSharedPreferences("permission", MODE_PRIVATE);
+        if (!prefs.getBoolean("cameraPermission", false)) {
             askPermission();
         }
     }

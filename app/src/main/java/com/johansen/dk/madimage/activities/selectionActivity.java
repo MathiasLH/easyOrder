@@ -24,7 +24,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -35,12 +34,10 @@ import com.johansen.dk.madimage.adapter.selectionAdapter;
 import com.johansen.dk.madimage.model.order;
 import com.johansen.dk.madimage.model.foodItem;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 import java.util.Locale;
 
-public class selectionActivity extends AppCompatActivity implements View.OnClickListener{
+public class selectionActivity extends AppCompatActivity implements View.OnClickListener {
     order selection;
     boolean animationConfirmation, doubleBackToExitPressedOnce = false;
     foodItem dyrlaege, laks, rejemad, roastbeef, stjerneskud;
@@ -59,7 +56,7 @@ public class selectionActivity extends AppCompatActivity implements View.OnClick
         super.onCreate(savedInstanceState);
 
         SharedPreferences sharedprefs = getSharedPreferences("screen_version", MODE_PRIVATE);
-        if(sharedprefs.getBoolean("tablet",false)){
+        if (sharedprefs.getBoolean("tablet", false)) {
             setContentView(R.layout.activity_selection_tablet);
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         } else {
@@ -73,7 +70,7 @@ public class selectionActivity extends AppCompatActivity implements View.OnClick
         foodList.setHasFixedSize(true);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
         foodList.setLayoutManager(mLayoutManager);
-        Typeface tf = Typeface.createFromAsset(getAssets(),"fonts/Orkney Regular.ttf");
+        Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/Orkney Regular.ttf");
         RecyclerView.Adapter niceAdapter = new selectionAdapter(foodItems, tf);
         ((selectionAdapter) niceAdapter).setOnItemClickListener(new selectionAdapter.ClickListener() {
             @Override
@@ -81,14 +78,14 @@ public class selectionActivity extends AppCompatActivity implements View.OnClick
 
                 Log.e("TTS", "@@@@@@@@@@@@@@@@@@@" + v.getTag());
 
-                if(v.getTag()=="TTS" && clickAllowed) {
+                if (v.getTag() == "TTS" && clickAllowed) {
                     Log.e("TTS", "@@@@@@@@@@@@@@@@@@@" + Integer.toString(v.getId()));
                     readDish(position);
                 }
 
-                if(v.getTag()=="OTHER" && clickAllowed) {
+                if (v.getTag() == "OTHER" && clickAllowed) {
                     clickAllowed = false;
-                    if(selection.getBasket().size() < 5) {
+                    if (selection.getBasket().size() < 5) {
                         launchEditActivity(position);
                     } else {
                         LayoutInflater li = LayoutInflater.from(context);
@@ -106,13 +103,13 @@ public class selectionActivity extends AppCompatActivity implements View.OnClick
                         alertDialogBuilder
                                 .setCancelable(true)
 
-                        .setPositiveButton("OK",
+                                .setPositiveButton("OK",
 
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog,int id) {
-                                        dialog.cancel();
-                                    }
-                                });
+                                        new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int id) {
+                                                dialog.cancel();
+                                            }
+                                        });
 
 
                         // create alert dialog
@@ -120,11 +117,6 @@ public class selectionActivity extends AppCompatActivity implements View.OnClick
 
                         // show it
                         alertDialog.show();
-                        /*Toast.makeText(v.getContext(),
-                                "Du har allerede valgt det maximale antal smørrebrød, " +
-                                        "venligst slet en af det forrige valgte smørrebrød for at " +
-                                        "tilføje et nyt smørrebrød, eller bestil din ordre."
-                                ,Toast.LENGTH_LONG).show();*/
                     }
                 }
 
@@ -135,7 +127,7 @@ public class selectionActivity extends AppCompatActivity implements View.OnClick
         myTTS = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
-                if (status == TextToSpeech.SUCCESS){
+                if (status == TextToSpeech.SUCCESS) {
                     // language da = danish ; en = english ; turkish = tr ; russisk = ru
                     int result = myTTS.setLanguage(new Locale("da", ""));
                     if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
@@ -149,47 +141,27 @@ public class selectionActivity extends AppCompatActivity implements View.OnClick
 
         foodList.setAdapter(niceAdapter);
 
-        text = (TextView) findViewById(R.id.texttop);
+        text = findViewById(R.id.texttop);
         text.setTypeface(tf);
-        basketBtn = (ImageButton) findViewById(R.id.basketbtn);
+        basketBtn = findViewById(R.id.basketbtn);
         basketBtn.setOnClickListener(this);
         selection = new order();
         Intent niceIntent = getIntent();
         selection.setRoom(niceIntent.getStringExtra("roomNo"));
         findViewById(R.id.basketbtn).setTransitionName("indkoebTrans");
 
-        vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE) ;
+        vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
     }
 
-    private void createTestData(){
-        /*ArrayList<String> dyrlaegeOptions = new ArrayList<>();
-        dyrlaegeOptions.add("sky");
-        dyrlaegeOptions.add("rødløg");
-        dyrlaegeOptions.add("karse");*/
+    private void createTestData() {
         String dyrlaegeOptions[] = {"sky", "rødløg", "karse"};
         dyrlaege = new foodItem("Dyrlægens natmad", R.drawable.dyrlaegensnatmad_big, 100, dyrlaegeOptions);
-        /*ArrayList<String> laksOptions = new ArrayList<>();
-        laksOptions.add("dild");
-        laksOptions.add("citron");
-        laksOptions.add("asperges");*/
         String laksOptions[] = {"dild", "citron", "asparges"};
         laks = new foodItem("Lakse mad", R.drawable.laks_big, 101, laksOptions);
-        /*ArrayList<String> rejeOptions = new ArrayList<>();
-        rejeOptions.add("krydderurt");*/
         String rejeOptions[] = {"krydderUrt"};
         rejemad = new foodItem("Rejemad", R.drawable.rejemad_big, 102, rejeOptions);
-        /*ArrayList<String> roastbeefOptions = new ArrayList<>();
-        roastbeefOptions.add("peberrod");
-        roastbeefOptions.add("salat");
-        roastbeefOptions.add("Syltet agurk");*/
         String roastbeefOptions[] = {"peberrod", "salat", "syltet agurk"};
         roastbeef = new foodItem("Roastbeef", R.drawable.roastbeef_big, 103, roastbeefOptions);
-        /*ArrayList<String> stjerneskudOptions = new ArrayList<>();
-        stjerneskudOptions.add("fiskeægting");
-        stjerneskudOptions.add("citron");
-        stjerneskudOptions.add("hvid asparges");
-        stjerneskudOptions.add("grøn asparges");
-        stjerneskudOptions.add("rejer");*/
         String stjerneskudOptions[] = {"rogn", "citron", "hvid asparges", "grøn asparges", "rejer"};
         stjerneskud = new foodItem("Stjerneskud", R.drawable.stjerneskud_big, 10, stjerneskudOptions);
         foodItems = new ArrayList<>();
@@ -200,24 +172,24 @@ public class selectionActivity extends AppCompatActivity implements View.OnClick
         foodItems.add(stjerneskud);
     }
 
-    private void launchEditActivity(int position){
+    private void launchEditActivity(int position) {
         Intent editIntent = new Intent(this, optionsActivity.class);
         editIntent.putExtra("orderObject", selection);
         editIntent.putExtra("foodItem", foodItems.get(position));
         CardView cv = (CardView) foodList.findViewHolderForAdapterPosition(position).itemView;
         ImageView iv = cv.getChildAt(0).findViewById(foodItems.get(position).getImageID());
         ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(selectionActivity.this, iv, ViewCompat.getTransitionName(iv));
-        startActivityForResult(editIntent,1, options.toBundle());
+        startActivityForResult(editIntent, 1, options.toBundle());
     }
 
-    private void readDish(int position){
+    private void readDish(int position) {
         CardView cv = (CardView) foodList.findViewHolderForAdapterPosition(position).itemView;
         TextView tv = cv.getChildAt(0).findViewById(R.id.cardName);
         String text = tv.getText().toString();
 
         //https://stackoverflow.com/questions/30706780/texttospeech-deprecated-speak-function-in-api-level-21
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            myTTS.speak(text,TextToSpeech.QUEUE_FLUSH,null,null);
+            myTTS.speak(text, TextToSpeech.QUEUE_FLUSH, null, null);
         } else {
             myTTS.speak(text, TextToSpeech.QUEUE_FLUSH, null);
         }
@@ -228,22 +200,21 @@ public class selectionActivity extends AppCompatActivity implements View.OnClick
         super.onActivityResult(requestCode, resultCode, data);
         clickAllowed = true;
         ImageButton basketBtn = findViewById(R.id.basketbtn);
-        if(resultCode != RESULT_CANCELED){
-            if(requestCode == 1){
+        if (resultCode != RESULT_CANCELED) {
+            if (requestCode == 1) {
                 selection.addItem((foodItem) data.getSerializableExtra("foodItem"));
-                //selection = (order) data.getSerializableExtra("orderObject");
                 animationConfirmation = (boolean) data.getSerializableExtra("boolean");
             }
         }
-        if(resultCode == 2){
+        if (resultCode == 2) {
             selection = (order) data.getSerializableExtra("orderObject");
         }
-        if(animationConfirmation == true){
+        if (animationConfirmation == true) {
             basketAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.blinkanim);
             basketBtn.startAnimation(basketAnimation);
             animationConfirmation = false;
         }
-        switch (selection.getBasket().size()){
+        switch (selection.getBasket().size()) {
             case 0:
                 basketBtn.setImageResource(R.drawable.serveringsbakke);
                 break;
@@ -268,22 +239,21 @@ public class selectionActivity extends AppCompatActivity implements View.OnClick
     @Override
     public void onClick(View v) {
         vibe.vibrate(100);
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.basketbtn:
                 Intent basketIntent = new Intent(this, basketActivity.class);
                 basketIntent.putExtra("orderObject", selection);
                 startActivityForResult(basketIntent, 2);
                 break;
             default:
-                Toast.makeText(v.getContext(),"DEFAULT HIT",Toast.LENGTH_SHORT).show();
+                Toast.makeText(v.getContext(), "DEFAULT HIT", Toast.LENGTH_SHORT).show();
                 break;
-
         }
     }
 
     @Override
     protected void onDestroy() {
-        if (myTTS != null){
+        if (myTTS != null) {
             myTTS.stop();
             myTTS.shutdown();
         }
@@ -302,7 +272,7 @@ public class selectionActivity extends AppCompatActivity implements View.OnClick
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                doubleBackToExitPressedOnce=false;
+                doubleBackToExitPressedOnce = false;
             }
         }, 2000);
     }

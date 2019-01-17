@@ -8,8 +8,6 @@ import android.os.Build;
 import android.os.Vibrator;
 import android.speech.tts.TextToSpeech;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityOptionsCompat;
-import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
@@ -18,10 +16,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.airbnb.lottie.LottieAnimationView;
@@ -39,8 +34,6 @@ public class basketActivity extends AppCompatActivity implements View.OnClickLis
     Button orderBtn;
     TextView basketText;
     RecyclerView foodList;
-    ArrayList<foodItem> fooditems;
-    ArrayList<LinearLayoutManager> LLM;
     basketAdapter niceAdapter;
     TextToSpeech myTTS;
     int lastItemClicked;
@@ -63,11 +56,9 @@ public class basketActivity extends AppCompatActivity implements View.OnClickLis
             setContentView(R.layout.activity_basket);
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         }
-
         vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE) ;
-
-        emptyBasketGif = (LottieAnimationView) findViewById(R.id.empty_basket_gif);
-        orderBtn = (Button) findViewById(R.id.orderbtn);
+        emptyBasketGif = findViewById(R.id.empty_basket_gif);
+        orderBtn = findViewById(R.id.orderbtn);
         orderBtn.setOnClickListener(this);
         Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/Orkney Regular.ttf");
         orderBtn.setTypeface(tf);
@@ -79,7 +70,6 @@ public class basketActivity extends AppCompatActivity implements View.OnClickLis
         foodList.setHasFixedSize(true);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
         foodList.setLayoutManager(mLayoutManager);
-
         niceAdapter = new basketAdapter(order.getBasket(), this, tf);
         niceAdapter.setOnItemClickListener(new basketAdapter.ClickListener() {
             @Override
@@ -122,9 +112,6 @@ public class basketActivity extends AppCompatActivity implements View.OnClickLis
         Intent editIntent = new Intent(this, optionsActivity.class);
         editIntent.putExtra("foodItem", order.getBasket().get(position));
         lastItemClicked = position;
-        //CardView cv = (CardView) foodList.findViewHolderForAdapterPosition(position).itemView;
-        //ImageView iv = cv.getChildAt(0).findViewById(foodItems.get(position).getImageID());
-        //ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(selectionActivity.this, iv, ViewCompat.getTransitionName(iv));
         startActivityForResult(editIntent, 2);
     }
 
@@ -140,10 +127,6 @@ public class basketActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void readDish(int position) {
-        CardView cv = (CardView) foodList.findViewHolderForAdapterPosition(position).itemView;
-        TextView tv = cv.getChildAt(0).findViewById(R.id.cardName);
-        String text = tv.getText().toString();
-
         //https://stackoverflow.com/questions/30706780/texttospeech-deprecated-speak-function-in-api-level-21
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             myTTS.speak(order.getBasket().get(position).toString(), TextToSpeech.QUEUE_FLUSH, null, null);
@@ -193,7 +176,6 @@ public class basketActivity extends AppCompatActivity implements View.OnClickLis
 
     public void addOrderToDatabase() {
         String id = mRootRef.push().getKey();
-
         mRootRef.child(id).setValue(order.getBasket().toString());
     }
 }
