@@ -2,12 +2,14 @@ package com.johansen.dk.madimage.activities;
 
 import android.app.Activity;
 import android.app.ActivityOptions;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Pair;
@@ -34,6 +36,7 @@ public class optionsActivity extends AppCompatActivity implements View.OnClickLi
     ArrayList<CheckBox> cbArray;
     RadioGroup breadbuttons;
     RadioButton cbdark, cblight;
+    Vibrator vibe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +71,8 @@ public class optionsActivity extends AppCompatActivity implements View.OnClickLi
         cbdark.setChecked(foodItem.isDarkBread());
         cblight = breadbuttons.findViewById(R.id.cblight);
         cblight.setChecked(!foodItem.isDarkBread());
+
+        vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE) ;
 
     }
 
@@ -106,6 +111,7 @@ public class optionsActivity extends AppCompatActivity implements View.OnClickLi
 
     @Override
     public void onClick(View v) {
+        vibe.vibrate(100);
         switch (v.getId()){
             case R.id.edit_addtobasketbutton:
                 foodItem.setOptionValues(getOptions());

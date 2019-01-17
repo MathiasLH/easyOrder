@@ -1,9 +1,11 @@
 package com.johansen.dk.madimage.activities;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.graphics.Typeface;
 import android.os.Build;
+import android.os.Vibrator;
 import android.speech.tts.TextToSpeech;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityOptionsCompat;
@@ -44,6 +46,7 @@ public class basketActivity extends AppCompatActivity implements View.OnClickLis
     int lastItemClicked;
     LottieAnimationView emptyBasketGif;
     boolean isOrderAvailable;
+    Vibrator vibe;
 
     /*instans of database*/
     DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference("Beboere");
@@ -60,6 +63,8 @@ public class basketActivity extends AppCompatActivity implements View.OnClickLis
             setContentView(R.layout.activity_basket);
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         }
+
+        vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE) ;
 
         emptyBasketGif = (LottieAnimationView) findViewById(R.id.empty_basket_gif);
         orderBtn = (Button) findViewById(R.id.orderbtn);
@@ -89,6 +94,7 @@ public class basketActivity extends AppCompatActivity implements View.OnClickLis
                     readDish(position);
                 }
                 if (v.getTag() == "OTHER") {
+                    vibe.vibrate(100);
                     launchEditActivity(position);
                 }
             }
@@ -156,6 +162,7 @@ public class basketActivity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
+        vibe.vibrate(100);
         switch (v.getId()) {
             case R.id.orderbtn:
                 if (isOrderAvailable) {

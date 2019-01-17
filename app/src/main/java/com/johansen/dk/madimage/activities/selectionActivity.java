@@ -9,6 +9,7 @@ import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Vibrator;
 import android.speech.tts.TextToSpeech;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityOptionsCompat;
@@ -51,6 +52,7 @@ public class selectionActivity extends AppCompatActivity implements View.OnClick
     Animation basketAnimation;
     final Context context = this;
     boolean clickAllowed = true;
+    Vibrator vibe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -155,6 +157,8 @@ public class selectionActivity extends AppCompatActivity implements View.OnClick
         Intent niceIntent = getIntent();
         selection.setRoom(niceIntent.getStringExtra("roomNo"));
         findViewById(R.id.basketbtn).setTransitionName("indkoebTrans");
+
+        vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE) ;
     }
 
     private void createTestData(){
@@ -263,6 +267,7 @@ public class selectionActivity extends AppCompatActivity implements View.OnClick
 
     @Override
     public void onClick(View v) {
+        vibe.vibrate(100);
         switch (v.getId()){
             case R.id.basketbtn:
                 Intent basketIntent = new Intent(this, basketActivity.class);

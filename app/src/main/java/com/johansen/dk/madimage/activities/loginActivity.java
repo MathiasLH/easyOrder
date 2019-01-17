@@ -55,6 +55,7 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
     SharedPreferences prefs = null;
     Typeface tf;
     final RxPermissions rxPermissions = new RxPermissions(this); // where this is an Activity or Fragment instance
+    Vibrator vibe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,12 +104,15 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
         turkishFlag.setOnClickListener(this);
         clearPerm.setOnClickListener(this);
 
+        vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE) ;
+
         hasCameraPermission();
         createQRscan();
     }
 
     @Override
     public void onClick(View v) {
+        vibe.vibrate(100);
         /*Implementing on click listener to QR-code image Button*/
         switch (v.getId()) {
             case R.id.moveAlongBtn:
@@ -174,8 +178,9 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
     private void validateQR(String input) {
         String regex = "([a-zA-Z]+[0-9]+)";
         if (input.matches(regex)) {
-            Vibrator vibrator = (Vibrator) getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
-            vibrator.vibrate(100);
+            for(int i=0;i<2;i++) {
+                vibe.vibrate(200);
+            }
             Intent niceIntent = new Intent(loginActivity.this, selectionActivity.class);
             niceIntent.putExtra("roomNo", input);
             startActivity(niceIntent);
