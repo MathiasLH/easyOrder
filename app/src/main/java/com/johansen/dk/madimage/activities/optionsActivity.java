@@ -54,7 +54,7 @@ public class optionsActivity extends AppCompatActivity implements View.OnClickLi
         foodImage.setTransitionName(foodItem.getName() + "Trans");
         foodName = findViewById(R.id.dish_name);
         foodName.setTypeface(tf);
-        foodName.setText("Rediger " + foodItem.getName());
+        foodName.setText(foodItem.getName());
         Button basketbtn = findViewById(R.id.edit_addtobasketbutton);
         basketbtn.setOnClickListener(this);
         LL = findViewById(R.id.optionsList);

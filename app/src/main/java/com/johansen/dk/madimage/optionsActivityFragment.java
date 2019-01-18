@@ -1,6 +1,7 @@
 package com.johansen.dk.madimage;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
@@ -8,11 +9,13 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -39,7 +42,8 @@ public class optionsActivityFragment extends Fragment implements View.OnClickLis
     private SharedPreferences prefs = null;
     private selectionActivity_tablet myActivity;
     private View view;
-    private Button basketbtn;
+    private ImageButton basketbtn;
+    private TextView btnText;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -56,7 +60,7 @@ public class optionsActivityFragment extends Fragment implements View.OnClickLis
         foodImage.setImageResource(foodItem.getImageResourceID());
         foodName = view.findViewById(R.id.dish_name);
         foodName.setTypeface(tf);
-        foodName.setText("Rediger " + foodItem.getName());
+        foodName.setText(foodItem.getName());
         LL = view.findViewById(R.id.optionsList);
         cbArray = new ArrayList<>();
         createCheckboxes();
@@ -66,12 +70,13 @@ public class optionsActivityFragment extends Fragment implements View.OnClickLis
         cblight = breadbuttons.findViewById(R.id.cblight);
         cblight.setChecked(!foodItem.isDarkBread());
 
-        basketbtn = (Button) view.findViewById(R.id.editfrag_addtobasketbutton);
+        basketbtn = view.findViewById(R.id.editfrag_addtobasketbutton);
         basketbtn.setOnClickListener(this);
 
-        vibe = (Vibrator) getActivity().getSystemService(Context.VIBRATOR_SERVICE);
+        btnText = view.findViewById(R.id.editfrag_buttonText);
+        btnText.setOnClickListener(this);
 
-        view.setOnClickListener(this);
+        vibe = (Vibrator) getActivity().getSystemService(Context.VIBRATOR_SERVICE);
 
         // Inflate the layout for this fragment
         return view;
@@ -86,7 +91,7 @@ public class optionsActivityFragment extends Fragment implements View.OnClickLis
             cb.setChecked(foodItem.getOptionValues()[i]);
             cb.setBackgroundResource(R.drawable.checkbox_edit);
             cb.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#FFFFFF")));
-            cb.setHeight(170);
+            cb.setHeight(80);
             cbArray.add(cb);
             LL.addView(cb);
         }
@@ -104,11 +109,36 @@ public class optionsActivityFragment extends Fragment implements View.OnClickLis
     public void onClick(View v) {
         Toast.makeText(getContext(),Integer.toString(v.getId()),Toast.LENGTH_SHORT).show();
         switch (v.getId()) {
+            case R.id.editfrag_buttonText:
             case R.id.editfrag_addtobasketbutton:
                 foodItem.setOptionValues(getOptions());
                 foodItem.setDarkBread(cbdark.isChecked());
-                myActivity.addItemToBasket(foodItem);
-                myActivity.updateTopIcon();
+                if(myActivity.getSelection().getBasket().size()<5) {
+                    myActivity.addItemToBasket(foodItem);
+                    myActivity.updateTopIcon();
+                } else {
+                        LayoutInflater li = LayoutInflater.from(getContext());
+                        View promptsView = li.inflate(R.layout.limit, null);
+                        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                                getContext());
+                        // set prompts.xml to alertdialog builder
+                        alertDialogBuilder.setView(promptsView);
+                        alertDialogBuilder.setTitle("For mange smørrebrød");
+                        // set dialog message
+                        alertDialogBuilder
+                                .setCancelable(true)
+                                .setPositiveButton("OK",
+                                        new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int id) {
+                                                dialog.cancel();
+                                            }
+                                        });
+                        // create alert dialog
+                        AlertDialog alertDialog = alertDialogBuilder.create();
+                        // show it
+                        alertDialog.show();
+
+                }
                 vibe.vibrate(100);
                 break;
             default:

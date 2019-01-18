@@ -1,8 +1,6 @@
 package com.johansen.dk.madimage.activities;
 
-import android.app.FragmentTransaction;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
@@ -12,23 +10,18 @@ import android.os.Handler;
 import android.os.Vibrator;
 import android.speech.tts.TextToSpeech;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.view.ViewCompat;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,7 +37,7 @@ import java.util.Locale;
 public class selectionActivity_tablet extends AppCompatActivity implements View.OnClickListener {
 
     private order selection;
-    private boolean animationConfirmation, doubleBackToExitPressedOnce = false;
+    private boolean doubleBackToExitPressedOnce = false;
     private foodItem dyrlaege, laks, rejemad, roastbeef, stjerneskud;
     private TextView text;
     private ArrayList<foodItem> foodItems;
@@ -52,7 +45,6 @@ public class selectionActivity_tablet extends AppCompatActivity implements View.
     private TextToSpeech myTTS;
     private ImageButton basketBtn;
     private Animation basketAnimation;
-    private final Context context = this;
     private boolean clickAllowed = true;
     private Vibrator vibe;
     private SharedPreferences prefs = null;
@@ -83,44 +75,8 @@ public class selectionActivity_tablet extends AppCompatActivity implements View.
                 }
 
                 if (v.getTag() == "OTHER" && clickAllowed) {
-                    clickAllowed = false;
-                    if (selection.getBasket().size() < 5) {
-                        launchEditActivity(position);
-                        clickAllowed = true;
-                    } else {
-                        LayoutInflater li = LayoutInflater.from(context);
-                        View promptsView = li.inflate(R.layout.limit, null);
-
-                        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
-                                context);
-
-                        // set prompts.xml to alertdialog builder
-                        alertDialogBuilder.setView(promptsView);
-
-                        alertDialogBuilder.setTitle("For mange smørrebrød");
-
-                        // set dialog message
-                        alertDialogBuilder
-                                .setCancelable(true)
-
-                                .setPositiveButton("OK",
-
-                                        new DialogInterface.OnClickListener() {
-                                            public void onClick(DialogInterface dialog, int id) {
-                                                dialog.cancel();
-                                            }
-                                        });
-
-
-                        // create alert dialog
-                        AlertDialog alertDialog = alertDialogBuilder.create();
-
-                        // show it
-                        alertDialog.show();
-                    }
+                    launchEditActivity(position);
                 }
-
-
             }
         });
 
@@ -151,7 +107,6 @@ public class selectionActivity_tablet extends AppCompatActivity implements View.
         findViewById(R.id.basketbtn).setTransitionName("indkoebTrans");
 
         vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-
     }
 
     private void createTestData() {
@@ -192,15 +147,12 @@ public class selectionActivity_tablet extends AppCompatActivity implements View.
         startActivityForResult(editIntent, 1, options.toBundle()); */
     }
 
-    public foodItem getFoodData(int position){
+    public foodItem getFoodData(int position) {
         return foodItems.get(position);
     }
-    public order getSelection (){
+
+    public order getSelection() {
         return selection;
-    }
-    public View getImageView(int position){
-        CardView cv = (CardView) foodList.findViewHolderForAdapterPosition(position).itemView;
-        return cv.getChildAt(0).findViewById(foodItems.get(position).getImageID());
     }
 
     public void updateTopIcon() {
@@ -230,7 +182,7 @@ public class selectionActivity_tablet extends AppCompatActivity implements View.
         }
     }
 
-    public void addItemToBasket(foodItem foodItem){
+    public void addItemToBasket(foodItem foodItem) {
         selection.addItem(foodItem);
     }
 
@@ -255,7 +207,6 @@ public class selectionActivity_tablet extends AppCompatActivity implements View.
         if (resultCode != RESULT_CANCELED) {
             if (requestCode == 1) {
                 selection.addItem((foodItem) data.getSerializableExtra("foodItem"));
-                animationConfirmation = (boolean) data.getSerializableExtra("boolean");
             }
         }
         if (resultCode == 2) {
@@ -302,5 +253,17 @@ public class selectionActivity_tablet extends AppCompatActivity implements View.
                 doubleBackToExitPressedOnce = false;
             }
         }, 2000);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        prefs = getSharedPreferences("options_number", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putInt("number", 1).commit();
+
+        Fragment optionsFrag = new optionsActivityFragment();
+        FragmentManager transaction = getSupportFragmentManager();
+        transaction.beginTransaction().replace(R.id.optionsHolder, optionsFrag).commit();
     }
 }

@@ -8,22 +8,11 @@
     tools:context=".activities.optionsActivity"
     tools:layout_editor_absoluteY="25dp">
 
-    <Button
-        android:id="@+id/editfrag_addtobasketbutton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:text="REEEEEEE"
-        android:background="@color/btnColor"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <TextView
         android:id="@+id/dish_name"
         android:layout_width="0dp"
-        android:layout_height="42dp"
-        android:layout_marginTop="24dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:text="TextView"
         android:textAlignment="center"
         android:textSize="20sp"
@@ -32,9 +21,11 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@+id/editfrag_addtobasketbutton"
         app:layout_constraintEnd_toEndOf="parent"
@@ -44,7 +35,7 @@
         <LinearLayout
             android:id="@+id/linearLayout2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:orientation="vertical"
@@ -80,9 +71,9 @@
                         android:id="@+id/cbdark"
                         style="@style/Widget.AppCompat.CompoundButton.CheckBox"
                         android:layout_width="match_parent"
-                        android:layout_height="70dp"
+                        android:layout_height="50dp"
                         android:layout_weight="1"
-                        android:background="@drawable/editbuttonshapeleft"
+                        android:background="@drawable/editbuttonshapeleft_tablet"
                         android:buttonTint="#FFFFFF"
                         android:checked="true"
                         android:layoutDirection="rtl"
@@ -94,9 +85,9 @@
                         android:id="@+id/cblight"
                         style="@style/Widget.AppCompat.CompoundButton.CheckBox"
                         android:layout_width="match_parent"
-                        android:layout_height="70dp"
+                        android:layout_height="50dp"
                         android:layout_weight="1"
-                        android:background="@drawable/editbuttonshaperight"
+                        android:background="@drawable/editbuttonshaperight_tablet"
                         android:buttonTint="#FFFFFF"
                         android:text="Lyst-Brød"
                         android:textAlignment="center"
@@ -120,5 +111,26 @@
 
         </LinearLayout>
     </ScrollView>
+
+    <ImageButton
+        android:id="@+id/editfrag_addtobasketbutton"
+        android:layout_width="0dp"
+        android:layout_height="38dp"
+        android:background="@color/btnColor"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:srcCompat="@drawable/popupshape" />
+
+    <TextView
+        android:id="@+id/editfrag_buttonText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/editfrag_addtobasketbutton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/editfrag_addtobasketbutton"
+        app:layout_constraintVertical_bias="0.619" />
 
 </android.support.constraint.ConstraintLayout>
