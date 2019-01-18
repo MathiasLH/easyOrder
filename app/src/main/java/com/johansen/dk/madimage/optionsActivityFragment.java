@@ -13,7 +13,6 @@ import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -44,18 +43,21 @@ public class optionsActivityFragment extends Fragment implements View.OnClickLis
     private View view;
     private ImageButton basketbtn;
     private TextView btnText;
+    private Typeface tf;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_options_activity_tablet, container, false);
 
-        Typeface tf = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Orkney Regular.ttf");
+        if(myActivity.isFirstFrag()){
+            foodItem = myActivity.getFoodData(0);
+            myActivity.setFirstFrag();
+        } else {
+            prefs = getContext().getSharedPreferences("options_number", MODE_PRIVATE);
+            foodItem = myActivity.getFoodData(prefs.getInt("number",2));
+        }
 
-        myActivity = (selectionActivity_tablet) getActivity();
-        prefs = getContext().getSharedPreferences("options_number", MODE_PRIVATE);
-
-        foodItem = myActivity.getFoodData(prefs.getInt("number",2));
         foodImage = view.findViewById(R.id.edit_foodimage);
         foodImage.setImageResource(foodItem.getImageResourceID());
         foodName = view.findViewById(R.id.dish_name);
@@ -80,6 +82,14 @@ public class optionsActivityFragment extends Fragment implements View.OnClickLis
 
         // Inflate the layout for this fragment
         return view;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        tf = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Orkney Regular.ttf");
+
+        myActivity = (selectionActivity_tablet) getActivity();
     }
 
     private void createCheckboxes() {

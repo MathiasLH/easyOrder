@@ -37,7 +37,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="horizontal"
-        android:weightSum="2"
+        android:weightSum="11"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -47,19 +47,23 @@
             android:id="@+id/foodList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_weight="5"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/texttop">
+            app:layout_constraintTop_toBottomOf="@+id/texttop"/>
 
-        </android.support.v7.widget.RecyclerView>
+        <View
+            android:layout_width="2dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="@color/backgroundColor" />
 
         <fragment
             android:id="@+id/optionsHolder"
-            android:name="com.johansen.dk.madimage.selectionholderFragment"
+            android:name="com.johansen.dk.madimage.optionsActivityFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1" />
+            android:layout_weight="5" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

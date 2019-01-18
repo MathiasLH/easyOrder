@@ -144,6 +144,15 @@ public class basketActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if(myTTS.isSpeaking()){
+            myTTS.stop();
+        }
+        myTTS.shutdown();
+    }
+
+    @Override
     public void onClick(View v) {
         vibe.vibrate(100);
         switch (v.getId()) {
@@ -178,4 +187,7 @@ public class basketActivity extends AppCompatActivity implements View.OnClickLis
         String id = mRootRef.push().getKey();
         mRootRef.child(id).setValue(order.getBasket().toString());
     }
+
+
+
 }

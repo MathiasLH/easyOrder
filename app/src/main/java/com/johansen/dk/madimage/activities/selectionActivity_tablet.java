@@ -48,14 +48,14 @@ public class selectionActivity_tablet extends AppCompatActivity implements View.
     private boolean clickAllowed = true;
     private Vibrator vibe;
     private SharedPreferences prefs = null;
+    private boolean booFirstFrag = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        createTestData();
         setContentView(R.layout.activity_selection_tablet);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-
-        createTestData();
 
         foodList = findViewById(R.id.foodList);
         foodList.setHasFixedSize(true);
@@ -255,15 +255,11 @@ public class selectionActivity_tablet extends AppCompatActivity implements View.
         }, 2000);
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        prefs = getSharedPreferences("options_number", MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putInt("number", 1).commit();
-
-        Fragment optionsFrag = new optionsActivityFragment();
-        FragmentManager transaction = getSupportFragmentManager();
-        transaction.beginTransaction().replace(R.id.optionsHolder, optionsFrag).commit();
+    public boolean isFirstFrag(){
+        return booFirstFrag;
     }
+    public void setFirstFrag(){
+        booFirstFrag = false;
+    }
+
 }
