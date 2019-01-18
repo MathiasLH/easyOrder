@@ -34,7 +34,7 @@
         app:srcCompat="@drawable/serveringsbakke" />
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="horizontal"
         android:weightSum="2"
@@ -50,7 +50,16 @@
             android:layout_weight="1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/texttop" />
+            app:layout_constraintTop_toBottomOf="@+id/texttop">
+
+        </android.support.v7.widget.RecyclerView>
+
+        <fragment
+            android:id="@+id/optionsHolder"
+            android:name="com.johansen.dk.madimage.selectionholderFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

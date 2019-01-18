@@ -27,6 +27,7 @@
         </activity>
         <activity android:name=".activities.selectionActivity" />
         <activity android:name=".activities.recieptActivity" />
+        <activity android:name=".activities.selectionActivity_tablet" />
     </application>
 
 </manifest>

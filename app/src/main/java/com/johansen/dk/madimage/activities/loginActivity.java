@@ -104,7 +104,11 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
         /*Implementing on click listener to QR-code image Button*/
         switch (v.getId()) {
             case R.id.moveAlongBtn:
-                startActivity(new Intent(loginActivity.this, selectionActivity.class));
+                prefs = getSharedPreferences("screen_version", MODE_PRIVATE);
+                if(prefs.getBoolean("tablet",false)==true) {
+                    startActivity(new Intent(loginActivity.this, selectionActivity_tablet.class));
+                }
+                else startActivity(new Intent(loginActivity.this, selectionActivity.class));
                 break;
 
             case R.id.helpBtn:
@@ -244,12 +248,10 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
         SharedPreferences.Editor editor = prefs.edit();
         double diagonalInches = Math.sqrt(xInches * xInches + yInches * yInches);
         if (diagonalInches >= 6.5) {
-            editor.putBoolean("tablet", true);
-            editor.commit();
+            editor.putBoolean("tablet", true).commit();
             return true;
         } else {
-            editor.putBoolean("tablet", false);
-            editor.commit();
+            editor.putBoolean("tablet", false).commit();
             return false;
         }
     }
