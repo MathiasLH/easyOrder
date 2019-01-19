@@ -32,7 +32,6 @@
             android:layout_width="match_parent"
             android:layout_height="93dp"
             android:background="@drawable/topbarshape"
-
             app:srcCompat="@drawable/easyorderlogo" />
 
         <TextView
@@ -47,6 +46,7 @@
             android:textAlignment="center"
             android:textColor="@color/textColor"
             android:textSize="22sp"
+            android:breakStrategy="balanced"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 

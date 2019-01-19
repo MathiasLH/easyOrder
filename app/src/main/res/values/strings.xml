@@ -24,5 +24,6 @@
     <string name="popup_limit_title">For mange smørrebrød!</string>
     <string name="toast_backToLogin">Klik tilbage igen for at gå til Login</string>
     <string name="toast_emptyBasket">Vælg venligst et smørrebrød</string>
+    <string name="toast_cameraPermission">Camera permission is needed to scan QR codes</string>
 
 </resources>

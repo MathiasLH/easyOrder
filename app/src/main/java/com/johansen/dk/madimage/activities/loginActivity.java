@@ -10,6 +10,7 @@ import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.v4.app.ActivityCompat;
@@ -36,7 +37,9 @@ import com.tbruyelle.rxpermissions2.RxPermissions;
 import java.io.IOException;
 import java.util.Locale;
 
-public class loginActivity extends AppCompatActivity implements View.OnClickListener {
+import static android.os.Build.VERSION_CODES.LOLLIPOP;
+
+public class loginActivity extends AppCompatActivity implements View.OnClickListener, ActivityCompat.OnRequestPermissionsResultCallback{
 
     private ImageButton danishFlag, englishFlag, turkishFlag;
     private SurfaceView cameraPreview;
@@ -46,7 +49,6 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
     private Button helpBtn, moveAlongBtn, clearPerm;
     private final Context context = this;
     private long time = 0;
-    private int tempHeight, tempWidth;
     private SharedPreferences prefs = null;
     private Typeface tf;
     private final RxPermissions rxPermissions = new RxPermissions(this); // where this is an Activity or Fragment instance
@@ -73,15 +75,13 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
         helpBtn.setTypeface(tf);
         /*defining elements for QR-scanner*/
         //from youtubevideo: https://www.youtube.com/watch?v=ej51mAYXbKs
-        cameraPreview = (SurfaceView) findViewById(R.id.cameraPreview);
+        cameraPreview = findViewById(R.id.cameraPreview);
         barcodeDetector = new BarcodeDetector.Builder(this).setBarcodeFormats(Barcode.QR_CODE).build();
         cameraSrc = new CameraSource.Builder(this, barcodeDetector).setRequestedPreviewSize(1024, 768)
                 .setFacing(CameraSource.CAMERA_FACING_BACK)
                 .setRequestedFps(30.0f)
                 .setAutoFocusEnabled(true)
                 .build();
-        tempHeight = cameraPreview.getHeight();
-        tempWidth = cameraPreview.getWidth();
         /*defining image Buttons*/
         danishFlag = findViewById(R.id.danishFlag);
         englishFlag = findViewById(R.id.englishFlag);
@@ -94,9 +94,6 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
         turkishFlag.setOnClickListener(this);
         clearPerm.setOnClickListener(this);
         vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        hasCameraPermission();
-        createQRscan();
-        setLocale();
     }
 
     @Override
@@ -106,7 +103,7 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
         switch (v.getId()) {
             case R.id.moveAlongBtn:
                 prefs = getSharedPreferences("screen_version", MODE_PRIVATE);
-                if(prefs.getBoolean("tablet",false)==true) {
+                if(prefs.getBoolean("tablet", false)) {
                     startActivity(new Intent(loginActivity.this, selectionActivity_tablet.class));
                 }
                 else startActivity(new Intent(loginActivity.this, selectionActivity.class));
@@ -129,11 +126,7 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
 
                         .setPositiveButton("OK",
 
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int id) {
-                                        dialog.cancel();
-                                    }
-                                });
+                                (dialog, id) -> dialog.cancel());
 
                 // create alert dialog
                 AlertDialog alertDialog = alertDialogBuilder.create();
@@ -143,25 +136,25 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
                 break;
             case R.id.danishFlag:
                 prefs = getSharedPreferences("setLanguage", MODE_PRIVATE);
-                prefs.edit().putString("language", "da").commit();
+                prefs.edit().putString("language", "da").apply();
                 setLocale();
                 Toast.makeText(this, "LANGUAGE SET: DK", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.englishFlag:
                 prefs = getSharedPreferences("setLanguage", MODE_PRIVATE);
-                prefs.edit().putString("language", "en").commit();
+                prefs.edit().putString("language", "en").apply();
                 setLocale();
                 Toast.makeText(this, "LANGUAGE SET: ENG", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.turkishFlag:
                 prefs = getSharedPreferences("setLanguage", MODE_PRIVATE);
-                prefs.edit().putString("language", "tr").commit();
+                prefs.edit().putString("language", "tr").apply();
                 setLocale();
                 Toast.makeText(this, "LANGUAGE SET: TR", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.clearPermission:
                 prefs = getSharedPreferences("permission", MODE_PRIVATE);
-                prefs.edit().clear().commit();
+                prefs.edit().clear().apply();
                 Toast.makeText(this, "RESTART APP", Toast.LENGTH_SHORT).show();
                 break;
             default:
@@ -183,19 +176,20 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
 
     private boolean enoughTimePassed() {
         long currentTime = System.currentTimeMillis();
-        if (currentTime - time > 3000) {
-            return true;
-        } else {
-            return false;
-        }
+        return currentTime - time > 3000;
     }
 
     private void createQRscan() {
+
         cameraPreview.getHolder().addCallback(new SurfaceHolder.Callback() {
             @Override
             public void surfaceCreated(SurfaceHolder holder) {
-                if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-                    return;
+
+                if(!(Build.VERSION.SDK_INT <= LOLLIPOP)) {
+                    if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                        askPermission();
+                        return;
+                    }
                 }
                 try {
                     cameraSrc.start(holder);
@@ -224,13 +218,10 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
                 SparseArray<Barcode> qrCodes = detections.getDetectedItems();
 
                 if (qrCodes.size() != 0) {
-                    loginInfo.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            if (enoughTimePassed()) {
-                                time = System.currentTimeMillis();
-                                validateQR(qrCodes.valueAt(0).displayValue);
-                            }
+                    loginInfo.post(() -> {
+                        if (enoughTimePassed()) {
+                            time = System.currentTimeMillis();
+                            validateQR(qrCodes.valueAt(0).displayValue);
                         }
                     });
                 }
@@ -249,10 +240,10 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
         SharedPreferences.Editor editor = prefs.edit();
         double diagonalInches = Math.sqrt(xInches * xInches + yInches * yInches);
         if (diagonalInches >= 6.5) {
-            editor.putBoolean("tablet", true).commit();
+            editor.putBoolean("tablet", true).apply();
             return true;
         } else {
-            editor.putBoolean("tablet", false).commit();
+            editor.putBoolean("tablet", false).apply();
             return false;
         }
     }
@@ -263,16 +254,17 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
         if (prefs.getBoolean("firstrun", true)) {
             // Do first run stuff here then set 'firstrun' as false
             // using the following line to edit/commit prefs
-            prefs.edit().putBoolean("firstrun", false).commit();
+            prefs.edit().putBoolean("firstrun", false).apply();
             prefs = getSharedPreferences("setLanguage", MODE_PRIVATE);
-            prefs.getString("da", "");
+            prefs.getString("language", Locale.getDefault().getDisplayLanguage());
             setLocale();
         }
+        createQRscan();
     }
 
     private void setLocale() {
         prefs = getSharedPreferences("setLanguage", MODE_PRIVATE);
-        String lang = prefs.getString("language", "da");
+        String lang = prefs.getString("language", Locale.getDefault().getDisplayLanguage());
         Locale myLocale = new Locale(lang);
         Resources res = getResources();
         DisplayMetrics dm = res.getDisplayMetrics();
@@ -283,8 +275,6 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void setText() {
-        prefs = getSharedPreferences("setLanguage", MODE_PRIVATE);
-        String lang = prefs.getString("language", "");
         helpBtn.setText(getString(R.string.help_button_text));
         loginInfo.setText(getString(R.string.login_info));
     }
@@ -296,18 +286,10 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
                 .request(Manifest.permission.CAMERA)
                 .subscribe(granted -> {
                     if (granted) {
-                        prefs.edit().putBoolean("cameraPermission", true).commit();
                         recreate();
                     } else {
-                        // Oups permission denied
+                        //Todo: Display text on why camera is needed
                     }
                 });
-    }
-
-    private void hasCameraPermission() {
-        prefs = getSharedPreferences("permission", MODE_PRIVATE);
-        if (!prefs.getBoolean("cameraPermission", false)) {
-            askPermission();
-        }
     }
 }
