@@ -7,39 +7,56 @@
     android:background="@color/white"
     tools:context=".activities.selectionActivity">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/foodList"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/texttop" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/topbarshape" />
 
     <TextView
         android:id="@+id/texttop"
-        android:layout_width="0dp"
-        android:layout_height="61dp"
-        android:background="@drawable/topbarshape"
-        android:text="Vælg et smørrebrød:"
+        android:layout_width="400dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/selection_toptext"
         android:textAlignment="center"
-        android:textSize="30sp"
+        android:textSize="24dp"
+        app:layout_constraintBottom_toTopOf="@+id/foodList"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/imageView3" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/foodList"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3">
+
+    </android.support.v7.widget.RecyclerView>
 
     <ImageButton
         android:id="@+id/basketbtn"
         android:layout_width="54dp"
         android:layout_height="0dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="1dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="2dp"
+        android:layout_marginBottom="2dp"
         android:background="@drawable/rounded_button"
         android:scaleType="fitCenter"
-        app:layout_constraintBottom_toBottomOf="@+id/texttop"
-        app:layout_constraintEnd_toEndOf="@+id/texttop"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/texttop"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/serveringsbakke" />
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/serveringsbakke_new" />
 
 </android.support.constraint.ConstraintLayout>

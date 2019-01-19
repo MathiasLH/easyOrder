@@ -8,14 +8,24 @@
     tools:context=".activities.optionsActivity"
     tools:layout_editor_absoluteY="25dp">
 
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:background="@drawable/topbarshape"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/dish_name"
         android:layout_width="0dp"
-        android:layout_height="42dp"
-        android:background="@drawable/topbarshape"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
         android:text="TextView"
         android:textAlignment="center"
-        android:textSize="20sp"
+        android:textSize="26dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -25,12 +35,13 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/edit_addtobasketbutton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dish_name">
+        app:layout_constraintTop_toBottomOf="@+id/imageView4">
 
         <ImageView
             android:id="@+id/edit_foodimage"
@@ -64,7 +75,7 @@
                     android:buttonTint="#FFFFFF"
                     android:checked="true"
                     android:layoutDirection="rtl"
-                    android:text="Mørkt-Brød"
+                    android:text="@string/breadtype_dark"
                     android:textAlignment="center"
                     android:textSize="24sp" />
 
@@ -76,7 +87,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/editbuttonshaperight"
                     android:buttonTint="#FFFFFF"
-                    android:text="Lyst-Brød"
+                    android:text="@string/breadtype_light"
                     android:textAlignment="center"
                     android:textSize="24sp" />
 
@@ -102,16 +113,13 @@
         android:id="@+id/edit_addtobasketbutton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:layout_marginBottom="12dp"
         android:background="@color/btnColor"
-        android:text="føj til kurv"
+        android:text="@string/options_button_text"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

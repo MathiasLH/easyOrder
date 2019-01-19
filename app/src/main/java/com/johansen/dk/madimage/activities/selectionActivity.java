@@ -97,7 +97,7 @@ public class selectionActivity extends AppCompatActivity implements View.OnClick
                         // set prompts.xml to alertdialog builder
                         alertDialogBuilder.setView(promptsView);
 
-                        alertDialogBuilder.setTitle("For mange smørrebrød");
+                        alertDialogBuilder.setTitle(getString(R.string.popup_limit_title));
 
                         // set dialog message
                         alertDialogBuilder
@@ -216,22 +216,22 @@ public class selectionActivity extends AppCompatActivity implements View.OnClick
         }
         switch (selection.getBasket().size()) {
             case 0:
-                basketBtn.setImageResource(R.drawable.serveringsbakke);
+                basketBtn.setImageResource(R.drawable.serveringsbakke_new);
                 break;
             case 1:
-                basketBtn.setImageResource(R.drawable.serveringsbakke_1);
+                basketBtn.setImageResource(R.drawable.serveringsbakke_1_new);
                 break;
             case 2:
-                basketBtn.setImageResource(R.drawable.serveringsbakke_2);
+                basketBtn.setImageResource(R.drawable.serveringsbakke_2_new);
                 break;
             case 3:
-                basketBtn.setImageResource(R.drawable.serveringsbakke_3);
+                basketBtn.setImageResource(R.drawable.serveringsbakke_3_new);
                 break;
             case 4:
-                basketBtn.setImageResource(R.drawable.serveringsbakke_4);
+                basketBtn.setImageResource(R.drawable.serveringsbakke_4_new);
                 break;
             case 5:
-                basketBtn.setImageResource(R.drawable.serveringsbakke_5);
+                basketBtn.setImageResource(R.drawable.serveringsbakke_5_new);
                 break;
         }
     }
@@ -268,7 +268,7 @@ public class selectionActivity extends AppCompatActivity implements View.OnClick
             return;
         }
         this.doubleBackToExitPressedOnce = true;
-        Toast.makeText(this, "Klik tilbage igen for at gå tilbage til Login", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, getString(R.string.toast_backToLogin), Toast.LENGTH_LONG).show();
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {

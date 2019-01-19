@@ -12,19 +12,25 @@
         android:id="@+id/helpText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sådan gør du:"
+        android:text="@string/help_gif_text"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#19414B" />
 
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/animation_view"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="250dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sucText"
-        app:lottie_autoPlay="true"
-        app:lottie_loop="true"
-        app:lottie_rawRes="@raw/scan" />
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/animation_view"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sucText"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/scan" />
+    </LinearLayout>
 
 </LinearLayout>

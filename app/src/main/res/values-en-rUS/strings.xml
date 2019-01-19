@@ -3,13 +3,22 @@
     <string name="quick_string">Lyst eller Mørkt brød</string>
     <string name="login_info">Hold your phone/tablet over the QR code to scan it</string>
     <string name="help_button_text">HELP</string>
-    <string name="help_gif_text">You do like this:</string>
+    <string name="help_gif_text">Find the QR-code at the side of your door and scan it like shown below.</string>
     <string name="selection_toptext">Choose a dish</string>
     <string name="basket_toptext">The contents of your serving tray</string>
-    <string name="selection_button_text">ORDER</string>
+    <string name="basket_button_text">ORDER</string>
     <string name="selection_toast">Please choose a dish</string>
     <string name="options_toptext">Edit</string>
     <string name="options_button_text">ADD TO SERVING TRAY</string>
     <string name="reciept_toptext">Thank you for your order!</string>
     <string name="reciept_order_text">has ordered:</string>
+    <string name="tablet_selection_toptext_left">Choose a dish</string>
+    <string name="tablet_selection_toptext_right">Edit and add to serving tray</string>
+    <string name="tablet_selection_button_text">ADD TO SERVING TRAY</string>
+    <string name="popup_limit">The maximum amount of dishes has been reserved. Please either delete one of your chosen dishes to add another, or finish the order.</string>
+    <string name="breadtype_light">Rye Bread</string>
+    <string name="breadtype_dark">Wheat Bread</string>
+    <string name="popup_limit_title">Too many dishes!</string>
+    <string name="toast_backToLogin">Click back again to go to Login</string>
+    <string name="toast_emptyBasket">Please choose a dish</string>
 </resources>

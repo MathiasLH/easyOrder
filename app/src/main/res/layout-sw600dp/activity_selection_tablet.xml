@@ -7,41 +7,16 @@
     android:background="@color/white"
     tools:context=".activities.selectionActivity">
 
-    <TextView
-        android:id="@+id/texttop"
-        android:layout_width="0dp"
-        android:layout_height="42dp"
-        android:background="@drawable/topbarshape_tablet"
-        android:text="Vælg et smørrebrød:"
-        android:textAlignment="center"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageButton
-        android:id="@+id/basketbtn"
-        android:layout_width="42dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="1dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginTop="1dp"
-        android:background="@drawable/rounded_button"
-        android:scaleType="fitCenter"
-        app:layout_constraintBottom_toBottomOf="@+id/texttop"
-        app:layout_constraintEnd_toEndOf="@+id/texttop"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/serveringsbakke" />
-
     <LinearLayout
+        android:id="@+id/linearLayout5"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="horizontal"
-        android:weightSum="11"
+        android:weightSum="10"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/texttop">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout6">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/foodList"
@@ -50,13 +25,7 @@
             android:layout_weight="5"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/texttop"/>
-
-        <View
-            android:layout_width="2dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="1"
-            android:background="@color/backgroundColor" />
+            app:layout_constraintTop_toBottomOf="@+id/texttop" />
 
         <fragment
             android:id="@+id/optionsHolder"
@@ -65,5 +34,63 @@
             android:layout_height="match_parent"
             android:layout_weight="5" />
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="0dp"
+        android:layout_height="45dp"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayout5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@color/backgroundColor" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout6"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/texttop"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/tablet_selection_toptext_left"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/texttop2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/tablet_selection_toptext_right"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="@+id/linearLayout5"
+            app:layout_constraintTop_toTopOf="parent" />
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/basketbtn"
+        android:layout_width="42dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="2dp"
+        android:layout_marginBottom="2dp"
+        android:background="@drawable/rounded_button"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayout6"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/serveringsbakke_new" />
 
 </android.support.constraint.ConstraintLayout>

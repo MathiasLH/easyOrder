@@ -38,19 +38,19 @@ import java.util.Locale;
 
 public class loginActivity extends AppCompatActivity implements View.OnClickListener {
 
-    ImageButton danishFlag, englishFlag, turkishFlag;
-    SurfaceView cameraPreview;
-    CameraSource cameraSrc;
-    BarcodeDetector barcodeDetector;
-    TextView loginInfo;
-    Button helpBtn, moveAlongBtn, clearPerm;
-    final Context context = this;
-    /*me love u*/ long time = 0;
-    int tempHeight, tempWidth;
-    SharedPreferences prefs = null;
-    Typeface tf;
-    final RxPermissions rxPermissions = new RxPermissions(this); // where this is an Activity or Fragment instance
-    Vibrator vibe;
+    private ImageButton danishFlag, englishFlag, turkishFlag;
+    private SurfaceView cameraPreview;
+    private CameraSource cameraSrc;
+    private BarcodeDetector barcodeDetector;
+    private TextView loginInfo;
+    private Button helpBtn, moveAlongBtn, clearPerm;
+    private final Context context = this;
+    private long time = 0;
+    private int tempHeight, tempWidth;
+    private SharedPreferences prefs = null;
+    private Typeface tf;
+    private final RxPermissions rxPermissions = new RxPermissions(this); // where this is an Activity or Fragment instance
+    private Vibrator vibe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,6 +96,7 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
         vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         hasCameraPermission();
         createQRscan();
+        setLocale();
     }
 
     @Override
@@ -271,7 +272,7 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
 
     private void setLocale() {
         prefs = getSharedPreferences("setLanguage", MODE_PRIVATE);
-        String lang = prefs.getString("language", "");
+        String lang = prefs.getString("language", "da");
         Locale myLocale = new Locale(lang);
         Resources res = getResources();
         DisplayMetrics dm = res.getDisplayMetrics();

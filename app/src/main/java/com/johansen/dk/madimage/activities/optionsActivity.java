@@ -33,19 +33,14 @@ public class optionsActivity extends AppCompatActivity implements View.OnClickLi
     RadioGroup breadbuttons;
     RadioButton cbdark, cblight;
     Vibrator vibe;
+    Button basketbtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        SharedPreferences sharedprefs = getSharedPreferences("screen_version", MODE_PRIVATE);
-        if (sharedprefs.getBoolean("tablet", false)) {
-            setContentView(R.layout.activity_options_tablet);
-            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-        } else {
-            setContentView(R.layout.activity_options);
-            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        }
+        setContentView(R.layout.activity_options);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/Orkney Regular.ttf");
         foodItem = (foodItem) getIntent().getSerializableExtra("foodItem");
@@ -55,7 +50,7 @@ public class optionsActivity extends AppCompatActivity implements View.OnClickLi
         foodName = findViewById(R.id.dish_name);
         foodName.setTypeface(tf);
         foodName.setText(foodItem.getName());
-        Button basketbtn = findViewById(R.id.edit_addtobasketbutton);
+        basketbtn = (Button) findViewById(R.id.edit_addtobasketbutton);
         basketbtn.setOnClickListener(this);
         LL = findViewById(R.id.optionsList);
         cbArray = new ArrayList<>();

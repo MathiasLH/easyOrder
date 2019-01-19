@@ -39,7 +39,7 @@ public class selectionActivity_tablet extends AppCompatActivity implements View.
     private order selection;
     private boolean doubleBackToExitPressedOnce = false;
     private foodItem dyrlaege, laks, rejemad, roastbeef, stjerneskud;
-    private TextView text;
+    private TextView leftText, rightText;
     private ArrayList<foodItem> foodItems;
     private RecyclerView foodList;
     private TextToSpeech myTTS;
@@ -49,6 +49,7 @@ public class selectionActivity_tablet extends AppCompatActivity implements View.
     private Vibrator vibe;
     private SharedPreferences prefs = null;
     private boolean booFirstFrag = true;
+    private  Typeface tf;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,11 +58,12 @@ public class selectionActivity_tablet extends AppCompatActivity implements View.
         setContentView(R.layout.activity_selection_tablet);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
+        tf = Typeface.createFromAsset(getAssets(), "fonts/Orkney Regular.ttf");
+
         foodList = findViewById(R.id.foodList);
         foodList.setHasFixedSize(true);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
         foodList.setLayoutManager(mLayoutManager);
-        Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/Orkney Regular.ttf");
         RecyclerView.Adapter niceAdapter = new selectionAdapter(foodItems, tf);
         ((selectionAdapter) niceAdapter).setOnItemClickListener(new selectionAdapter.ClickListener() {
             @Override
@@ -96,9 +98,6 @@ public class selectionActivity_tablet extends AppCompatActivity implements View.
         });
 
         foodList.setAdapter(niceAdapter);
-
-        text = findViewById(R.id.texttop);
-        text.setTypeface(tf);
         basketBtn = findViewById(R.id.basketbtn);
         basketBtn.setOnClickListener(this);
         selection = new order();
@@ -107,6 +106,9 @@ public class selectionActivity_tablet extends AppCompatActivity implements View.
         findViewById(R.id.basketbtn).setTransitionName("indkoebTrans");
 
         vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+
+        setText();
+
     }
 
     private void createTestData() {
@@ -129,7 +131,6 @@ public class selectionActivity_tablet extends AppCompatActivity implements View.
     }
 
     private void launchEditActivity(int position) {
-
         prefs = getSharedPreferences("options_number", MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putInt("number", position).commit();
@@ -137,14 +138,6 @@ public class selectionActivity_tablet extends AppCompatActivity implements View.
         Fragment optionsFrag = new optionsActivityFragment();
         FragmentManager transaction = getSupportFragmentManager();
         transaction.beginTransaction().replace(R.id.optionsHolder, optionsFrag).commit();
-
-        /*Intent editIntent = new Intent(this, optionsActivity.class);
-        editIntent.putExtra("orderObject", selection);
-        editIntent.putExtra("foodItem", foodItems.get(position));
-        CardView cv = (CardView) foodList.findViewHolderForAdapterPosition(position).itemView;
-        ImageView iv = cv.getChildAt(0).findViewById(foodItems.get(position).getImageID());
-        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(selectionActivity_tablet.this, iv, ViewCompat.getTransitionName(iv));
-        startActivityForResult(editIntent, 1, options.toBundle()); */
     }
 
     public foodItem getFoodData(int position) {
@@ -162,22 +155,22 @@ public class selectionActivity_tablet extends AppCompatActivity implements View.
 
         switch (selection.getBasket().size()) {
             case 0:
-                basketBtn.setImageResource(R.drawable.serveringsbakke);
+                basketBtn.setImageResource(R.drawable.serveringsbakke_new);
                 break;
             case 1:
-                basketBtn.setImageResource(R.drawable.serveringsbakke_1);
+                basketBtn.setImageResource(R.drawable.serveringsbakke_1_new);
                 break;
             case 2:
-                basketBtn.setImageResource(R.drawable.serveringsbakke_2);
+                basketBtn.setImageResource(R.drawable.serveringsbakke_2_new);
                 break;
             case 3:
-                basketBtn.setImageResource(R.drawable.serveringsbakke_3);
+                basketBtn.setImageResource(R.drawable.serveringsbakke_3_new);
                 break;
             case 4:
-                basketBtn.setImageResource(R.drawable.serveringsbakke_4);
+                basketBtn.setImageResource(R.drawable.serveringsbakke_4_new);
                 break;
             case 5:
-                basketBtn.setImageResource(R.drawable.serveringsbakke_5);
+                basketBtn.setImageResource(R.drawable.serveringsbakke_5_new);
                 break;
         }
     }
@@ -246,7 +239,7 @@ public class selectionActivity_tablet extends AppCompatActivity implements View.
             return;
         }
         this.doubleBackToExitPressedOnce = true;
-        Toast.makeText(this, "Klik tilbage igen for at gå tilbage til Login", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, getString(R.string.toast_backToLogin), Toast.LENGTH_LONG).show();
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -260,6 +253,19 @@ public class selectionActivity_tablet extends AppCompatActivity implements View.
     }
     public void setFirstFrag(){
         booFirstFrag = false;
+    }
+
+    private void setText() {
+        tf = Typeface.createFromAsset(getAssets(), "fonts/Orkney Regular.ttf");
+        prefs = getSharedPreferences("setLanguage", MODE_PRIVATE);
+        String lang = prefs.getString("language", "");
+
+        leftText = findViewById(R.id.texttop);
+        rightText = findViewById(R.id.texttop2);
+
+        leftText.setTypeface(tf);
+        rightText.setTypeface(tf);
+
     }
 
 }

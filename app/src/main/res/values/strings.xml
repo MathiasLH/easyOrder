@@ -4,10 +4,10 @@
     <string name="quick_string" translatable="true">Lyst eller Mørkt brød</string>
     <string name="login_info">Hold din telefon/tablet hen over QR koden for at scanne</string>
     <string name="help_button_text">HJÆLP</string>
-    <string name="help_gif_text">Sådan gør du:</string>
-    <string name="selection_toptext">Vælg et smørrebrød:</string>
+    <string name="help_gif_text">Find QR-koden på siden af din dør og scan den med kameraet som vist under.</string>
+    <string name="selection_toptext">Vælg et smørrebrød</string>
     <string name="basket_toptext">Indholdet af din serveringsbakke</string>
-    <string name="selection_button_text">BESTIL</string>
+    <string name="basket_button_text">BESTIL</string>
     <string name="selection_toast">Vælg venligst et smørrebrød</string>
     <string name="options_toptext">Rediger</string>
     <string name="options_button_text">FØJ TIL SERVERINGSBAKKE</string>
@@ -15,6 +15,14 @@
     <string name="reciept_order_text">har bestilt:</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="tablet_selection_toptext_right">Rediger og læg på fad</string>
+    <string name="tablet_selection_toptext_left">Vælg et smørrebrød</string>
+    <string name="tablet_selection_button_text">FØJ TIL SERVERINGSBAKKE</string>
+    <string name="popup_limit">Det maximale antal smørrebrød er valgt. Slet venligst et af de forrige valgte smørrebrød for at tilføje et nyt, eller færdiggøre din ordre.</string>
+    <string name="breadtype_light">Lyst Brød</string>
+    <string name="breadtype_dark">Mørkt Brød</string>
+    <string name="popup_limit_title">For mange smørrebrød!</string>
+    <string name="toast_backToLogin">Klik tilbage igen for at gå til Login</string>
+    <string name="toast_emptyBasket">Vælg venligst et smørrebrød</string>
 
 </resources>

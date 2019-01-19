@@ -3,13 +3,22 @@
     <string name="help_button_text">YARDIM</string>
     <string name="quick_string">Beyaz veya buğdaylı ekmek</string>
     <string name="login_info">Taramak için telefonunuzu / tabletinizi QR kodunun üzerinde tutunuz</string>
-    <string name="help_gif_text">Nasıl siprariş verilir:</string>
-    <string name="selection_toptext">Bir sandviç/smørrebrød ekmeği seçiniz:</string>
+    <string name="help_gif_text">Kapınızın yanındaki QR kodunu bulun ve aşağıda gösterildiği gibi tarayın.*</string>
+    <string name="selection_toptext">Bir sandviç ekmeği seçiniz</string>
     <string name="basket_toptext">Servis tepsinizin içeriği:</string>
-    <string name="selection_button_text">SİPARİŞ ET</string>
+    <string name="basket_button_text">SİPARİŞ ET</string>
     <string name="selection_toast">"Lütfen bir sandviç/smørrebrød türü seçiniz "</string>
     <string name="options_toptext">Düzenle</string>
     <string name="options_button_text">SERVIS TEPSINIZE EKLEYINIZ</string>
     <string name="reciept_toptext">Siparişiniz için teşekkürler!</string>
     <string name="reciept_order_text">Sizin siparişiniz:</string>
+    <string name="tablet_selection_toptext_left">Düzenleyin ve servis tepsisine ekleyin</string>
+    <string name="tablet_selection_button_text">SERVIS TEPSINIZE EKLEYINIZ</string>
+    <string name="popup_limit">Maksimum sandviç sayısı seçilmiştir. Yeni bir tane eklemek veya siparişinizi tamamlamak için lütfen önceki seçilen sandviçlerden birini silin.*</string>
+    <string name="breadtype_dark">Çavdar ekmeği</string>
+    <string name="breadtype_light">Buğday ekmeği</string>
+    <string name="popup_limit_title">Çok fazla yemek!*</string>
+    <string name="tablet_selection_toptext_right">Yemekleri düzenle ve giy</string>
+    <string name="toast_backToLogin">" Girişe gitmek için tekrar tıklayın*"</string>
+    <string name="toast_emptyBasket">" Lütfen bir tabak seç*"</string>
 </resources>

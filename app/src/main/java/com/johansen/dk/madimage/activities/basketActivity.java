@@ -164,7 +164,7 @@ public class basketActivity extends AppCompatActivity implements View.OnClickLis
                     intent.putExtra("order", order);
                     startActivity(intent);
                     order.clean();
-                } else Toast.makeText(this,"Vælg venligst et smørrebrød",Toast.LENGTH_LONG).show();
+                } else Toast.makeText(this,getString(R.string.toast_emptyBasket),Toast.LENGTH_LONG).show();
                 break;
         }
     }

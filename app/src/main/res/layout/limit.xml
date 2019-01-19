@@ -12,7 +12,7 @@
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Det maximale antal smørrebrød er valgt. Slet venligst et af de forrige valgte smørrebrød for at tilføje et nyt, eller færdiggøre din ordre."
+        android:text="@string/popup_limit"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#19414B" />
 

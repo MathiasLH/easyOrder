@@ -7,14 +7,24 @@
     android:background="@color/white"
     tools:context=".activities.basketActivity">
 
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/topbarshape" />
+
     <TextView
         android:id="@+id/toptekst"
         android:layout_width="0dp"
-        android:layout_height="42dp"
-        android:background="@drawable/topbarshape"
-        android:text="Indholdet af din serveringsbakke"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/basket_toptext"
         android:textAlignment="center"
-        android:textSize="24sp"
+        android:textSize="26dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -24,7 +34,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/orderbtn"
-        app:layout_constraintTop_toBottomOf="@+id/toptekst" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView5" />
 
     <Button
         android:id="@+id/orderbtn"
@@ -33,7 +43,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:background="@color/btnColor"
-        android:text="Bestil"
+        android:text="@string/basket_button_text"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

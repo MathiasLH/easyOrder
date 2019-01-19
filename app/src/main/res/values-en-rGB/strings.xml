@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="help_button_text">HELP</string>
-    <string name="selection_button_text">ORDER</string>
+    <string name="basket_button_text">ORDER</string>
     <string name="options_toptext">Edit</string>
     <string name="selection_toptext">Choose a dish</string>
     <string name="help_gif_text">You do like this:</string>
@@ -12,4 +12,13 @@
     <string name="reciept_toptext">Thank you for your order!</string>
     <string name="reciept_order_text">has ordered:</string>
     <string name="quick_string">White or Rye bread</string>
+    <string name="tablet_selection_toptext_left">Choose a dish</string>
+    <string name="tablet_selection_toptext_right">Edit and add to serving tray</string>
+    <string name="tablet_selection_button_text">ADD TO SERVING TRAY</string>
+    <string name="popup_limit">The maximum amount of dishes has been reserved. Please either delete one of your chosen dishes or finish the order.</string>
+    <string name="breadtype_light">Rye Bread</string>
+    <string name="breadtype_dark">Wheat Bread</string>
+    <string name="popup_limit_title">Too many dishes!</string>
+    <string name="toast_backToLogin">Click back again to go to Login</string>
+    <string name="toast_emptyBasket">Please choose a dish</string>
 </resources>

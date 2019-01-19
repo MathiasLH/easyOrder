@@ -31,7 +31,7 @@ import static android.content.Context.MODE_PRIVATE;
 public class optionsActivityFragment extends Fragment implements View.OnClickListener {
 
     private ImageView foodImage;
-    private TextView foodName;
+    private TextView foodName, btnText;
     private com.johansen.dk.madimage.model.foodItem foodItem;
     private LinearLayout LL;
     private ArrayList<CheckBox> cbArray;
@@ -42,7 +42,6 @@ public class optionsActivityFragment extends Fragment implements View.OnClickLis
     private selectionActivity_tablet myActivity;
     private View view;
     private ImageButton basketbtn;
-    private TextView btnText;
     private Typeface tf;
 
     @Override
@@ -58,11 +57,15 @@ public class optionsActivityFragment extends Fragment implements View.OnClickLis
             foodItem = myActivity.getFoodData(prefs.getInt("number",2));
         }
 
+        tf = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Orkney Regular.ttf");
+
+        foodName = view.findViewById(R.id.dish_name);
+        foodName.setText(foodItem.getName());
+        foodName.setTypeface(tf);
+
         foodImage = view.findViewById(R.id.edit_foodimage);
         foodImage.setImageResource(foodItem.getImageResourceID());
-        foodName = view.findViewById(R.id.dish_name);
-        foodName.setTypeface(tf);
-        foodName.setText(foodItem.getName());
+
         LL = view.findViewById(R.id.optionsList);
         cbArray = new ArrayList<>();
         createCheckboxes();
@@ -77,6 +80,7 @@ public class optionsActivityFragment extends Fragment implements View.OnClickLis
 
         btnText = view.findViewById(R.id.editfrag_buttonText);
         btnText.setOnClickListener(this);
+        btnText.setTypeface(tf);
 
         vibe = (Vibrator) getActivity().getSystemService(Context.VIBRATOR_SERVICE);
 
@@ -101,7 +105,7 @@ public class optionsActivityFragment extends Fragment implements View.OnClickLis
             cb.setChecked(foodItem.getOptionValues()[i]);
             cb.setBackgroundResource(R.drawable.checkbox_edit);
             cb.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#FFFFFF")));
-            cb.setHeight(80);
+            cb.setHeight(90);
             cbArray.add(cb);
             LL.addView(cb);
         }
@@ -133,7 +137,7 @@ public class optionsActivityFragment extends Fragment implements View.OnClickLis
                                 getContext());
                         // set prompts.xml to alertdialog builder
                         alertDialogBuilder.setView(promptsView);
-                        alertDialogBuilder.setTitle("For mange smørrebrød");
+                        alertDialogBuilder.setTitle(getString(R.string.popup_limit_title));
                         // set dialog message
                         alertDialogBuilder
                                 .setCancelable(true)
