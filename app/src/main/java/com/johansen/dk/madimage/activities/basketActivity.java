@@ -78,6 +78,7 @@ public class basketActivity extends AppCompatActivity implements View.OnClickLis
                 if (v.getTag() == "TRASH") {
                     niceAdapter.removeItemAt(position);
                     v.setOnClickListener(null);
+
                     isOrderAvailable();
                 }
                 if (v.getTag() == "TTS") {
