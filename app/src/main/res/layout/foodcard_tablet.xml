@@ -38,7 +38,6 @@
             android:id="@+id/cardName"
             android:layout_width="299dp"
             android:layout_height="39dp"
-            android:text="TextView"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Widget.PopupMenu.Large"
             android:textSize="28sp"

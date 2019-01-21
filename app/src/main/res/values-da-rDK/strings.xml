@@ -22,4 +22,7 @@
     <string name="toast_backToLogin">Klik tilbage igen for at gå til Login</string>
     <string name="toast_emptyBasket">Vælg venligst et smørrebrød</string>
     <string name="toast_cameraPermission">Kamera tilladelse skal bruges for at scanner QR-koder</string>
+    <string name="contentDesc_danishFlag">Skift app sprog til dansk</string>
+    <string name="contentDesc_englishFlag">Skift app sprog til engelsk</string>
+    <string name="contentDesc_turkishFlag">Skift app sprog til tyrkisk</string>
 </resources>

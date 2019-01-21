@@ -14,10 +14,10 @@ import com.johansen.dk.madimage.R;
 import com.johansen.dk.madimage.model.order;
 
 public class recieptActivity extends AppCompatActivity {
-    TextView sText;
-    TextView orderList;
-    MediaPlayer mediaPlayer;
-    order items;
+    private TextView sText;
+    private TextView orderList;
+    private MediaPlayer mediaPlayer;
+    private order items;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

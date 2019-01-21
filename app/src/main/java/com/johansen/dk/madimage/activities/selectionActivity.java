@@ -38,18 +38,18 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 public class selectionActivity extends AppCompatActivity implements View.OnClickListener {
-    order selection;
-    boolean animationConfirmation, doubleBackToExitPressedOnce = false;
-    foodItem dyrlaege, laks, rejemad, roastbeef, stjerneskud;
-    TextView text;
-    ArrayList<foodItem> foodItems;
-    RecyclerView foodList;
-    TextToSpeech myTTS;
-    ImageButton basketBtn;
-    Animation basketAnimation;
-    final Context context = this;
-    boolean clickAllowed = true;
-    Vibrator vibe;
+    private order selection;
+    private boolean animationConfirmation, doubleBackToExitPressedOnce = false;
+    private foodItem dyrlaege, laks, rejemad, roastbeef, stjerneskud;
+    private TextView text;
+    private ArrayList<foodItem> foodItems;
+    private RecyclerView foodList;
+    private TextToSpeech myTTS;
+    private ImageButton basketBtn;
+    private Animation basketAnimation;
+    private final Context context = this;
+    private boolean clickAllowed = true;
+    private Vibrator vibe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

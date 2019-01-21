@@ -22,4 +22,7 @@
     <string name="toast_backToLogin">" Girişe gitmek için tekrar tıklayın*"</string>
     <string name="toast_emptyBasket">" Lütfen bir tabak seç*"</string>
     <string name="toast_cameraPermission">" QR kodlarını taramak için kamera izni gereklidir*"</string>
+    <string name="contentDesc_danishFlag">Danca için uygulama dilini değiştirin</string>
+    <string name="contentDesc_englishFlag">Uygulama dilini ingilizce olarak değiştir</string>
+    <string name="contentDesc_turkishFlag">Uygulama dilini türkçeye değiştir</string>
 </resources>

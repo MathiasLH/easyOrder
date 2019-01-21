@@ -25,15 +25,15 @@ import com.johansen.dk.madimage.model.foodItem;
 import java.util.ArrayList;
 
 public class optionsActivity extends AppCompatActivity implements View.OnClickListener {
-    ImageView foodImage;
-    TextView foodName;
-    com.johansen.dk.madimage.model.foodItem foodItem;
-    LinearLayout LL;
-    ArrayList<CheckBox> cbArray;
-    RadioGroup breadbuttons;
-    RadioButton cbdark, cblight;
-    Vibrator vibe;
-    Button basketbtn;
+    private ImageView foodImage;
+    private TextView foodName;
+    private com.johansen.dk.madimage.model.foodItem foodItem;
+    private LinearLayout LL;
+    private ArrayList<CheckBox> cbArray;
+    private RadioGroup breadbuttons;
+    private RadioButton cbdark, cblight;
+    private Vibrator vibe;
+    private Button basketbtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

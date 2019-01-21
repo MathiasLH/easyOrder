@@ -65,6 +65,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/foodList"
         app:lottie_rawRes="@raw/empty_box" />
-
-
 </android.support.constraint.ConstraintLayout>

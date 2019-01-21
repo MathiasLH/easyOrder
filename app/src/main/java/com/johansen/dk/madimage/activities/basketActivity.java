@@ -30,19 +30,18 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 public class basketActivity extends AppCompatActivity implements View.OnClickListener{
-    com.johansen.dk.madimage.model.order order;
-    Button orderBtn;
-    TextView basketText;
-    RecyclerView foodList;
-    basketAdapter niceAdapter;
-    TextToSpeech myTTS;
-    int lastItemClicked;
-    LottieAnimationView emptyBasketGif;
-    boolean isOrderAvailable;
-    Vibrator vibe;
-
+    private com.johansen.dk.madimage.model.order order;
+    private Button orderBtn;
+    private TextView basketText;
+    private RecyclerView foodList;
+    private basketAdapter niceAdapter;
+    private TextToSpeech myTTS;
+    private int lastItemClicked;
+    private LottieAnimationView emptyBasketGif;
+    private boolean isOrderAvailable;
+    private Vibrator vibe;
     /*instans of database*/
-    DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference("Beboere");
+    private DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference("Beboere");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -174,6 +173,7 @@ public class basketActivity extends AppCompatActivity implements View.OnClickLis
         if (order.getBasket().size() < 1) {
             emptyBasketGif.setVisibility(View.VISIBLE);
             orderBtn.setBackgroundColor(getResources().getColor(R.color.grey));
+            emptyBasketGif.playAnimation();
             isOrderAvailable = false;
         }
         else {
@@ -187,7 +187,4 @@ public class basketActivity extends AppCompatActivity implements View.OnClickLis
         String id = mRootRef.push().getKey();
         mRootRef.child(id).setValue(order.getBasket().toString());
     }
-
-
-
 }

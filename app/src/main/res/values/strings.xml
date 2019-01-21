@@ -1,29 +1,32 @@
 <resources>
     <string name="app_name" translatable="false">easyOrder</string>
 
-    <string name="quick_string" translatable="true">Lyst eller Mørkt brød</string>
-    <string name="login_info">Hold din telefon/tablet hen over QR koden for at scanne</string>
-    <string name="help_button_text">HJÆLP</string>
-    <string name="help_gif_text">Find QR-koden på siden af din dør og scan den med kameraet som vist under.</string>
-    <string name="selection_toptext">Vælg et smørrebrød</string>
-    <string name="basket_toptext">Indholdet af din serveringsbakke</string>
-    <string name="basket_button_text">BESTIL</string>
-    <string name="selection_toast">Vælg venligst et smørrebrød</string>
-    <string name="options_toptext">Rediger</string>
-    <string name="options_button_text">FØJ TIL SERVERINGSBAKKE</string>
-    <string name="reciept_toptext">Tak for din bestilling!</string>
-    <string name="reciept_order_text">har bestilt:</string>
+    <string name="quick_string" translatable="true">White or Rye bread</string>
+    <string name="login_info">Hold your phone/tablet over the QR code to scan it</string>
+    <string name="help_button_text">HELP</string>
+    <string name="help_gif_text">Find the QR-code at the side of your door and scan it like shown below.</string>
+    <string name="selection_toptext">Choose a dish</string>
+    <string name="basket_toptext">The contents of your serving tray</string>
+    <string name="basket_button_text">ORDER</string>
+    <string name="selection_toast">Please choose a dish</string>
+    <string name="options_toptext">Edit</string>
+    <string name="options_button_text">ADD TO SERVING TRAY</string>
+    <string name="reciept_toptext">Thank you for your order!</string>
+    <string name="reciept_order_text">has ordered:</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="tablet_selection_toptext_right">Rediger og læg på fad</string>
-    <string name="tablet_selection_toptext_left">Vælg et smørrebrød</string>
-    <string name="tablet_selection_button_text">FØJ TIL SERVERINGSBAKKE</string>
-    <string name="popup_limit">Det maximale antal smørrebrød er valgt. Slet venligst et af de forrige valgte smørrebrød for at tilføje et nyt, eller færdiggøre din ordre.</string>
-    <string name="breadtype_light">Lyst Brød</string>
-    <string name="breadtype_dark">Mørkt Brød</string>
-    <string name="popup_limit_title">For mange smørrebrød!</string>
-    <string name="toast_backToLogin">Klik tilbage igen for at gå til Login</string>
-    <string name="toast_emptyBasket">Vælg venligst et smørrebrød</string>
+    <string name="tablet_selection_toptext_right">Edit and add to serving tray</string>
+    <string name="tablet_selection_toptext_left">Choose a dish</string>
+    <string name="tablet_selection_button_text">ADD TO SERVING TRAY</string>
+    <string name="popup_limit">The maximum amount of dishes has been reserved. Please either delete one of your chosen dishes or finish the order.</string>
+    <string name="breadtype_light">Rye Bread</string>
+    <string name="breadtype_dark">Wheat Bread</string>
+    <string name="popup_limit_title">Too many dishes!</string>
+    <string name="toast_backToLogin">Click back again to go to Login</string>
+    <string name="toast_emptyBasket">Please choose a dish</string>
     <string name="toast_cameraPermission">Camera permission is needed to scan QR codes</string>
+    <string name="contentDesc_danishFlag">Change app language to danish</string>
+    <string name="contentDesc_englishFlag">Change app language to english</string>
+    <string name="contentDesc_turkishFlag">Change app langauge to turkish</string>
 
 </resources>

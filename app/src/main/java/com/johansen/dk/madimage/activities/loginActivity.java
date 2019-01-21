@@ -2,7 +2,6 @@ package com.johansen.dk.madimage.activities;
 
 import android.Manifest;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
@@ -46,7 +45,7 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
     private CameraSource cameraSrc;
     private BarcodeDetector barcodeDetector;
     private TextView loginInfo;
-    private Button helpBtn, moveAlongBtn, clearPerm;
+    private Button helpBtn, moveAlongBtn;
     private final Context context = this;
     private long time = 0;
     private SharedPreferences prefs = null;
@@ -67,7 +66,6 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
         loginInfo = findViewById(R.id.explqr);
         helpBtn = findViewById(R.id.helpBtn);
         moveAlongBtn = findViewById(R.id.moveAlongBtn);
-        clearPerm = findViewById(R.id.clearPermission);
         tf = Typeface.createFromAsset(getAssets(), "fonts/Orkney Regular.ttf");
         /*using fonts on text fields*/
         loginInfo.setTypeface(tf);
@@ -92,7 +90,6 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
         danishFlag.setOnClickListener(this);
         englishFlag.setOnClickListener(this);
         turkishFlag.setOnClickListener(this);
-        clearPerm.setOnClickListener(this);
         vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
     }
 
@@ -152,11 +149,6 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
                 setLocale();
                 Toast.makeText(this, "LANGUAGE SET: TR", Toast.LENGTH_SHORT).show();
                 break;
-            case R.id.clearPermission:
-                prefs = getSharedPreferences("permission", MODE_PRIVATE);
-                prefs.edit().clear().apply();
-                Toast.makeText(this, "RESTART APP", Toast.LENGTH_SHORT).show();
-                break;
             default:
                 Toast.makeText(this, "DEFAULT HIT", Toast.LENGTH_SHORT).show();
         }
@@ -180,7 +172,6 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void createQRscan() {
-
         cameraPreview.getHolder().addCallback(new SurfaceHolder.Callback() {
             @Override
             public void surfaceCreated(SurfaceHolder holder) {

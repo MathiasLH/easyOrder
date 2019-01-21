@@ -4,7 +4,7 @@
     <string name="basket_button_text">ORDER</string>
     <string name="options_toptext">Edit</string>
     <string name="selection_toptext">Choose a dish</string>
-    <string name="help_gif_text">You do like this:</string>
+    <string name="help_gif_text">Find the QR-code at the side of your door and scan it like shown below.</string>
     <string name="login_info">Hold your phone/tablet over the QR code to scan it</string>
     <string name="basket_toptext">The contents of your serving tray</string>
     <string name="selection_toast">Please choose a dish</string>
@@ -22,4 +22,7 @@
     <string name="toast_backToLogin">Click back again to go to Login</string>
     <string name="toast_emptyBasket">Please choose a dish</string>
     <string name="toast_cameraPermission">Camera permission is needed to scan QR codes</string>
+    <string name="contentDesc_turkishFlag">Change app langauge to turkish</string>
+    <string name="contentDesc_englishFlag">Change app language to english</string>
+    <string name="contentDesc_danishFlag">Change app language to danish</string>
 </resources>

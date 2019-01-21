@@ -45,7 +45,6 @@ public class selectionActivity_tablet extends AppCompatActivity implements View.
     private TextToSpeech myTTS;
     private ImageButton basketBtn;
     private Animation basketAnimation;
-    private boolean clickAllowed = true;
     private Vibrator vibe;
     private SharedPreferences prefs = null;
     private boolean booFirstFrag = true;
@@ -71,12 +70,12 @@ public class selectionActivity_tablet extends AppCompatActivity implements View.
 
                 Log.e("TTS", "@@@@@@@@@@@@@@@@@@@" + v.getTag());
 
-                if (v.getTag() == "TTS" && clickAllowed) {
+                if (v.getTag() == "TTS") {
                     Log.e("TTS", "@@@@@@@@@@@@@@@@@@@" + Integer.toString(v.getId()));
                     readDish(position);
                 }
 
-                if (v.getTag() == "OTHER" && clickAllowed) {
+                if (v.getTag() == "OTHER") {
                     launchEditActivity(position);
                 }
             }
@@ -195,8 +194,6 @@ public class selectionActivity_tablet extends AppCompatActivity implements View.
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        clickAllowed = true;
-        ImageButton basketBtn = findViewById(R.id.basketbtn);
         if (resultCode != RESULT_CANCELED) {
             if (requestCode == 1) {
                 selection.addItem((foodItem) data.getSerializableExtra("foodItem"));

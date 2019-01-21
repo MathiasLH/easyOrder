@@ -7,17 +7,6 @@
     android:background="@color/white"
     tools:layout_editor_absoluteY="25dp">
 
-    <Button
-        android:id="@+id/clearPermission"
-        android:layout_width="89dp"
-        android:layout_height="33dp"
-        android:layout_marginTop="128dp"
-        android:layout_marginEnd="4dp"
-        android:background="@color/backgroundColor"
-        android:text="Clear cam Perm BTN"
-        app:layout_constraintEnd_toEndOf="@+id/linearLayout4"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <LinearLayout
         android:id="@+id/linearLayout4"
         android:layout_width="match_parent"
@@ -32,7 +21,8 @@
             android:layout_width="match_parent"
             android:layout_height="93dp"
             android:background="@drawable/topbarshape"
-            app:srcCompat="@drawable/easyorderlogo" />
+            app:srcCompat="@drawable/easyorderlogo"
+            />
 
         <TextView
             android:id="@+id/explqr"
@@ -118,6 +108,7 @@
             android:layout_weight="1"
             android:adjustViewBounds="true"
             android:background="@drawable/rounded_button"
+            android:contentDescription="@string/contentDesc_danishFlag"
             android:scaleType="fitCenter"
             app:srcCompat="@drawable/danish_flag"
             tools:layout_editor_absoluteX="62dp"
@@ -130,6 +121,7 @@
             android:layout_weight="1"
             android:adjustViewBounds="true"
             android:background="@drawable/rounded_button"
+            android:contentDescription="@string/contentDesc_englishFlag"
             android:scaleType="fitCenter"
             app:srcCompat="@drawable/british_flag"
             tools:layout_editor_absoluteX="285dp"
@@ -142,6 +134,7 @@
             android:layout_weight="1"
             android:adjustViewBounds="true"
             android:background="@drawable/rounded_button"
+            android:contentDescription="@string/contentDesc_turkishFlag"
             android:scaleType="fitCenter"
             app:srcCompat="@drawable/turkish_flag"
             tools:layout_editor_absoluteX="508dp"
