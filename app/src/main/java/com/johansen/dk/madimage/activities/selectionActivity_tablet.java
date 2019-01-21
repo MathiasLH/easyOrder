@@ -86,7 +86,8 @@ public class selectionActivity_tablet extends AppCompatActivity implements View.
             public void onInit(int status) {
                 if (status == TextToSpeech.SUCCESS) {
                     // language da = danish ; en = english ; turkish = tr ; russisk = ru
-                    int result = myTTS.setLanguage(new Locale("da", ""));
+                    prefs = getSharedPreferences("setLanguage", MODE_PRIVATE);
+                    int result = myTTS.setLanguage(new Locale(prefs.getString("language","en"), ""));
                     if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
                         Log.e("TTS", "Language not supportd");
                     }

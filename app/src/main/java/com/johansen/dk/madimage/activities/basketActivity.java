@@ -42,6 +42,7 @@ public class basketActivity extends AppCompatActivity implements View.OnClickLis
     private Vibrator vibe;
     /*instans of database*/
     private DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference("Beboere");
+    private SharedPreferences prefs = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,7 +98,8 @@ public class basketActivity extends AppCompatActivity implements View.OnClickLis
             @Override
             public void onInit(int status) {
                 if (status == TextToSpeech.SUCCESS) {
-                    int result = myTTS.setLanguage(new Locale("da", ""));
+                    prefs = getSharedPreferences("setLanguage", MODE_PRIVATE);
+                    int result = myTTS.setLanguage(new Locale(prefs.getString("language","en"), ""));
                     if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
                         Log.e("TTS", "Language not supportd");
                     }

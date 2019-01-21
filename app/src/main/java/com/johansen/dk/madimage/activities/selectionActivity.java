@@ -50,19 +50,13 @@ public class selectionActivity extends AppCompatActivity implements View.OnClick
     private final Context context = this;
     private boolean clickAllowed = true;
     private Vibrator vibe;
+    private SharedPreferences prefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        SharedPreferences sharedprefs = getSharedPreferences("screen_version", MODE_PRIVATE);
-        if (sharedprefs.getBoolean("tablet", false)) {
-            setContentView(R.layout.activity_selection_tablet);
-            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-        } else {
-            setContentView(R.layout.activity_selection);
-            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        }
+        setContentView(R.layout.activity_selection);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         setContentView(R.layout.activity_selection);
         createTestData();
@@ -129,7 +123,8 @@ public class selectionActivity extends AppCompatActivity implements View.OnClick
             public void onInit(int status) {
                 if (status == TextToSpeech.SUCCESS) {
                     // language da = danish ; en = english ; turkish = tr ; russisk = ru
-                    int result = myTTS.setLanguage(new Locale("da", ""));
+                    prefs = getSharedPreferences("setLanguage", MODE_PRIVATE);
+                    int result = myTTS.setLanguage(new Locale(prefs.getString("language","en"), ""));
                     if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
                         Log.e("TTS", "Language not supportd");
                     }

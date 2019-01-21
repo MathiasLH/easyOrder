@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/easyOrderLogo"
             android:layout_width="match_parent"
             android:layout_height="93dp"
             android:background="@drawable/topbarshape"
@@ -91,15 +91,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent">
-
-        <Button
-            android:id="@+id/moveAlongBtn"
-            android:layout_width="40dp"
-            android:layout_height="25dp"
-            android:background="@color/backgroundColor"
-            android:text="Next"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
 
         <ImageButton
             android:id="@+id/danishFlag"

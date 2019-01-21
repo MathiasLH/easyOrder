@@ -25,6 +25,7 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,13 +48,14 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
     private CameraSource cameraSrc;
     private BarcodeDetector barcodeDetector;
     private TextView loginInfo;
-    private Button helpBtn, moveAlongBtn;
+    private Button helpBtn;
     private final Context context = this;
     private long time = 0;
     private SharedPreferences prefs = null;
     private Typeface tf;
     private final RxPermissions rxPermissions = new RxPermissions(this); // where this is an Activity or Fragment instance
     private Vibrator vibe;
+    private ImageView moveAlongBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +69,7 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
         }
         loginInfo = findViewById(R.id.explqr);
         helpBtn = findViewById(R.id.helpBtn);
-        moveAlongBtn = findViewById(R.id.moveAlongBtn);
+        moveAlongBtn = findViewById(R.id.easyOrderLogo);
         tf = Typeface.createFromAsset(getAssets(), "fonts/Orkney Regular.ttf");
         /*using fonts on text fields*/
         loginInfo.setTypeface(tf);
@@ -95,8 +97,8 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
         vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         if(isNetworkAvailable() == false){
             //NO INTERNET
-            Toast.makeText(this,"No internet connection was detected",Toast.LENGTH_LONG).show();
-
+            //Todo: Handle this event better. Either deny access to app or guide the user to whatever could be wrong.
+             Toast.makeText(this,"No internet connection was detected",Toast.LENGTH_LONG).show();
         }
     }
 
@@ -105,7 +107,7 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
         vibe.vibrate(100);
         /*Implementing on click listener to QR-code image Button*/
         switch (v.getId()) {
-            case R.id.moveAlongBtn:
+            case R.id.easyOrderLogo:
                 prefs = getSharedPreferences("screen_version", MODE_PRIVATE);
                 if(prefs.getBoolean("tablet", false)) {
                     startActivity(new Intent(loginActivity.this, selectionActivity_tablet.class));
@@ -142,19 +144,16 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
                 prefs = getSharedPreferences("setLanguage", MODE_PRIVATE);
                 prefs.edit().putString("language", "da").apply();
                 setLocale();
-                Toast.makeText(this, "LANGUAGE SET: DK", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.englishFlag:
                 prefs = getSharedPreferences("setLanguage", MODE_PRIVATE);
                 prefs.edit().putString("language", "en").apply();
                 setLocale();
-                Toast.makeText(this, "LANGUAGE SET: ENG", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.turkishFlag:
                 prefs = getSharedPreferences("setLanguage", MODE_PRIVATE);
                 prefs.edit().putString("language", "tr").apply();
                 setLocale();
-                Toast.makeText(this, "LANGUAGE SET: TR", Toast.LENGTH_SHORT).show();
                 break;
             default:
                 Toast.makeText(this, "DEFAULT HIT", Toast.LENGTH_SHORT).show();

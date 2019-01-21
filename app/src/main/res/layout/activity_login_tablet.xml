@@ -46,7 +46,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/easyOrderLogo"
             android:layout_width="match_parent"
             android:layout_height="93dp"
             android:background="@drawable/topbarshape"
