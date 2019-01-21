@@ -26,9 +26,6 @@ public class basketAdapter extends RecyclerView.Adapter<basketAdapter.myViewHold
     private Context context;
     Typeface tf2;
 
-
-
-
     public static class myViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         public CardView niceCard;
         public Button TTSBtn;

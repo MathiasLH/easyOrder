@@ -9,6 +9,8 @@ import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Typeface;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Vibrator;
@@ -91,6 +93,11 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
         englishFlag.setOnClickListener(this);
         turkishFlag.setOnClickListener(this);
         vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        if(isNetworkAvailable() == false){
+            //NO INTERNET
+            Toast.makeText(this,"No internet connection was detected",Toast.LENGTH_LONG).show();
+
+        }
     }
 
     @Override
@@ -152,6 +159,13 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
             default:
                 Toast.makeText(this, "DEFAULT HIT", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
     private void validateQR(String input) {
