@@ -100,6 +100,7 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
             //Todo: Handle this event better. Either deny access to app or guide the user to whatever could be wrong.
              Toast.makeText(this,"No internet connection was detected",Toast.LENGTH_LONG).show();
         }
+        setLocale();
     }
 
     @Override
@@ -259,9 +260,6 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
             // Do first run stuff here then set 'firstrun' as false
             // using the following line to edit/commit prefs
             prefs.edit().putBoolean("firstrun", false).apply();
-            prefs = getSharedPreferences("setLanguage", MODE_PRIVATE);
-            prefs.getString("language", Locale.getDefault().getDisplayLanguage());
-            setLocale();
         }
         createQRscan();
     }

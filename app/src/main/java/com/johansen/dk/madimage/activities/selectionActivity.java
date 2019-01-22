@@ -124,7 +124,7 @@ public class selectionActivity extends AppCompatActivity implements View.OnClick
                 if (status == TextToSpeech.SUCCESS) {
                     // language da = danish ; en = english ; turkish = tr ; russisk = ru
                     prefs = getSharedPreferences("setLanguage", MODE_PRIVATE);
-                    int result = myTTS.setLanguage(new Locale(prefs.getString("language","en"), ""));
+                    int result = myTTS.setLanguage(new Locale(prefs.getString("language",Locale.getDefault().getDisplayLanguage()), ""));
                     if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
                         Log.e("TTS", "Language not supportd");
                     }

@@ -99,7 +99,7 @@ public class basketActivity extends AppCompatActivity implements View.OnClickLis
             public void onInit(int status) {
                 if (status == TextToSpeech.SUCCESS) {
                     prefs = getSharedPreferences("setLanguage", MODE_PRIVATE);
-                    int result = myTTS.setLanguage(new Locale(prefs.getString("language","en"), ""));
+                    int result = myTTS.setLanguage(new Locale(prefs.getString("language",Locale.getDefault().getDisplayLanguage()), ""));
                     if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
                         Log.e("TTS", "Language not supportd");
                     }
