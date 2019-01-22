@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.johansen.dk.madimage.R;
@@ -20,12 +21,12 @@ public class selectionAdapter extends RecyclerView.Adapter<selectionAdapter.myVi
     public Typeface tf2;
     public static class myViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         public CardView niceCard;
-        public Button TTSBtn;
+        public ImageButton TTSBtn;
         public TextView textV;
         public ImageView imageV;
         public myViewHolder(@NonNull CardView cv) {
             super(cv);
-            this.TTSBtn = (Button) cv.findViewById(R.id.TTSBtn);
+            this.TTSBtn = cv.findViewById(R.id.TTSBtn);
             TTSBtn.setOnClickListener(this);
             TTSBtn.setTag("TTS");
             this.textV = (TextView) cv.findViewById(R.id.cardName);

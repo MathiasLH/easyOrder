@@ -152,7 +152,7 @@ public class selectionActivity extends AppCompatActivity implements View.OnClick
         String dyrlaegeOptions[] = {"sky", "rødløg", "karse"};
         dyrlaege = new foodItem("Dyrlægens natmad", R.drawable.dyrlaegensnatmad_big, 100, dyrlaegeOptions);
         String laksOptions[] = {"dild", "citron", "asparges"};
-        laks = new foodItem("Lakse mad", R.drawable.laks_big, 101, laksOptions);
+        laks = new foodItem("lakse mad", R.drawable.laks_big, 101, laksOptions);
         String rejeOptions[] = {"krydderUrt"};
         rejemad = new foodItem("Rejemad", R.drawable.rejemad_big, 102, rejeOptions);
         String roastbeefOptions[] = {"peberrod", "salat", "syltet agurk"};

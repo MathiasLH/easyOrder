@@ -14,22 +14,25 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <Button
+        <ImageButton
             android:id="@+id/TTSBtn"
-            android:layout_width="78dp"
+            android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="@drawable/rightside_speaker"
+            android:background="@android:drawable/screen_background_light_transparent"
+            android:scaleType="centerInside"
+            android:src="@drawable/speaker"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toEndOf="@+id/divider2"
+            app:layout_constraintTop_toBottomOf="@+id/cardImage" />
 
         <ImageView
             android:id="@+id/cardImage"
             android:layout_width="0dp"
-            android:layout_height="133dp"
+            android:layout_height="250dp"
             android:scaleType="centerCrop"
             app:layout_constraintBottom_toTopOf="@+id/cardName"
-            app:layout_constraintEnd_toStartOf="@+id/TTSBtn"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/rejemad_big" />
@@ -38,14 +41,30 @@
             android:id="@+id/cardName"
             android:layout_width="0dp"
             android:layout_height="39dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
             android:text="TextView"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Widget.PopupMenu.Large"
-            android:textSize="24sp"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/divider2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardImage" />
+
+        <View
+            android:id="@+id/divider2"
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="8dp"
+            android:background="?android:attr/listDivider"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintHorizontal_bias="0.75"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardImage" />
 
     </android.support.constraint.ConstraintLayout>
 
