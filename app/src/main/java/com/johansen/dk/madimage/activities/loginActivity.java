@@ -29,6 +29,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.crashlytics.android.Crashlytics;
 import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.barcode.Barcode;
@@ -36,6 +37,7 @@ import com.google.android.gms.vision.barcode.BarcodeDetector;
 import com.johansen.dk.madimage.R;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
+import io.fabric.sdk.android.Fabric;
 import java.io.IOException;
 import java.util.Locale;
 
@@ -60,6 +62,7 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Fabric.with(this, new Crashlytics());
         if (isTablet()) {
             setContentView(R.layout.activity_login_tablet);
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);

@@ -29,6 +29,9 @@
         <activity android:name=".activities.selectionActivity" />
         <activity android:name=".activities.recieptActivity" />
         <activity android:name=".activities.selectionActivity_tablet" />
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="6e6b990dbb90a74b38b13c0ffe93e11ad8b934cc" />
     </application>
 
 </manifest>
