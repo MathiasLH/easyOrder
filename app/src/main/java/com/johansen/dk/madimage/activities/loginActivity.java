@@ -120,24 +120,17 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
                 // get prompts.xml view
                 LayoutInflater li = LayoutInflater.from(context);
                 View promptsView = li.inflate(R.layout.help, null);
-
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
                         context);
-
                 // set prompts.xml to alertdialog builder
                 alertDialogBuilder.setView(promptsView);
-
                 // set dialog message
                 alertDialogBuilder
                         .setCancelable(true)
-
                         .setPositiveButton("OK",
-
                                 (dialog, id) -> dialog.cancel());
-
                 // create alert dialog
                 AlertDialog alertDialog = alertDialogBuilder.create();
-
                 // show it
                 alertDialog.show();
                 break;

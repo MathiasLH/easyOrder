@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.graphics.Typeface;
+import android.media.AudioManager;
 import android.os.Build;
 import android.os.Vibrator;
 import android.speech.tts.TextToSpeech;
@@ -147,12 +148,20 @@ public class basketActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     @Override
-    public void onDestroy() {
+    protected void onDestroy() {
+        if (myTTS.isSpeaking()) {
+            myTTS.stop();
+            myTTS.shutdown();
+        }
         super.onDestroy();
-        if(myTTS.isSpeaking()){
+    }
+
+    @Override
+    protected void onPause() {
+        if (myTTS.isSpeaking()) {
             myTTS.stop();
         }
-        myTTS.shutdown();
+        super.onPause();
     }
 
     @Override

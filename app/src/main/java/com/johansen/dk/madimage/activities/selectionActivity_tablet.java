@@ -222,11 +222,19 @@ public class selectionActivity_tablet extends AppCompatActivity implements View.
 
     @Override
     protected void onDestroy() {
-        if (myTTS != null) {
+        if (myTTS.isSpeaking()) {
             myTTS.stop();
             myTTS.shutdown();
         }
         super.onDestroy();
+    }
+
+    @Override
+    protected void onPause() {
+        if (myTTS.isSpeaking()) {
+            myTTS.stop();
+        }
+        super.onPause();
     }
 
     //dont want to reinvent the wheel: https://stackoverflow.com/questions/8430805/clicking-the-back-button-twice-to-exit-an-activity
@@ -249,15 +257,12 @@ public class selectionActivity_tablet extends AppCompatActivity implements View.
     public boolean isFirstFrag(){
         return booFirstFrag;
     }
+
     public void setFirstFrag(){
         booFirstFrag = false;
     }
 
     private void setText() {
-        tf = Typeface.createFromAsset(getAssets(), "fonts/Orkney Regular.ttf");
-        prefs = getSharedPreferences("setLanguage", MODE_PRIVATE);
-        String lang = prefs.getString("language", "");
-
         leftText = findViewById(R.id.texttop);
         rightText = findViewById(R.id.texttop2);
 
@@ -265,5 +270,4 @@ public class selectionActivity_tablet extends AppCompatActivity implements View.
         rightText.setTypeface(tf);
 
     }
-
 }

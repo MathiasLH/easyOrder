@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.graphics.Typeface;
+import android.media.AudioManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -157,7 +158,7 @@ public class selectionActivity extends AppCompatActivity implements View.OnClick
         rejemad = new foodItem("Rejemad", R.drawable.rejemad_big, 102, rejeOptions);
         String roastbeefOptions[] = {"peberrod", "salat", "syltet agurk"};
         roastbeef = new foodItem("Roastbeef", R.drawable.roastbeef_big, 103, roastbeefOptions);
-        String stjerneskudOptions[] = {"rogn", "citron", "hvid asparges", "grøn asparges", "rejer"};
+        String stjerneskudOptions[] = {"citron", "hvid asparges", "grøn asparges", "rejer"};
         stjerneskud = new foodItem("Stjerneskud", R.drawable.stjerneskud_big, 10, stjerneskudOptions);
         foodItems = new ArrayList<>();
         foodItems.add(dyrlaege);
@@ -248,11 +249,19 @@ public class selectionActivity extends AppCompatActivity implements View.OnClick
 
     @Override
     protected void onDestroy() {
-        if (myTTS != null) {
+        if (myTTS.isSpeaking()) {
             myTTS.stop();
             myTTS.shutdown();
         }
         super.onDestroy();
+    }
+
+    @Override
+    protected void onPause() {
+        if (myTTS.isSpeaking()) {
+            myTTS.stop();
+        }
+        super.onPause();
     }
 
     //dont want to reinvent the wheel: https://stackoverflow.com/questions/8430805/clicking-the-back-button-twice-to-exit-an-activity
