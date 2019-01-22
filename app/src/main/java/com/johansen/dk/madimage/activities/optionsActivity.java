@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -50,7 +51,7 @@ public class optionsActivity extends AppCompatActivity implements View.OnClickLi
         foodName = findViewById(R.id.dish_name);
         foodName.setTypeface(tf);
         foodName.setText(foodItem.getName());
-        basketbtn = (Button) findViewById(R.id.edit_addtobasketbutton);
+        basketbtn = findViewById(R.id.edit_addtobasketbutton);
         basketbtn.setOnClickListener(this);
         LL = findViewById(R.id.optionsList);
         cbArray = new ArrayList<>();
@@ -61,7 +62,18 @@ public class optionsActivity extends AppCompatActivity implements View.OnClickLi
         cblight = breadbuttons.findViewById(R.id.cblight);
         cblight.setChecked(!foodItem.isDarkBread());
         vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-
+        cbdark.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                vibe.vibrate(100);
+            }
+        });
+        cblight.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                vibe.vibrate(100);
+            }
+        });
     }
 
     private void createCheckboxes() {
@@ -74,6 +86,12 @@ public class optionsActivity extends AppCompatActivity implements View.OnClickLi
             cb.setBackgroundResource(R.drawable.checkbox_edit);
             cb.setButtonTintList(ColorStateList.valueOf(Color.parseColor("#FFFFFF")));
             cb.setHeight(170);
+            cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    vibe.vibrate(100);
+                }
+            });
             cbArray.add(cb);
             LL.addView(cb);
         }
