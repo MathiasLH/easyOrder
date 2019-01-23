@@ -28,5 +28,10 @@
     <string name="contentDesc_danishFlag">Change app language to danish</string>
     <string name="contentDesc_englishFlag">Change app language to english</string>
     <string name="contentDesc_turkishFlag">Change app langauge to turkish</string>
+    <string name="group_name_caroline" translatable="false">Caroline Ankjær Andersen - s175201</string>
+    <string name="group_name_mathias" translatable="false">Mathias Lysgaard Hansen - s144229</string>
+    <string name="group_name_milishia" translatable="false">Milishia Moradi - s175193</string>
+    <string name="group_name_paul" translatable="false">Paul Felter - s175203</string>
+    <string name="group_name_simon" translatable="false">Simon Semelin Johansen - s164646</string>
 
 </resources>

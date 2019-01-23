@@ -202,7 +202,6 @@ public class basketActivity extends AppCompatActivity implements View.OnClickLis
         if (order.getBasket().size() < 1) {
             emptyBasketGif.setVisibility(View.VISIBLE);
             orderBtn.setBackgroundColor(getResources().getColor(R.color.grey));
-            emptyBasketGif.playAnimation();
             isOrderAvailable = false;
         }
         else {

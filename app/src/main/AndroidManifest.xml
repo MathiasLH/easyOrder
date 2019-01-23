@@ -17,15 +17,16 @@
         android:label="easyOrder"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.basketActivity" />
-        <activity android:name=".activities.optionsActivity" />
-        <activity android:name=".activities.loginActivity" >
+        <activity android:name=".activities.loadingScreen" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <data android:configChanges="locale|orientation"/>
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".activities.basketActivity" />
+        <activity android:name=".activities.optionsActivity" />
+        <activity android:name=".activities.loginActivity" />
         <activity android:name=".activities.selectionActivity" />
         <activity android:name=".activities.recieptActivity" />
         <activity android:name=".activities.selectionActivity_tablet" />
