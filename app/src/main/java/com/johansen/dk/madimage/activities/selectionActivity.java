@@ -32,11 +32,15 @@ import android.widget.Toast;
 
 import com.johansen.dk.madimage.R;
 import com.johansen.dk.madimage.adapter.selectionAdapter;
+import com.johansen.dk.madimage.model.onPauseClock;
 import com.johansen.dk.madimage.model.order;
 import com.johansen.dk.madimage.model.foodItem;
 
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Locale;
+
+import static java.lang.System.currentTimeMillis;
 
 public class selectionActivity extends AppCompatActivity implements View.OnClickListener {
     private order selection;
@@ -147,6 +151,8 @@ public class selectionActivity extends AppCompatActivity implements View.OnClick
         findViewById(R.id.basketbtn).setTransitionName("indkoebTrans");
 
         vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+
+        onPauseClock.getInstance().setTimeLeft(System.currentTimeMillis());
     }
 
     private void createTestData() {
@@ -258,10 +264,24 @@ public class selectionActivity extends AppCompatActivity implements View.OnClick
 
     @Override
     protected void onPause() {
+        super.onPause();
         if (myTTS.isSpeaking()) {
             myTTS.stop();
         }
-        super.onPause();
+        onPauseClock.getInstance().setTimeLeft(System.currentTimeMillis());
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        if(onPauseClock.getInstance().isReset(System.currentTimeMillis())){
+            Intent intent = new Intent(getApplicationContext(), loginActivity.class);
+            // for info about clear task: https://developer.android.com/reference/android/content/Intent.html#FLAG_ACTIVITY_CLEAR_TASK
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            //for info about new task : https://developer.android.com/reference/android/content/Intent.html#FLAG_ACTIVITY_NEW_TASK
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        }
     }
 
     //dont want to reinvent the wheel: https://stackoverflow.com/questions/8430805/clicking-the-back-button-twice-to-exit-an-activity

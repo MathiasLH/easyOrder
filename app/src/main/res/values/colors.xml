@@ -9,5 +9,6 @@
     <color name="btnColor">#89CCD0</color>
     <color name="white">#FFFFFF</color>
     <color name="grey">#C0C0C0</color>
+    <color name="optionsBtn">#20FF8E</color>
     //name="btnColor">#19414B
 </resources>

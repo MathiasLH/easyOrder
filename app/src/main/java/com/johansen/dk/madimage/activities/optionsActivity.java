@@ -22,6 +22,7 @@ import android.widget.TextView;
 
 import com.johansen.dk.madimage.R;
 import com.johansen.dk.madimage.model.foodItem;
+import com.johansen.dk.madimage.model.onPauseClock;
 
 import java.util.ArrayList;
 
@@ -125,4 +126,24 @@ public class optionsActivity extends AppCompatActivity implements View.OnClickLi
                 supportFinishAfterTransition();
         }
     }
+    @Override
+    protected void onPause() {
+        long time = System.currentTimeMillis();
+        onPauseClock.getInstance().setTimeLeft(time);
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume(){
+        if(onPauseClock.getInstance().isReset(System.currentTimeMillis())){
+            Intent intent = new Intent(getApplicationContext(), loginActivity.class);
+            // for info about clear task: https://developer.android.com/reference/android/content/Intent.html#FLAG_ACTIVITY_CLEAR_TASK
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            //for info about new task : https://developer.android.com/reference/android/content/Intent.html#FLAG_ACTIVITY_NEW_TASK
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        }
+        super.onResume();
+    }
+
 }

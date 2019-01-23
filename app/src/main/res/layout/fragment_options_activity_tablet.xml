@@ -105,12 +105,11 @@
     <ImageButton
         android:id="@+id/editfrag_addtobasketbutton"
         android:layout_width="0dp"
-        android:layout_height="38dp"
-        android:background="@color/btnColor"
+        android:layout_height="75dp"
+        android:background="@color/optionsBtn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:srcCompat="@drawable/popupshape" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/editfrag_buttonText"
@@ -123,7 +122,6 @@
         app:layout_constraintEnd_toEndOf="@+id/editfrag_addtobasketbutton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/editfrag_addtobasketbutton"
-        app:layout_constraintVertical_bias="0.619"
         tools:text="@string/tablet_selection_button_text" />
 
     <TextView
