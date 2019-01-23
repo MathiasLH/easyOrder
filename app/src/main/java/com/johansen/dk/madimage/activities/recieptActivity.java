@@ -42,8 +42,7 @@ public class recieptActivity extends AppCompatActivity {
         orderList.setTypeface(tf);
         Intent i = getIntent();
         items = (order) i.getSerializableExtra("order");
-        sText.setText("Tak for din bestilling! \n");
-        orderList.setText(items.getRoomNo() + " har bestilt: \n");
+        orderList.setText(getResources().getString(R.string.reciept_order_text) +"\n");
         for (int a = 0; a < items.getBasket().size(); a++) {
             orderList.append(items.getBasket().get(a).getName() + "\n");
         }
