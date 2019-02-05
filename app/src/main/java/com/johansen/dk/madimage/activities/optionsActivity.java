@@ -8,6 +8,7 @@ import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Vibrator;
+import android.support.v4.widget.TextViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -50,6 +51,7 @@ public class optionsActivity extends AppCompatActivity implements View.OnClickLi
         foodImage.setImageResource(foodItem.getImageResourceID());
         foodImage.setTransitionName(foodItem.getName() + "Trans");
         foodName = findViewById(R.id.dish_name);
+        TextViewCompat.setAutoSizeTextTypeWithDefaults(foodName, TextViewCompat.AUTO_SIZE_TEXT_TYPE_UNIFORM);
         foodName.setTypeface(tf);
         foodName.setText(foodItem.getName());
         basketbtn = findViewById(R.id.edit_addtobasketbutton);

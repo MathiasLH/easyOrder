@@ -7,6 +7,35 @@
     android:background="@color/white"
     tools:layout_editor_absoluteY="25dp">
 
+    <ImageView
+        android:id="@+id/easyOrderLogo"
+        android:layout_width="match_parent"
+        android:layout_height="93dp"
+        android:background="@drawable/topbarshape"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/easyorderlogo" />
+
+    <TextView
+        android:id="@+id/explqr"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
+        android:breakStrategy="balanced"
+        android:gravity="center"
+        android:lines="2"
+        android:maxLines="2"
+        android:text="@string/login_info"
+        android:textAlignment="center"
+        android:textColor="@color/textColor"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/easyOrderLogo" />
+
     <LinearLayout
         android:id="@+id/linearLayout4"
         android:layout_width="match_parent"
@@ -16,41 +45,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/easyOrderLogo"
-            android:layout_width="match_parent"
-            android:layout_height="93dp"
-            android:background="@drawable/topbarshape"
-            app:srcCompat="@drawable/easyorderlogo"
-            />
-
-        <TextView
-            android:id="@+id/explqr"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:gravity="center"
-            android:text="@string/login_info"
-            android:textAlignment="center"
-            android:textColor="@color/textColor"
-            android:textSize="22sp"
-            android:breakStrategy="balanced"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
     </LinearLayout>
 
     <FrameLayout
         android:id="@+id/frameLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
+        app:layout_constraintTop_toBottomOf="@+id/explqr">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
@@ -59,7 +65,7 @@
             <SurfaceView
                 android:id="@+id/cameraPreview"
                 android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:layout_height="539dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -67,8 +73,8 @@
 
             <FrameLayout
                 android:id="@+id/somethingFrame"
-                android:layout_width="300dp"
-                android:layout_height="300dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:background="@drawable/qr_code_reader_square"
                 app:layout_constraintBottom_toBottomOf="@+id/cameraPreview"
                 app:layout_constraintEnd_toEndOf="@+id/cameraPreview"

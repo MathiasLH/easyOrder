@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.graphics.Typeface;
-import android.media.AudioManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -15,6 +14,7 @@ import android.speech.tts.TextToSpeech;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.view.ViewCompat;
+import android.support.v4.widget.TextViewCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
@@ -36,17 +36,14 @@ import com.johansen.dk.madimage.model.onPauseClock;
 import com.johansen.dk.madimage.model.order;
 import com.johansen.dk.madimage.model.foodItem;
 
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Locale;
-
-import static java.lang.System.currentTimeMillis;
 
 public class selectionActivity extends AppCompatActivity implements View.OnClickListener {
     private order selection;
     private boolean animationConfirmation, doubleBackToExitPressedOnce = false;
     private foodItem dyrlaege, laks, rejemad, roastbeef, stjerneskud;
-    private TextView text;
+    private TextView topText;
     private ArrayList<foodItem> foodItems;
     private RecyclerView foodList;
     private TextToSpeech myTTS;
@@ -141,8 +138,10 @@ public class selectionActivity extends AppCompatActivity implements View.OnClick
 
         foodList.setAdapter(niceAdapter);
 
-        text = findViewById(R.id.texttop);
-        text.setTypeface(tf);
+        topText = findViewById(R.id.texttop);
+        TextViewCompat.setAutoSizeTextTypeWithDefaults(topText, TextViewCompat.AUTO_SIZE_TEXT_TYPE_UNIFORM);
+        topText.setTypeface(tf);
+
         basketBtn = findViewById(R.id.basketbtn);
         basketBtn.setOnClickListener(this);
         selection = new order();

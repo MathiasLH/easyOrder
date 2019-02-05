@@ -15,6 +15,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.widget.TextViewCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
@@ -71,6 +72,7 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         }
         loginInfo = findViewById(R.id.explqr);
+        TextViewCompat.setAutoSizeTextTypeWithDefaults(loginInfo, TextViewCompat.AUTO_SIZE_TEXT_TYPE_UNIFORM);
         helpBtn = findViewById(R.id.helpBtn);
         moveAlongBtn = findViewById(R.id.easyOrderLogo);
         tf = Typeface.createFromAsset(getAssets(), "fonts/Orkney Regular.ttf");

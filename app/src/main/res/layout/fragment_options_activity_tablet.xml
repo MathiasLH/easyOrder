@@ -131,6 +131,7 @@
         android:layout_marginTop="8dp"
         android:text="TextView"
         android:textAlignment="center"
+        android:textColor="#000000"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

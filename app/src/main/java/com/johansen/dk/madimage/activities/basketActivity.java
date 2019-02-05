@@ -4,15 +4,14 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.graphics.Typeface;
-import android.media.AudioManager;
 import android.os.Build;
 import android.os.Vibrator;
 import android.speech.tts.TextToSpeech;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.TextViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -28,13 +27,12 @@ import com.johansen.dk.madimage.adapter.basketAdapter;
 import com.johansen.dk.madimage.model.foodItem;
 import com.johansen.dk.madimage.model.onPauseClock;
 
-import java.util.ArrayList;
 import java.util.Locale;
 
 public class basketActivity extends AppCompatActivity implements View.OnClickListener{
     private com.johansen.dk.madimage.model.order order;
     private Button orderBtn;
-    private TextView basketText;
+    private TextView topText;
     private RecyclerView foodList;
     private basketAdapter niceAdapter;
     private TextToSpeech myTTS;
@@ -63,9 +61,12 @@ public class basketActivity extends AppCompatActivity implements View.OnClickLis
         orderBtn = findViewById(R.id.orderbtn);
         orderBtn.setOnClickListener(this);
         Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/Orkney Regular.ttf");
+
+        topText = findViewById(R.id.basket_toptext);
+        TextViewCompat.setAutoSizeTextTypeWithDefaults(topText, TextViewCompat.AUTO_SIZE_TEXT_TYPE_UNIFORM);
+        topText.setTypeface(tf);
+
         orderBtn.setTypeface(tf);
-        basketText = findViewById(R.id.toptekst);
-        basketText.setTypeface(tf);
         Intent i = getIntent();
         order = (com.johansen.dk.madimage.model.order) i.getSerializableExtra("orderObject");
         foodList = findViewById(R.id.foodList);
