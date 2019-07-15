@@ -36,7 +36,13 @@ import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
 import com.johansen.dk.madimage.R;
-import com.tbruyelle.rxpermissions2.RxPermissions;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionDeniedResponse;
+import com.karumi.dexter.listener.PermissionGrantedResponse;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.single.DialogOnDeniedPermissionListener;
+import com.karumi.dexter.listener.single.PermissionListener;
 
 import io.fabric.sdk.android.Fabric;
 import java.io.IOException;
@@ -56,7 +62,6 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
     private long time = 0;
     private SharedPreferences prefs = null;
     private Typeface tf;
-    private final RxPermissions rxPermissions = new RxPermissions(this); // where this is an Activity or Fragment instance
     private Vibrator vibe;
     private ImageView moveAlongBtn;
 
@@ -279,17 +284,29 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
         loginInfo.setText(getString(R.string.login_info));
     }
 
-    //permission library: https://github.com/tbruyelle/RxPermissions
+    //permission library: https://github.com/Karumi/Dexter
+    // Must be done during an initialization phase like onCreate
     private void askPermission() {
-        // Must be done during an initialization phase like onCreate
-        rxPermissions
-                .request(Manifest.permission.CAMERA)
-                .subscribe(granted -> {
-                    if (granted) {
+        Dexter.withActivity(this)
+                .withPermission(Manifest.permission.CAMERA)
+                .withListener(new PermissionListener() {
+                    @Override
+                    public void onPermissionGranted(PermissionGrantedResponse response) {
                         recreate();
-                    } else {
-                        //Todo: Display text on why camera is needed
                     }
-                });
+
+                    @Override
+                    public void onPermissionDenied(PermissionDeniedResponse response) {
+                        if(response.isPermanentlyDenied()) {
+                            //TODO: Handle denial efficiently
+                        } else{
+
+                        }
+                    }
+                    @Override
+                    public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
+                        token.continuePermissionRequest();
+                    }
+                }).check();
     }
 }
