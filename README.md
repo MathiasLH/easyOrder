@@ -1,5 +1,6 @@
 # easyOrder
-Platform for the elderly to order lunch at nursing homes
+APK ligger i roden af projektet.
+Platform for madbestilling til ældre på plejehjem.
 
 Til dette projekt udarbejdes en madbestillings app til ældre i samarbejde med vores projektstiller, AnnaMaria Tromp Kreipke, fra Social 
 og Sundhedsafdelingen i Ballerup kommune. Førhen har personalet påplejecentrene været vandt til at skulle gå rundt til hver beboer på 
