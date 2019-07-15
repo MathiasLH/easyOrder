@@ -10,8 +10,7 @@ arbejdsbyrde, ved at lægge ansvaret i beboernesegne hænder og gøre, at beboer
 de får meremedbestemmelse.
 
 # Tilgå elementer efter login
+Klik på easyOrder logo'et i toppen, da den guider til næste event.
 
-Test QR-kode til bestilling af produkter
+Eller brug denne test QR-kode til bestilling af produkter
 ![alt text](https://i.imgur.com/VZNQEW7.png)
-
-Eller klik på easyOrder logo'et i toppen, da den guider til næste event.
