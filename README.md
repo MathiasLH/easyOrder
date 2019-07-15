@@ -9,3 +9,9 @@ muligt for de ældre på plejecentrene, at bestille deres frokost hurtigt og sim
 arbejdsbyrde, ved at lægge ansvaret i beboernesegne hænder og gøre, at beboerne bliver mere motiveret og engageret i deres måltid, da 
 de får meremedbestemmelse.
 
+# Tilgå elementer efter login
+
+Test QR-kode til bestilling af produkter
+![alt text](https://i.imgur.com/VZNQEW7.png)
+
+Eller klik på easyOrder logo'et i toppen, da den guider til næste event.
