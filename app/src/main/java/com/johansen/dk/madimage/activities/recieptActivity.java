@@ -8,6 +8,7 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.util.DisplayMetrics;
 import android.widget.TextView;
 
 import com.johansen.dk.madimage.R;
@@ -23,8 +24,7 @@ public class recieptActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        SharedPreferences sharedprefs = getSharedPreferences("screen_version", MODE_PRIVATE);
-        if (sharedprefs.getBoolean("tablet", false)) {
+        if (isTablet()) {
             setContentView(R.layout.activity_reciept_tablet);
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         } else {
@@ -48,6 +48,15 @@ public class recieptActivity extends AppCompatActivity {
         }
         mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.done);
         mediaPlayer.start();
+    }
+
+    private boolean isTablet() {
+        DisplayMetrics metrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        float yInches = metrics.heightPixels / metrics.ydpi;
+        float xInches = metrics.widthPixels / metrics.xdpi;
+
+        return Math.sqrt(xInches * xInches + yInches * yInches) >= 6.5;
     }
 
     //from stackoverflow: https://stackoverflow.com/questions/14001963/finish-all-activities-at-a-time

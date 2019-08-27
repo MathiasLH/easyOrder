@@ -121,7 +121,6 @@ public class optionsActivityFragment extends Fragment implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
-        Toast.makeText(getContext(),Integer.toString(v.getId()),Toast.LENGTH_SHORT).show();
         switch (v.getId()) {
             case R.id.editfrag_buttonText:
             case R.id.editfrag_addtobasketbutton:

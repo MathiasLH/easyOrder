@@ -134,7 +134,7 @@ public class selectionActivity_tablet extends AppCompatActivity implements View.
     private void launchEditActivity(int position) {
         prefs = getSharedPreferences("options_number", MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
-        editor.putInt("number", position).commit();
+        editor.putInt("number", position).apply();
 
         Fragment optionsFrag = new optionsActivityFragment();
         FragmentManager transaction = getSupportFragmentManager();
@@ -232,16 +232,17 @@ public class selectionActivity_tablet extends AppCompatActivity implements View.
 
     @Override
     protected void onPause() {
+        super.onPause();
         if (myTTS.isSpeaking()) {
             myTTS.stop();
         }
         long time = System.currentTimeMillis();
         onPauseClock.getInstance().setTimeLeft(time);
-        super.onPause();
     }
 
     @Override
     protected void onResume(){
+        super.onResume();
         if(onPauseClock.getInstance().isReset(System.currentTimeMillis())){
             Intent intent = new Intent(getApplicationContext(), loginActivity.class);
             // for info about clear task: https://developer.android.com/reference/android/content/Intent.html#FLAG_ACTIVITY_CLEAR_TASK
@@ -250,7 +251,7 @@ public class selectionActivity_tablet extends AppCompatActivity implements View.
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
         }
-        super.onResume();
+        updateTopIcon();
     }
 
 

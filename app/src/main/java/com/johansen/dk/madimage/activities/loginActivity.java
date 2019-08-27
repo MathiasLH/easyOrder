@@ -41,12 +41,12 @@ import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionDeniedResponse;
 import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.PermissionRequest;
-import com.karumi.dexter.listener.single.DialogOnDeniedPermissionListener;
 import com.karumi.dexter.listener.single.PermissionListener;
 
 import io.fabric.sdk.android.Fabric;
 import java.io.IOException;
 import java.util.Locale;
+import java.util.regex.Pattern;
 
 import static android.os.Build.VERSION_CODES.LOLLIPOP;
 
@@ -81,10 +81,12 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
         helpBtn = findViewById(R.id.helpBtn);
         moveAlongBtn = findViewById(R.id.easyOrderLogo);
         tf = Typeface.createFromAsset(getAssets(), "fonts/Orkney Regular.ttf");
+
         /*using fonts on text fields*/
         loginInfo.setTypeface(tf);
         helpBtn.setTypeface(tf);
         helpBtn.setTypeface(tf);
+
         /*defining elements for QR-scanner*/
         //from youtubevideo: https://www.youtube.com/watch?v=ej51mAYXbKs
         cameraPreview = findViewById(R.id.cameraPreview);
@@ -94,10 +96,12 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
                 .setRequestedFps(30.0f)
                 .setAutoFocusEnabled(true)
                 .build();
+
         /*defining image Buttons*/
         danishFlag = findViewById(R.id.danishFlag);
         englishFlag = findViewById(R.id.englishFlag);
         turkishFlag = findViewById(R.id.turkishFlag);
+
         /*OnClick listener on Buttons*/
         moveAlongBtn.setOnClickListener(this);
         helpBtn.setOnClickListener(this);
@@ -105,7 +109,7 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
         englishFlag.setOnClickListener(this);
         turkishFlag.setOnClickListener(this);
         vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        if(isNetworkAvailable() == false){
+        if(!isNetworkAvailable()){
             //NO INTERNET
             //Todo: Handle this event better. Either deny access to app or guide the user to whatever could be wrong.
              Toast.makeText(this,"No internet connection was detected",Toast.LENGTH_LONG).show();
@@ -119,13 +123,12 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
         /*Implementing on click listener to QR-code image Button*/
         switch (v.getId()) {
             case R.id.easyOrderLogo:
-                prefs = getSharedPreferences("screen_version", MODE_PRIVATE);
-                if(prefs.getBoolean("tablet", false)) {
+                if(isTablet()){
                     startActivity(new Intent(loginActivity.this, selectionActivity_tablet.class));
+                } else {
+                    startActivity(new Intent(loginActivity.this, selectionActivity.class));
                 }
-                else startActivity(new Intent(loginActivity.this, selectionActivity.class));
                 break;
-
             case R.id.helpBtn:
                 // get prompts.xml view
                 LayoutInflater li = LayoutInflater.from(context);
@@ -160,7 +163,7 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
                 setLocale();
                 break;
             default:
-                Toast.makeText(this, "DEFAULT HIT", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "DEFAULT HIT IN ONCLICK SWITCH", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -171,19 +174,7 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
-    private void validateQR(String input) {
-        String regex = "([a-zA-Z]+[0-9]+)";
-        if (input.matches(regex)) {
-            for (int i = 0; i < 2; i++) {
-                vibe.vibrate(200);
-            }
-            Intent niceIntent = new Intent(loginActivity.this, selectionActivity.class);
-            niceIntent.putExtra("roomNo", input);
-            startActivity(niceIntent);
-        }
-    }
-
-    private boolean enoughTimePassed() {
+    private boolean timeAllowedBetweenScans() {
         long currentTime = System.currentTimeMillis();
         return currentTime - time > 3000;
     }
@@ -218,7 +209,6 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
         barcodeDetector.setProcessor(new Detector.Processor<Barcode>() {
             @Override
             public void release() {
-
             }
 
             @Override
@@ -227,9 +217,23 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
 
                 if (qrCodes.size() != 0) {
                     loginInfo.post(() -> {
-                        if (enoughTimePassed()) {
+                        if (timeAllowedBetweenScans()) {
                             time = System.currentTimeMillis();
-                            validateQR(qrCodes.valueAt(0).displayValue);
+                            if (qrRegex(qrCodes.valueAt(0).displayValue)) {
+
+                                vibe.vibrate(200);
+                                Intent intent;
+                                if(isTablet()){
+                                    intent = new Intent(loginActivity.this, selectionActivity_tablet.class);
+                                } else {
+                                    intent = new Intent(loginActivity.this, selectionActivity.class);
+                                }
+                                intent.putExtra("roomNo", qrCodes.valueAt(0).displayValue);
+                                startActivity(intent);
+                            } else {
+                                Toast.makeText(getApplicationContext(),"Couldn't recognize QR-code, try again", Toast.LENGTH_SHORT).show();
+                            }
+
                         }
                     });
                 }
@@ -244,26 +248,11 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
         float yInches = metrics.heightPixels / metrics.ydpi;
         float xInches = metrics.widthPixels / metrics.xdpi;
 
-        prefs = getSharedPreferences("screen_version", MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
-        double diagonalInches = Math.sqrt(xInches * xInches + yInches * yInches);
-        if (diagonalInches >= 6.5) {
-            editor.putBoolean("tablet", true).apply();
-            return true;
-        } else {
-            editor.putBoolean("tablet", false).apply();
-            return false;
-        }
+        return Math.sqrt(xInches * xInches + yInches * yInches) >= 6.5;
     }
 
     protected void onResume() {
         super.onResume();
-        prefs = getSharedPreferences("com.johansen.easyOrder", MODE_PRIVATE);
-        if (prefs.getBoolean("firstrun", true)) {
-            // Do first run stuff here then set 'firstrun' as false
-            // using the following line to edit/commit prefs
-            prefs.edit().putBoolean("firstrun", false).apply();
-        }
         createQRscan();
     }
 
@@ -276,15 +265,11 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
         Configuration conf = res.getConfiguration();
         conf.locale = myLocale;
         res.updateConfiguration(conf, dm);
-        setText();
-    }
 
-    private void setText() {
         helpBtn.setText(getString(R.string.help_button_text));
         loginInfo.setText(getString(R.string.login_info));
     }
 
-    //permission library: https://github.com/Karumi/Dexter
     // Must be done during an initialization phase like onCreate
     private void askPermission() {
         Dexter.withActivity(this)
@@ -309,4 +294,29 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
                     }
                 }).check();
     }
+
+    private boolean qrRegex(String codeString) {
+
+        // 6-14 character password requiring numbers and alphabets of both cases
+        final String PASSWORD_REGEX =
+                "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{16}$";
+
+        /* 4-32 character password requiring at least 3 out of 4 (uppercase
+        // and lowercase letters, numbers & special characters) and at-most
+        // 2 equal consecutive chars.
+        final String COMPLEX_PASSWORD_REGEX =
+                "^(?:(?=.*\\d)(?=.*[A-Z])(?=.*[a-z])|" +
+                        "(?=.*\\d)(?=.*[^A-Za-z0-9])(?=.*[a-z])|" +
+                        "(?=.*[^A-Za-z0-9])(?=.*[A-Z])(?=.*[a-z])|" +
+                        "(?=.*\\d)(?=.*[A-Z])(?=.*[^A-Za-z0-9]))(?!.*(.)\\1{2,})" +
+                        "[A-Za-z0-9!~<>,;:_=?*+#.\"&§%°()\\|\\[\\]\\-\\$\\^\\@\\/]" +
+                        "{8,32}$";
+        */
+
+        final Pattern PASSWORD_PATTERN =
+                Pattern.compile(PASSWORD_REGEX);
+
+        return PASSWORD_PATTERN.matcher(codeString).matches();
+    }
+
 }

@@ -38,6 +38,7 @@ import com.johansen.dk.madimage.model.foodItem;
 
 import java.util.ArrayList;
 import java.util.Locale;
+import java.util.regex.Pattern;
 
 public class selectionActivity extends AppCompatActivity implements View.OnClickListener {
     private order selection;
@@ -299,4 +300,5 @@ public class selectionActivity extends AppCompatActivity implements View.OnClick
             }
         }, 2000);
     }
+
 }

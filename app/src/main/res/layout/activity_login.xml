@@ -146,6 +146,7 @@
         android:background="@color/backgroundColor"
         android:text="@string/help_button_text"
         android:textAlignment="center"
+        android:textColor="@color/textColor"
         android:textSize="26sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

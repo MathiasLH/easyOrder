@@ -1,17 +1,17 @@
 package com.johansen.dk.madimage.activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.graphics.Typeface;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.Vibrator;
 import android.speech.tts.TextToSpeech;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.TextViewCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -19,6 +19,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.airbnb.lottie.LottieAnimationView;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -29,7 +30,7 @@ import com.johansen.dk.madimage.model.onPauseClock;
 
 import java.util.Locale;
 
-public class basketActivity extends AppCompatActivity implements View.OnClickListener{
+public class basketActivity extends AppCompatActivity implements View.OnClickListener {
     private com.johansen.dk.madimage.model.order order;
     private Button orderBtn;
     private TextView topText;
@@ -49,14 +50,14 @@ public class basketActivity extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
 
         SharedPreferences sharedprefs = getSharedPreferences("screen_version", MODE_PRIVATE);
-        if(sharedprefs.getBoolean("tablet",false)){
+        if (sharedprefs.getBoolean("tablet", false)) {
             setContentView(R.layout.activity_basket_tablet);
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         } else {
             setContentView(R.layout.activity_basket);
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         }
-        vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE) ;
+        vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         emptyBasketGif = findViewById(R.id.empty_basket_gif);
         orderBtn = findViewById(R.id.orderbtn);
         orderBtn.setOnClickListener(this);
@@ -81,7 +82,6 @@ public class basketActivity extends AppCompatActivity implements View.OnClickLis
                 if (v.getTag() == "TRASH") {
                     niceAdapter.removeItemAt(position);
                     v.setOnClickListener(null);
-
                     isOrderAvailable();
                 }
                 if (v.getTag() == "TTS") {
@@ -102,7 +102,7 @@ public class basketActivity extends AppCompatActivity implements View.OnClickLis
             public void onInit(int status) {
                 if (status == TextToSpeech.SUCCESS) {
                     prefs = getSharedPreferences("setLanguage", MODE_PRIVATE);
-                    int result = myTTS.setLanguage(new Locale(prefs.getString("language",Locale.getDefault().getDisplayLanguage()), ""));
+                    int result = myTTS.setLanguage(new Locale(prefs.getString("language", Locale.getDefault().getDisplayLanguage()), ""));
                     if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
                         Log.e("TTS", "Language not supportd");
                     }
@@ -169,8 +169,8 @@ public class basketActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     @Override
-    protected void onResume(){
-        if(onPauseClock.getInstance().isReset(System.currentTimeMillis())){
+    protected void onResume() {
+        if (onPauseClock.getInstance().isReset(System.currentTimeMillis())) {
             Intent intent = new Intent(getApplicationContext(), loginActivity.class);
             // for info about clear task: https://developer.android.com/reference/android/content/Intent.html#FLAG_ACTIVITY_CLEAR_TASK
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -193,8 +193,11 @@ public class basketActivity extends AppCompatActivity implements View.OnClickLis
                     intent.putExtra("order", order);
                     startActivity(intent);
                     order.clean();
-                } else Toast.makeText(this,getString(R.string.toast_emptyBasket),Toast.LENGTH_LONG).show();
+                } else
+                    Toast.makeText(this, getString(R.string.toast_emptyBasket), Toast.LENGTH_LONG).show();
                 break;
+            default:
+                Toast.makeText(this, "DEFAULT HIT IN ONCLICK SWITCH", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -204,8 +207,7 @@ public class basketActivity extends AppCompatActivity implements View.OnClickLis
             emptyBasketGif.setVisibility(View.VISIBLE);
             orderBtn.setBackgroundColor(getResources().getColor(R.color.grey));
             isOrderAvailable = false;
-        }
-        else {
+        } else {
             emptyBasketGif.setVisibility(View.GONE);
             orderBtn.setBackgroundColor(getResources().getColor(R.color.btnColor));
             isOrderAvailable = true;
