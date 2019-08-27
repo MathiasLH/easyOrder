@@ -15,4 +15,4 @@ de får meremedbestemmelse.
 Klik på easyOrder logo'et i toppen, da den guider til næste event.
 
 Eller brug denne test QR-kode til bestilling af produkter
-![alt text](https://imgur.com/a/t4axAer)
+![alt text](https://i.imgur.com/Ir7gRpO.png)
